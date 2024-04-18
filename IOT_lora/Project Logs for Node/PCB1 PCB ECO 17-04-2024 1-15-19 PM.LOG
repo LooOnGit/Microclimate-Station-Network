@@ -1,0 +1,90 @@
+Removed Member From Class: ClassName=Sheet1 Member=J?
+Added Component: Designator=C?(tu 1206)
+Add component (AddParameter): Name = "Chung_Loai"; Value = "Dán"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Don_Vi"; Value = "Con"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Kieu_Chan"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ma_Hang"; Value = "MH004544"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "So_Chan"; Value = "2"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ten_Linh_Kien"; Value = "T? 1206 104-0.1uF 20% 50V"; VariantName = "[No Variations]"
+Added Component: Designator=C?(tu 1206)
+Add component (AddParameter): Name = "Chung_Loai"; Value = "Dán"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Don_Vi"; Value = "Con"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Kieu_Chan"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ma_Hang"; Value = "MH004544"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "So_Chan"; Value = "2"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ten_Linh_Kien"; Value = "T? 1206 104-0.1uF 20% 50V"; VariantName = "[No Variations]"
+Added Component: Designator=C?(tu 1206)
+Add component (AddParameter): Name = "Chung_Loai"; Value = "Dán"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Don_Vi"; Value = "Con"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Kieu_Chan"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ma_Hang"; Value = "MH004541"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "So_Chan"; Value = "2"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ten_Linh_Kien"; Value = "T? 1206 106-10uF 20% 16V"; VariantName = "[No Variations]"
+Added Component: Designator=Q?(S8050)
+Added Component: Designator=Q?(S8050)
+Added Component: Designator=R?(tro smd 1206)
+Add component (AddParameter): Name = "Chung_Loai"; Value = "Dán"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Don_Vi"; Value = "Con"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Kieu_Chan"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ma_Hang"; Value = "MH005909"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "So_Chan"; Value = "2"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ten_Linh_Kien"; Value = "Tr? 1206 5% 10K"; VariantName = "[No Variations]"
+Added Component: Designator=R?(1206 470Ohm)
+Added Component: Designator=R?(tro smd 1206)
+Add component (AddParameter): Name = "Chung_Loai"; Value = "Dán"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Don_Vi"; Value = "Con"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Kieu_Chan"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ma_Hang"; Value = "MH005909"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "So_Chan"; Value = "2"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ten_Linh_Kien"; Value = "Tr? 1206 5% 10K"; VariantName = "[No Variations]"
+Added Pin To Net: NetName=+5 Pin=C?-1
+Added Pin To Net: NetName=+5 Pin=C?-1
+Added Pin To Net: NetName=GND Pin=C?-2
+Added Pin To Net: NetName=GND Pin=C?-2
+Added Pin To Net: NetName=GND Pin=C?-2
+Added Pin To Net: NetName=GND Pin=U?-1
+Added Pin To Net: NetName=+5 Pin=U?-16
+Added Pin To Net: NetName=GND Pin=USB?-5
+Added Pin To Net: NetName=GND Pin=USB?-5
+Added Pin To Net: NetName=GND Pin=USB?-5
+Added Pin To Net: NetName=GND Pin=USB?-5
+Added Pin To Net: NetName=GND Pin=USB?-5
+Added Pin To Net: NetName=GND Pin=USB?-5
+Added Pin To Net: NetName=GND Pin=USB?-5
+Added Pin To Net: NetName=EN Pin=Q?-3
+Added Net: Name=EN
+Added Pin To Net: NetName=ESP_IO0 Pin=Q?-3
+Added Net: Name=ESP_IO0
+Added Pin To Net: NetName=ESP_RX0 Pin=*-34
+Added Net: Name=ESP_RX0
+Added Pin To Net: NetName=ESP_RX2 Pin=*-27
+Added Net: Name=ESP_RX2
+Added Pin To Net: NetName=ESP_TX0 Pin=*-35
+Added Net: Name=ESP_TX0
+Added Pin To Net: NetName=ESP_TX2 Pin=*-28
+Added Net: Name=ESP_TX2
+Added Pin To Net: NetName=NetC?_1 Pin=C?-1
+Added Pin To Net: NetName=NetC?_1 Pin=U?-4
+Added Net: Name=NetC?_1
+Added Pin To Net: NetName=NetQ?_1 Pin=Q?-1
+Added Pin To Net: NetName=NetQ?_1 Pin=R?-1
+Added Net: Name=NetQ?_1
+Added Pin To Net: NetName=NetQ?_2 Pin=Q?-2
+Added Pin To Net: NetName=NetQ?_2 Pin=R?-2
+Added Pin To Net: NetName=NetQ?_2 Pin=U?-13
+Added Net: Name=NetQ?_2
+Added Pin To Net: NetName=NetU?_5 Pin=U?-5
+Added Pin To Net: NetName=NetU?_5 Pin=USB?-3
+Added Net: Name=NetU?_5
+Added Pin To Net: NetName=NetU?_6 Pin=U?-6
+Added Pin To Net: NetName=NetU?_6 Pin=USB?-2
+Added Net: Name=NetU?_6
+Added Member To Class: ClassName=Sheet1 Member=Component C? 104
+Added Member To Class: ClassName=Sheet1 Member=Component C? 104
+Added Member To Class: ClassName=Sheet1 Member=Component C? 106
+Added Member To Class: ClassName=Sheet1 Member=Component Q? S8050
+Added Member To Class: ClassName=Sheet1 Member=Component Q? S8050
+Added Member To Class: ClassName=Sheet1 Member=Component R? 10k
+Added Member To Class: ClassName=Sheet1 Member=Component R? 470R
+Added Member To Class: ClassName=Sheet1 Member=Component R? 10k
+Added Room: Name=Sheet1
