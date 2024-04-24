@@ -1,0 +1,10 @@
+Change Component Designator: OldDesignator= NewDesignator=5V
+Change Component Designator: OldDesignator=H1 NewDesignator=ST
+Change Component Designator: OldDesignator=H2 NewDesignator=SAL
+Change Component Designator: OldDesignator=H3 NewDesignator=SHT3x
+Change Component Designator: OldDesignator=H4 NewDesignator=FLOW
+Change Component Designator: OldDesignator=H5 NewDesignator=TEMP_W
+Change Component Designator: OldDesignator=H7 NewDesignator=LCD
+Change Component Designator: OldDesignator=Lora1 NewDesignator=LORA
+Change Component Designator: OldDesignator=SIM1 NewDesignator=SIM
+Added Room: Name=Sheet3

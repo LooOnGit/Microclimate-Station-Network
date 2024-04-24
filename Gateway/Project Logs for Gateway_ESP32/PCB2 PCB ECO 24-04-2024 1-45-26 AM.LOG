@@ -1,0 +1,5 @@
+Added Component: Designator=*(USB_TYPEA)
+Added Pin To Net: NetName=+5 Pin=*-01
+Added Pin To Net: NetName=GND Pin=*-04
+Added Member To Class: ClassName=Sheet2 Member=Component * USB_TYPEA
+Added Room: Name=Sheet2
