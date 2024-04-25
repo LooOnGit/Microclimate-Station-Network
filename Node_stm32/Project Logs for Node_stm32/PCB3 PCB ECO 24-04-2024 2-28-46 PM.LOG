@@ -1,0 +1,8 @@
+Removed Pin From Net: NetName=+5 Pin=FLOW-1
+Removed Pin From Net: NetName=PB1 Pin=FLOW-2
+Removed Pin From Net: NetName=GND Pin=FLOW-3
+Added Pin To Net: NetName=GND Pin=FLOW-1
+Added Pin To Net: NetName=+5 Pin=FLOW-2
+Added Pin To Net: NetName=PB1 Pin=FLOW-3
+Added Member To Class: ClassName=Sheet3 Member=Component BT3 Nut Nhan 2 Chan SMD 3x6x2.5
+Added Room: Name=Sheet3

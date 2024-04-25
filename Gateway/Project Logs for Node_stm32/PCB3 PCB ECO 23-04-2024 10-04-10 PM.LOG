@@ -1,0 +1,59 @@
+Change Component Description : Designator=U2 Old Description=ARM® Cortex®-M3 STM32F1 Microcontroller IC 32-Bit 72MHz 64KB (64K x 8) FLASH 48-LQFP (7x7) New Description=ARM® Cortex®-M3 STM32F1 Microcontroller IC 32-Bit 72MHz 64KB (64K x 8) FLASH 48-LQFP (7x7)
+
+Added Component: Designator=BT2(Nut Nhan 2 Chan SMD 3x6x2.5)
+Add component (AddParameter): Name = "Ma_Hang"; Value = "MH001036"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ten"; Value = "Nút Nh?n 2 Chân 3x6x2.5MM SMD"; VariantName = "[No Variations]"
+Added Component: Designator=BT3(Nut Nhan 2 Chan SMD 3x6x2.5)
+Add component (AddParameter): Name = "Ma_Hang"; Value = "MH001036"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ten"; Value = "Nút Nh?n 2 Chân 3x6x2.5MM SMD"; VariantName = "[No Variations]"
+Added Component: Designator=C15(tu 1206)
+Add component (AddParameter): Name = "Chung_Loai"; Value = "Dán"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Don_Vi"; Value = "Con"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Kieu_Chan"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ma_Hang"; Value = "MH004544"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "So_Chan"; Value = "2"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ten_Linh_Kien"; Value = "T? 1206 104-0.1uF 20% 50V"; VariantName = "[No Variations]"
+Added Component: Designator=C16(tu 1206)
+Add component (AddParameter): Name = "Chung_Loai"; Value = "Dán"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Don_Vi"; Value = "Con"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Kieu_Chan"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ma_Hang"; Value = "MH004544"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "So_Chan"; Value = "2"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ten_Linh_Kien"; Value = "T? 1206 104-0.1uF 20% 50V"; VariantName = "[No Variations]"
+Added Component: Designator=R8(tro smd 1206)
+Add component (AddParameter): Name = "Chung_Loai"; Value = "Dán"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Don_Vi"; Value = "Con"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Kieu_Chan"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ma_Hang"; Value = "MH005885"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "So_Chan"; Value = "2"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ten_Linh_Kien"; Value = "Tr? 1206 1% 10k"; VariantName = "[No Variations]"
+Added Component: Designator=R9(tro smd 1206)
+Add component (AddParameter): Name = "Chung_Loai"; Value = "Dán"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Don_Vi"; Value = "Con"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Kieu_Chan"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ma_Hang"; Value = "MH005885"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "So_Chan"; Value = "2"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ten_Linh_Kien"; Value = "Tr? 1206 1% 10k"; VariantName = "[No Variations]"
+Added Pin To Net: NetName=GND Pin=BT2-1
+Added Pin To Net: NetName=GND Pin=BT3-1
+Added Pin To Net: NetName=GND Pin=C15-1
+Added Pin To Net: NetName=GND Pin=C16-1
+Added Pin To Net: NetName=+3.3 Pin=R8-2
+Added Pin To Net: NetName=+3.3 Pin=R9-2
+Added Pin To Net: NetName=BT1 Pin=BT3-2
+Added Pin To Net: NetName=BT1 Pin=C16-2
+Added Pin To Net: NetName=BT1 Pin=R9-1
+Added Pin To Net: NetName=BT1 Pin=U2-25
+Added Net: Name=BT1
+Added Pin To Net: NetName=BT2 Pin=BT2-2
+Added Pin To Net: NetName=BT2 Pin=C15-2
+Added Pin To Net: NetName=BT2 Pin=R8-1
+Added Pin To Net: NetName=BT2 Pin=U2-32
+Added Net: Name=BT2
+Added Member To Class: ClassName=Sheet3 Member=Component BT2 Nut Nhan 2 Chan SMD 3x6x2.5
+Added Member To Class: ClassName=Sheet3 Member=Component BT3 Nut Nhan 2 Chan SMD 3x6x2.5
+Added Member To Class: ClassName=Sheet3 Member=Component C15 104
+Added Member To Class: ClassName=Sheet3 Member=Component C16 104
+Added Member To Class: ClassName=Sheet3 Member=Component R8 10k
+Added Member To Class: ClassName=Sheet3 Member=Component R9 10k
+Added Room: Name=Sheet3

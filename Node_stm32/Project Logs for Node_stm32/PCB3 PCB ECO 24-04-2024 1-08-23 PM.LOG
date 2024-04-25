@@ -1,0 +1,23 @@
+Removed Pin From Net: NetName=GND Pin=-1
+Removed Pin From Net: NetName=+5 Pin=-2
+Removed Pin From Net: NetName=PA1 Pin=-3
+Removed Member From Class: ClassName=Sheet3 Member=
+Change Component Designator: OldDesignator=5V NewDesignator=JACK DC1
+Change Component Designator: OldDesignator=FLOW NewDesignator=H4
+Change Component Designator: OldDesignator=LCD NewDesignator=H7
+Change Component Designator: OldDesignator=SAL NewDesignator=H2
+Change Component Designator: OldDesignator=SHT3x NewDesignator=H3
+Change Component Designator: OldDesignator=SIM NewDesignator=SIM1
+Change Component Designator: OldDesignator=ST NewDesignator=H1
+Added Component: Designator=H5(XH2.54M-3)
+Add component (AddParameter): Name = "Chung_Loai"; Value = "C?m"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Don_Vi"; Value = "Con"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ghi_Chu"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Kieu_Chan"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ma_Hang"; Value = "MH001292"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ten_Linh_Kien"; Value = "Header 3P XH2.54-3P Ð?c Th?ng"; VariantName = "[No Variations]"
+Added Pin To Net: NetName=GND Pin=H5-1
+Added Pin To Net: NetName=+5 Pin=H5-2
+Added Pin To Net: NetName=PA1 Pin=H5-3
+Added Member To Class: ClassName=Sheet3 Member=Component H5 Header 3P
+Added Room: Name=Sheet3

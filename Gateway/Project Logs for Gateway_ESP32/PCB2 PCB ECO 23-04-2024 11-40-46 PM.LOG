@@ -1,0 +1,29 @@
+Added Component: Designator=BT3(Nut Nhan 2 Chan SMD 3x6x2.5)
+Add component (AddParameter): Name = "Ma_Hang"; Value = "MH001036"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ten"; Value = "Nút Nh?n 2 Chân 3x6x2.5MM SMD"; VariantName = "[No Variations]"
+Added Component: Designator=C15(tu 1206)
+Add component (AddParameter): Name = "Chung_Loai"; Value = "Dán"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Don_Vi"; Value = "Con"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Kieu_Chan"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ma_Hang"; Value = "MH004544"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "So_Chan"; Value = "2"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ten_Linh_Kien"; Value = "T? 1206 104-0.1uF 20% 50V"; VariantName = "[No Variations]"
+Added Component: Designator=R12(tro smd 1206)
+Add component (AddParameter): Name = "Chung_Loai"; Value = "Dán"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Don_Vi"; Value = "Con"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Kieu_Chan"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ma_Hang"; Value = "MH005904"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "So_Chan"; Value = "2"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ten_Linh_Kien"; Value = "Tr? 1206 5% 1k"; VariantName = "[No Variations]"
+Added Pin To Net: NetName=GND Pin=BT3-1
+Added Pin To Net: NetName=GND Pin=C15-2
+Added Pin To Net: NetName=+3.3 Pin=R12-2
+Added Pin To Net: NetName=IO12 Pin=*1-14
+Added Pin To Net: NetName=IO12 Pin=BT3-2
+Added Pin To Net: NetName=IO12 Pin=C15-1
+Added Pin To Net: NetName=IO12 Pin=R12-1
+Added Net: Name=IO12
+Added Member To Class: ClassName=Sheet2 Member=Component BT3 Nut Nhan 2 Chan SMD 3x6x2.5
+Added Member To Class: ClassName=Sheet2 Member=Component C15 104
+Added Member To Class: ClassName=Sheet2 Member=Component R12 1k
+Added Room: Name=Sheet2

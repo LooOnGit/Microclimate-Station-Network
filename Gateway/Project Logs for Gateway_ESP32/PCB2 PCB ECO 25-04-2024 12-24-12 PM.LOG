@@ -1,0 +1,6 @@
+Change Component Designator: OldDesignator=BT1 NewDesignator=Boot
+Change Component Designator: OldDesignator=BT2 NewDesignator=EN
+Change Component Designator: OldDesignator=JACK DC1 NewDesignator=5V
+Change Component Designator: OldDesignator=Lora1 NewDesignator=LORA
+Change Component Designator: OldDesignator=SIM1 NewDesignator=SIM
+Added Room: Name=Sheet2

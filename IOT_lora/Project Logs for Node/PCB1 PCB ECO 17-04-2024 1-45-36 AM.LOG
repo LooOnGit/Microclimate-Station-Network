@@ -1,0 +1,17 @@
+Change Component Description : Designator=U1 Old Description=ARM® Cortex®-M3 STM32F1 Microcontroller IC 32-Bit 72MHz 64KB (64K x 8) FLASH 48-LQFP (7x7) New Description=ARM® Cortex®-M3 STM32F1 Microcontroller IC 32-Bit 72MHz 64KB (64K x 8) FLASH 48-LQFP (7x7)
+
+Added Component: Designator=J?(S8050)
+Added Component: Designator=U?(SOIC16_50_284_25X90_SMT)
+Add component (AddParameter): Name = "Alternate Part Number-1"; Value = "NA"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Case/Package"; Value = "SOIC16"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer"; Value = "Olimex"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer Part Number"; Value = "CH340C"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Supplier Part Number-1"; Value = "C84681"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Supplier-1"; Value = "LCSC"; VariantName = "[No Variations]"
+Added Component: Designator=USB?(USB Micro 5p DIP)
+Add component (AddParameter): Name = "Ma_Hang"; Value = "MH005145"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ten"; Value = "MicroUSB MK5P DIP"; VariantName = "[No Variations]"
+Added Member To Class: ClassName=Sheet1 Member=Component J? SOT-23
+Added Member To Class: ClassName=Sheet1 Member=Component U? CH340C
+Added Member To Class: ClassName=Sheet1 Member=Component USB? USB Micro 5p DIP
+Added Room: Name=Sheet1
