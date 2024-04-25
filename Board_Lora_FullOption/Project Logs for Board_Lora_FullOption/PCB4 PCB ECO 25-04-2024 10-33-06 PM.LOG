@@ -1,0 +1,7 @@
+Added Pin To Net: NetName=RST_Lora Pin=*1-13
+Added Pin To Net: NetName=DIO0 Pin=*1-24
+Added Pin To Net: NetName=NSS Pin=*1-29
+Added Pin To Net: NetName=SCK Pin=*1-30
+Added Pin To Net: NetName=MISO Pin=*1-31
+Added Pin To Net: NetName=MOSI Pin=*1-37
+Added Room: Name=Sheet4

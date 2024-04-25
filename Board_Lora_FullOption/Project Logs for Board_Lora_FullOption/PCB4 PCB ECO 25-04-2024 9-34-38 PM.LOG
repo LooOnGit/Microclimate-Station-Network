@@ -1,0 +1,19 @@
+Removed Pin From Net: NetName=+3.3 Pin=C5-1
+Removed Pin From Net: NetName=GND Pin=C5-2
+Removed Pin From Net: NetName=+3.3 Pin=C6-1
+Removed Pin From Net: NetName=GND Pin=C6-2
+Removed Pin From Net: NetName=GND Pin=Lora1-1
+Removed Pin From Net: NetName=GND Pin=Lora1-2
+Removed Pin From Net: NetName=+3.3 Pin=Lora1-3
+Removed Pin From Net: NetName=RST_Lora Pin=Lora1-4
+Removed Pin From Net: NetName=DIO0 Pin=Lora1-5
+Removed Pin From Net: NetName=GND Pin=Lora1-9
+Removed Pin From Net: NetName=SCK Pin=Lora1-12
+Removed Pin From Net: NetName=MISO Pin=Lora1-13
+Removed Pin From Net: NetName=MOSI Pin=Lora1-14
+Removed Pin From Net: NetName=NSS Pin=Lora1-15
+Removed Pin From Net: NetName=GND Pin=Lora1-16
+Removed Member From Class: ClassName=Sheet4 Member=C5
+Removed Member From Class: ClassName=Sheet4 Member=C6
+Removed Member From Class: ClassName=Sheet4 Member=Lora1
+Added Room: Name=Sheet4

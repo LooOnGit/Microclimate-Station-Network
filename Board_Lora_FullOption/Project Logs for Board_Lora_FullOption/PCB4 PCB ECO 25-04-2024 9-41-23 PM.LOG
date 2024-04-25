@@ -1,0 +1,46 @@
+Change Component Description : Designator=U2 Old Description=ARM® Cortex®-M3 STM32F1 Microcontroller IC 32-Bit 72MHz 64KB (64K x 8) FLASH 48-LQFP (7x7) New Description=ARM® Cortex®-M3 STM32F1 Microcontroller IC 32-Bit 72MHz 64KB (64K x 8) FLASH 48-LQFP (7x7)
+
+Added Component: Designator=C1(tu 1206)
+Add component (AddParameter): Name = "Chung_Loai"; Value = "Dán"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Don_Vi"; Value = "Con"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Kieu_Chan"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ma_Hang"; Value = "MH004544"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "So_Chan"; Value = "2"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ten_Linh_Kien"; Value = "T? 1206 104-0.1uF 20% 50V"; VariantName = "[No Variations]"
+Added Component: Designator=C?(tu 1206)
+Add component (AddParameter): Name = "Chung_Loai"; Value = "Dán"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Don_Vi"; Value = "Con"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Kieu_Chan"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ma_Hang"; Value = "MH004544"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "So_Chan"; Value = "2"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ten_Linh_Kien"; Value = "T? 1206 104-0.1uF 20% 50V"; VariantName = "[No Variations]"
+Added Component: Designator=C?(tu 1206)
+Add component (AddParameter): Name = "Chung_Loai"; Value = "Dán"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Don_Vi"; Value = "Con"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Kieu_Chan"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ma_Hang"; Value = "MH004541"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "So_Chan"; Value = "2"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ten_Linh_Kien"; Value = "T? 1206 106-10uF 20% 16V"; VariantName = "[No Variations]"
+Added Component: Designator=LORA?(Sx1278)
+Added Pin To Net: NetName=+3.3 Pin=C1-1
+Added Pin To Net: NetName=GND Pin=C1-2
+Added Pin To Net: NetName=+3.3 Pin=C?-1
+Added Pin To Net: NetName=+3.3 Pin=C?-1
+Added Pin To Net: NetName=GND Pin=C?-2
+Added Pin To Net: NetName=GND Pin=C?-2
+Added Pin To Net: NetName=GND Pin=LORA?-1
+Added Pin To Net: NetName=GND Pin=LORA?-2
+Added Pin To Net: NetName=+3.3 Pin=LORA?-3
+Added Pin To Net: NetName=RST_Lora Pin=LORA?-4
+Added Pin To Net: NetName=DIO0 Pin=LORA?-5
+Added Pin To Net: NetName=GND Pin=LORA?-9
+Added Pin To Net: NetName=SCK Pin=LORA?-12
+Added Pin To Net: NetName=MISO Pin=LORA?-13
+Added Pin To Net: NetName=MOSI Pin=LORA?-14
+Added Pin To Net: NetName=NSS Pin=LORA?-15
+Added Pin To Net: NetName=GND Pin=LORA?-16
+Added Member To Class: ClassName=Sheet4 Member=Component C1 104
+Added Member To Class: ClassName=Sheet4 Member=Component C? 104
+Added Member To Class: ClassName=Sheet4 Member=Component C? 106
+Added Member To Class: ClassName=Sheet4 Member=Component LORA? Ra-02
+Added Room: Name=Sheet4

@@ -1,0 +1,53 @@
+Removed Pin From Net: NetName=Led1 Pin=L2-1
+Removed Pin From Net: NetName=Led2 Pin=L3-1
+Removed Pin From Net: NetName=Led3 Pin=L4-1
+Removed Pin From Net: NetName=Led4 Pin=L5-1
+Removed Pin From Net: NetName=GND Pin=R3-1
+Removed Pin From Net: NetName=GND Pin=R5-2
+Removed Pin From Net: NetName=GND Pin=R6-2
+Removed Pin From Net: NetName=GND Pin=R7-2
+Change Component Footprint: Designator=L4 Old Footprint=LED-1206-Blue New Footprint=LED-1206-Green
+Change Component Footprint: Designator=L5 Old Footprint=LED-1206-Green New Footprint=LED-1206-Yellow
+Change Component Footprint: Designator=L3 Old Footprint=LED-1206-Yellow New Footprint=LED-1206-Blue
+Change component parameters: Designator = "L3" ("L3"); Footprint = "LED-1206-Yellow"; UniqueID = "\MTEEDDDT" ("\MTEEDDDT")
+Change component parameters (AddParameter): Name = "Chung_Loai"; Value = "Dán"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Don_Vi"; Value = "Con"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Ghi_Chu"; Value = ""; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Kieu_Chan"; Value = ""; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Ma_Hang"; Value = "MH002333"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Ten_Linh_Kien"; Value = "LED1206 Màu Xanh Duong (Blue)"; VariantName = "[No Variations]"
+Change component parameters: Designator = "L4" ("L4"); Footprint = "LED-1206-Blue"; UniqueID = "\ZVOQQUDO" ("\ZVOQQUDO")
+Change component parameters (AddParameter): Name = "Chung_Loai"; Value = "Dán"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Don_Vi"; Value = "Con"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Ghi_Chu"; Value = ""; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Kieu_Chan"; Value = ""; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Ma_Hang"; Value = "MH002947"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Ten_Linh_Kien"; Value = "LED1206 Màu Xanh Lá (Green)"; VariantName = "[No Variations]"
+Change component parameters: Designator = "L5" ("L5"); Footprint = "LED-1206-Green"; UniqueID = "\DLRUVENT" ("\DLRUVENT")
+Change component parameters (AddParameter): Name = "Chung_Loai"; Value = "Dán"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Don_Vi"; Value = "Con"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Ghi_Chu"; Value = ""; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Kieu_Chan"; Value = ""; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Ma_Hang"; Value = "MH002331"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Ten_Linh_Kien"; Value = "LED1206 Màu Vàng (Yellow)"; VariantName = "[No Variations]"
+Added Pin To Net: NetName=GND Pin=L2-2
+Added Pin To Net: NetName=GND Pin=L3-2
+Added Pin To Net: NetName=GND Pin=L4-2
+Added Pin To Net: NetName=GND Pin=L5-2
+Added Pin To Net: NetName=Led1 Pin=R3-1
+Added Pin To Net: NetName=Led2 Pin=R5-1
+Added Pin To Net: NetName=Led3 Pin=R6-2
+Added Pin To Net: NetName=Led4 Pin=R7-1
+Added Pin To Net: NetName=NetL2_1 Pin=L2-1
+Added Pin To Net: NetName=NetL2_1 Pin=R3-2
+Added Net: Name=NetL2_1
+Added Pin To Net: NetName=NetL3_1 Pin=L3-1
+Added Pin To Net: NetName=NetL3_1 Pin=R5-2
+Added Net: Name=NetL3_1
+Added Pin To Net: NetName=NetL4_1 Pin=L4-1
+Added Pin To Net: NetName=NetL4_1 Pin=R6-1
+Added Net: Name=NetL4_1
+Added Pin To Net: NetName=NetL5_1 Pin=L5-1
+Added Pin To Net: NetName=NetL5_1 Pin=R7-2
+Added Net: Name=NetL5_1
+Added Room: Name=Sheet4

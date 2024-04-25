@@ -1,0 +1,9 @@
+Change Component Description : Designator=U2 Old Description=ARM® Cortex®-M3 STM32F1 Microcontroller IC 32-Bit 72MHz 64KB (64K x 8) FLASH 48-LQFP (7x7) New Description=ARM® Cortex®-M3 STM32F1 Microcontroller IC 32-Bit 72MHz 64KB (64K x 8) FLASH 48-LQFP (7x7)
+
+Added Component: Designator=SIM1(SIMA7680C)
+Added Pin To Net: NetName=ESP_TX2 Pin=SIM1-4
+Added Pin To Net: NetName=ESP_RX2 Pin=SIM1-5
+Added Pin To Net: NetName=GND Pin=SIM1-6
+Added Pin To Net: NetName=+5 Pin=SIM1-7
+Added Member To Class: ClassName=Sheet4 Member=Component SIM1 SIMA7680C
+Added Room: Name=Sheet4
