@@ -691,6 +691,16 @@
               <FileType>5</FileType>
               <FilePath>..\User\i2c-lcd.h</FilePath>
             </File>
+            <File>
+              <FileName>cJSON.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\cJSON.c</FilePath>
+            </File>
+            <File>
+              <FileName>cJSON.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\User\cJSON.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

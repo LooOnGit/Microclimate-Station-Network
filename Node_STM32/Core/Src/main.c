@@ -24,6 +24,8 @@
 #include <stdlib.h>
 #include "LoRa.h"
 #include <string.h>
+#include "cJSON.h"
+#include "i2c-lcd.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -35,6 +37,10 @@
 /* USER CODE BEGIN PD */
 //#define RX
 #define TX
+#define sht3x
+#define sen0451 //Sensor Sal
+#define sen0186 //Kit Weather Station
+#define yf //sensor flow water 
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -59,6 +65,42 @@ LoRa myLoRa;
 uint8_t read_data[128];
 uint8_t send_data[128];
 int			RSSI;
+char msg[64];
+char buf[20];
+#ifdef TX
+char jsonPack[100];
+#endif
+
+typedef struct{
+	#ifdef sht3x
+	int temp;
+	char tempToStr[10];
+	int hum;
+	char humToStr[10];
+	#endif
+	
+	#ifdef sen0451
+	#endif
+	
+	#ifdef sen0186
+	int windSpeed;
+	int windDirection;
+	int tempKit;
+	int humKit;
+	
+	char speedToStr[10];
+	char directionToStr[10];
+	char tempKitToStr[10];
+	char humKitToStr[10];
+	#endif
+	
+	#ifdef yf
+	int q;
+	char qToStr[10];
+	#endif
+}sensors;
+
+sensors sensorVals;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -77,7 +119,70 @@ static void MX_USART2_UART_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-char msg[64];
+#ifdef TX
+void formatJson(sensors *sensorVal){
+	//xoa mang du lieu
+	for(int i = 0; i < 10; i++)
+	{
+		jsonPack[i] = 0;
+		sensorVal->tempToStr[i] = 0;
+		sensorVal->humToStr[i] = 0;
+		sensorVal->speedToStr[i] = 0;
+		sensorVal->directionToStr[i] = 0;
+		sensorVal->tempKitToStr[i] = 0;
+		sensorVal->humKitToStr[i] = 0;
+		sensorVal->qToStr[i] = 0;
+	}
+	
+	//Truyen du lieu vao ve char
+	sprintf(sensorVal->tempToStr, "%d", sensorVal->temp);
+	sprintf(sensorVal->humToStr, "%d", sensorVal->hum);
+	sprintf(sensorVal->speedToStr, "%d", sensorVal->windSpeed);
+	sprintf(sensorVal->directionToStr, "%d", sensorVal->windDirection);
+	sprintf(sensorVal->tempKitToStr, "%d", sensorVal->tempKit);
+	sprintf(sensorVal->humKitToStr, "%d", sensorVal->humKit);
+	sprintf(sensorVal->qToStr, "%d", sensorVal->q);
+	
+	//{"ND":"123","DA":"456"}
+	strcat(jsonPack,"{\"TEMP\":\"");
+	strcat(jsonPack,sensorVal->tempToStr);
+	strcat(jsonPack,"\",");
+	
+	strcat(jsonPack,"\"HUM\":\"");
+	strcat(jsonPack,sensorVal->humToStr);
+	strcat(jsonPack,"\",");
+	
+	strcat(jsonPack,"\"WP\":\"");
+	strcat(jsonPack,sensorVal->speedToStr);
+	strcat(jsonPack,"\",");
+	
+	strcat(jsonPack,"\"WD\":\"");
+	strcat(jsonPack,sensorVal->directionToStr);
+	strcat(jsonPack,"\",");
+	
+	strcat(jsonPack,"\"TempKit\":\"");
+	strcat(jsonPack,sensorVal->tempKitToStr);
+	strcat(jsonPack,"\",");
+	
+	strcat(jsonPack,"\"HumKit\":\"");
+	strcat(jsonPack,sensorVal->humKitToStr);
+	strcat(jsonPack,"\",");
+	
+	strcat(jsonPack,"\"Q\":\"");
+	strcat(jsonPack,sensorVal->qToStr);
+	
+	strcat(jsonPack,"\"}");
+	strcat(jsonPack,"\n");
+	int i=0;
+	
+	while(jsonPack[i]!=0)
+	{
+		unsigned char Send=jsonPack[i];
+		HAL_UART_Transmit(&huart1, &Send, 1, 1);
+		i++;
+	}
+}
+#endif 
 /* USER CODE END 0 */
 
 /**
@@ -88,7 +193,7 @@ int main(void)
 {
 
   /* USER CODE BEGIN 1 */
-	char buf[20];
+
 	
   /* USER CODE END 1 */
 
@@ -139,6 +244,8 @@ int main(void)
 	LoRa_reset(&myLoRa);
 	LoRa_init(&myLoRa);
 	
+	
+	lcd_init();
 	// START CONTINUOUS RECEIVING -----------------------------------
 	LoRa_startReceiving(&myLoRa);
 	sprintf(msg,"Done configuring LoRaModule\r\n");
@@ -160,9 +267,9 @@ int main(void)
 
     /* USER CODE BEGIN 3 */
 		#ifdef TX
-		
-		LoRa_transmit(&myLoRa, (uint8_t*)buf, 128, 500);
-		sprintf(msg,"%s\r\n",buf);
+		formatJson(&sensorVals);
+		LoRa_transmit(&myLoRa, (uint8_t*)jsonPack, 100, 500);
+		sprintf(msg,"%s\r\n",jsonPack);
 		HAL_UART_Transmit(&huart1,(uint8_t *)msg,strlen(msg),1000);
 		HAL_Delay(1000);
 		#endif
@@ -170,7 +277,12 @@ int main(void)
 		#ifdef RX
 		RSSI = LoRa_getRSSI(&myLoRa);
 		LoRa_receive(&myLoRa, (uint8_t*)buf, 128);
-		sprintf(msg,"packed: %s --- RSSI: %d\r\n",buf, RSSI);
+		sprintf(msg,"packed: %s\r\n",buf);
+		lcd_goto_XY(1,0);
+		lcd_send_string(msg);
+		sprintf(msg,"RSSI: %d\r\n",RSSI);
+		lcd_goto_XY(2,0);
+		lcd_send_string(msg);
 		HAL_UART_Transmit(&huart1,(uint8_t *)msg,strlen(msg),1000);
 		HAL_Delay(5000);
 		#endif

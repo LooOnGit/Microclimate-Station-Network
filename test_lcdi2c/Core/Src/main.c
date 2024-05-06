@@ -23,6 +23,8 @@
 /* USER CODE BEGIN Includes */
 #include <stdio.h>
 #include "i2c-lcd.h"
+
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -106,7 +108,7 @@ int main(void)
 
     /* USER CODE BEGIN 3 */
 		lcd_goto_XY(1,4);
-		lcd_send_string("LOO 3");
+		lcd_send_string("LOO");
 		lcd_goto_XY(2,0);
 		lcd_send_string("HELLO");
   }

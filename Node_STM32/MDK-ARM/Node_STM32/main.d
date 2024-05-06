@@ -33,3 +33,5 @@ node_stm32\main.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h
 node_stm32\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 node_stm32\main.o: ../User/LoRa.h
 node_stm32\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+node_stm32\main.o: ../User/cJSON.h
+node_stm32\main.o: ../User/i2c-lcd.h
