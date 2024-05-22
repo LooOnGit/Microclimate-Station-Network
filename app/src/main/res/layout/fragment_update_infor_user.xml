@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    android:orientation="vertical"
+    tools:context=".ui.UpdateInforUserFragment">
+
+    <TextView
+        android:background="@color/bgRecycle"
+        android:text="Update"
+        android:textColor="@color/text"
+        android:fontFamily="@font/ptn777"
+        android:textSize="25dp"
+        android:textAlignment="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </TextView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="484dp"
+        android:layout_marginTop="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/ptn777"
+            android:text="User name: "
+            android:textSize="15dp"/>
+
+        <EditText
+            style="@style/Widget.AppCompat.EditText"
+            android:id="@+id/edtUserName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/ptn777"
+            android:shadowColor="#FFFFFF"
+            android:textColorHint="#070707">
+        </EditText>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnSaveInfor"
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:background="@color/bgRecycle"
+        android:fontFamily="@font/ptn777"
+        android:text="Save"
+        android:textAllCaps="false"
+        android:textSize="25dp" />
+
+    <Button
+        android:layout_marginTop="20dp"
+        android:id="@+id/btnExitInfor"
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:background="@color/btnExit"
+        android:fontFamily="@font/ptn777"
+        android:text="Exit"
+        android:textAllCaps="false"
+        android:textSize="25dp" />
+
+
+</LinearLayout>

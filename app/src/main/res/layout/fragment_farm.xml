@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="5dp"
+    android:orientation="vertical"
+    android:background="@color/grey"
+    tools:context=".ui.FarmFragment">
+
+
+    <LinearLayout
+        android:background="@color/bgRecycle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageButton
+            android:id="@+id/btnOutFarm"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/ic_outwhite"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        </ImageButton>
+
+        <TextView
+            android:text="FARM"
+            android:textColor="@color/text"
+            android:layout_gravity="center"
+            android:textAlignment="center"
+            android:textSize="25dp"
+            android:fontFamily="@font/ptn777"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_margin="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="2">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtNameSensor1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nhiet do"
+                android:layout_gravity="center"
+                android:fontFamily="@font/ptn777"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/text"
+                android:textSize="15dp">
+            </TextView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:weightSum="3"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/txtValueSensor1"
+                    android:layout_gravity="center"
+                    android:text="0"
+                    android:textSize="25dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content">
+                </TextView>
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="55dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:background="@drawable/ic_temperature">
+                </ImageView>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtNameSensor2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Do am"
+                android:layout_gravity="center"
+                android:fontFamily="@font/ptn777"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/text"
+                android:textSize="15dp">
+            </TextView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:weightSum="3"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/txtValueSensor2"
+                    android:layout_gravity="center"
+                    android:text="10 g/m³"
+                    android:textSize="25dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content">
+                </TextView>
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="55dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:background="@drawable/ic_humidity">
+                </ImageView>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="2">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtNameAc1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nhiet do"
+                android:layout_gravity="center"
+                android:fontFamily="@font/ptn777"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/text"
+                android:textSize="15dp">
+            </TextView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:weightSum="3"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="2">
+
+                    <Switch
+                        android:id="@+id/swAc1"
+                        android:layout_marginLeft="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent">
+                    </Switch>
+
+                </LinearLayout>
+                <ImageView
+                    android:id="@+id/imgFan"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:layout_gravity="center">
+                </ImageView>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/vD"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtNameAc2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Do am"
+                android:textColor="@color/text"
+                android:layout_gravity="center"
+                android:fontFamily="@font/ptn777"
+                android:layout_marginTop="5dp"
+                android:textSize="15dp">
+            </TextView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:weightSum="3"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1.5">
+
+                    <Switch
+                        android:id="@+id/swAc2"
+                        android:layout_marginLeft="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent">
+                    </Switch>
+
+                </LinearLayout>
+
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="55dp"
+                    android:layout_weight="1.5"
+                    android:layout_gravity="center"
+                    android:background="@drawable/ic_waterspray">
+                </ImageView>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/shape">
+
+        <TextView
+            android:text="Start date"
+            android:textColor="@color/text"
+            android:fontFamily="@font/ptn777"
+            android:textAlignment="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </TextView>
+
+        <LinearLayout
+            android:layout_marginLeft="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:weightSum="5">
+
+            <TextView
+                android:text="Date:"
+                android:textColor="@color/text"
+                android:fontFamily="@font/ptn777"
+                android:textSize="20dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content">
+            </TextView>
+
+
+            <TextView
+                android:id="@+id/txtStartDate"
+                android:text="Start"
+                android:fontFamily="@font/ptn777"
+                android:textSize="20dp"
+                android:layout_width="0dp"
+                android:layout_weight="3.5"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content">
+            </TextView>
+
+            <ImageView
+                android:background="@drawable/ic_startday"
+                android:layout_width="50dp"
+                android:layout_height="50dp">
+            </ImageView>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/shape">
+
+        <TextView
+            android:text="Harvest date"
+            android:textColor="@color/text"
+            android:fontFamily="@font/ptn777"
+            android:textAlignment="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </TextView>
+
+        <LinearLayout
+            android:layout_marginLeft="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:weightSum="5">
+
+            <TextView
+                android:text="Date:"
+                android:textColor="@color/text"
+                android:fontFamily="@font/ptn777"
+                android:textSize="20dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content">
+            </TextView>
+
+
+            <TextView
+                android:id="@+id/txtHavestDate"
+                android:text="Date"
+                android:fontFamily="@font/ptn777"
+                android:textSize="20dp"
+                android:layout_width="0dp"
+                android:layout_weight="3.5"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content">
+            </TextView>
+
+            <ImageView
+                android:background="@drawable/ic_calendar"
+                android:layout_width="50dp"
+                android:layout_height="50dp">
+            </ImageView>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

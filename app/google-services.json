@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "570803930418",
+    "firebase_url": "https://loofarm-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "loofarm",
+    "storage_bucket": "loofarm.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:570803930418:android:fc438d05b97697ad03c32b",
+        "android_client_info": {
+          "package_name": "com.example.loofarm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "570803930418-ftct8m6odevd9m27o7tahb4b79nmfgm4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.loofarm",
+            "certificate_hash": "216bc96e73298d5946d6ef7e3660cbcc63192e83"
+          }
+        },
+        {
+          "client_id": "570803930418-qsjpttp27pal171qep5u5jiglllmp5n0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZ0HygNhpHqqjP8KxzUZcXw0GOdgkhdyM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "570803930418-qsjpttp27pal171qep5u5jiglllmp5n0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
