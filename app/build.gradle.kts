@@ -4,6 +4,7 @@ plugins {
     id("com.google.gms.google-services")
 }
 
+
 android {
     namespace = "com.example.loofarm"
     compileSdk = 34
@@ -56,4 +57,7 @@ dependencies {
     implementation("com.google.firebase:firebase-database-ktx")
     implementation("androidx.cardview:cardview:1.0.0")
     implementation("androidx.recyclerview:recyclerview:1.3.2")
+
+    //add chart
+    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
 }

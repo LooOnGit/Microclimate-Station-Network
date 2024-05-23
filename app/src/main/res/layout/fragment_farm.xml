@@ -24,7 +24,7 @@
         </ImageButton>
 
         <TextView
-            android:text="FARM"
+            android:text="FARM    "
             android:textColor="@color/text"
             android:layout_gravity="center"
             android:textAlignment="center"

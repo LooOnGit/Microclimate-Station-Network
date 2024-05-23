@@ -35,7 +35,7 @@ class UpdateInforUserFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = FragmentUpdateInforUserBinding.inflate(layoutInflater, container, false)
+        binding = FragmentUpdateInforUserBinding.inflate(inflater, container, false)
 
         initEvents()
 
