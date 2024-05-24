@@ -7,10 +7,11 @@ import com.example.loofarm.model.ManagerUser
 import com.example.loofarm.ui.HistoryValueFragment
 import com.example.loofarm.ui.HomeFragment
 import com.example.loofarm.ui.LoginFragment
+import com.example.loofarm.ui.ScanQRFragment
 
 class MainActivity : AppCompatActivity(){
     private lateinit var binding: ActivityMainBinding
-    private val login = HistoryValueFragment()
+    private val login = ScanQRFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

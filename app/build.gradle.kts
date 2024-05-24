@@ -60,4 +60,7 @@ dependencies {
 
     //add chart
     implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
+
+    //qr
+    implementation("com.github.yuriy-budiyev:code-scanner:2.1.0")
 }
