@@ -4,14 +4,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.loofarm.databinding.ActivityMainBinding
 import com.example.loofarm.model.ManagerUser
-import com.example.loofarm.ui.HistoryValueFragment
-import com.example.loofarm.ui.HomeFragment
 import com.example.loofarm.ui.LoginFragment
-import com.example.loofarm.ui.ScanQRFragment
 
 class MainActivity : AppCompatActivity(){
     private lateinit var binding: ActivityMainBinding
-    private val login = ScanQRFragment()
+    private val login = LoginFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

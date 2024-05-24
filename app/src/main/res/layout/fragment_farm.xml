@@ -42,6 +42,7 @@
         android:weightSum="2">
 
         <LinearLayout
+            android:id="@+id/lnTem"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:background="@drawable/shape"
@@ -90,6 +91,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/lnHum"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:background="@drawable/shape"

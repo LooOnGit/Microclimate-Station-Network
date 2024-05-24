@@ -86,18 +86,47 @@ class FarmFragment : Fragment() {
             transaction.addToBackStack(null)
             transaction.commit()
         }
+        binding.lnTem.setOnClickListener{
+            val targetFragment = HistoryValueFragment()
+            // Thực hiện transaction để chuyển đổi Fragment
+            val transaction = requireActivity().supportFragmentManager
+                .beginTransaction().setCustomAnimations(
+                    R.anim.slide_in,
+                    R.anim.fade_out,
+                    R.anim.fade_in,
+                    R.anim.slide_out
+                )
+            transaction.replace(R.id.frLayout, targetFragment)
+            transaction.addToBackStack(null)
+            transaction.commit()
+        }
+
+        binding.lnHum.setOnClickListener{
+            val targetFragment = HistoryValueFragment()
+            // Thực hiện transaction để chuyển đổi Fragment
+            val transaction = requireActivity().supportFragmentManager
+                .beginTransaction().setCustomAnimations(
+                    R.anim.slide_in,
+                    R.anim.fade_out,
+                    R.anim.fade_in,
+                    R.anim.slide_out
+                )
+            transaction.replace(R.id.frLayout, targetFragment)
+            transaction.addToBackStack(null)
+            transaction.commit()
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun initControls() {
 //        Toast.makeText(requireContext(), "${ManagerUser.getPosition()}", Toast.LENGTH_SHORT).show()
         binding.txtStartDate.text = ManagerUser.getDate(ManagerUser.getPosition())
-        binding.txtNameSensor1.text = 7.toString()
+        binding.txtNameSensor1.text = "Nhiệt độ"
         binding.txtValueSensor1.text = "6"+"°C"
-        binding.txtNameSensor2.text = 5.toString()
+        binding.txtNameSensor2.text = "Độ Ẩm"
         binding.txtValueSensor2.text = "5"+"g/m³"
-        binding.txtNameAc1.text = "Acuter 1"
-        binding.txtNameAc2.text = "Acuter 2"
+        binding.txtNameAc1.text = "Động cơ 1"
+        binding.txtNameAc2.text = "Động cơ 2"
 
         var dateStart = ManagerUser.getDate(ManagerUser.getPosition())
         val parts = dateStart?.split("/")

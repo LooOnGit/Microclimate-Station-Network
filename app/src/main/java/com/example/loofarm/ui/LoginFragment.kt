@@ -53,6 +53,21 @@ class LoginFragment : Fragment() {
 //        binding.btnLoginGG.setOnClickListener {
 //            signInGoogle()
 //        }
+        binding.btnLogin.setOnClickListener{
+            // Tạo Fragment mục tiêu
+            val targetFragment = HomeFragment()
+            // Thực hiện transaction để chuyển đổi Fragment
+            val transaction = requireActivity().supportFragmentManager
+                .beginTransaction().setCustomAnimations(
+                    R.anim.slide_in,
+                    R.anim.fade_out,
+                    R.anim.fade_in,
+                    R.anim.slide_out
+                )
+            transaction.replace(R.id.frLayout, targetFragment)
+            transaction.addToBackStack(null)
+            transaction.commit()
+        }
     }
 
     private fun signInGoogle() {
