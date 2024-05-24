@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:background="@color/grey"
+    tools:context=".ui.UserInforFragment">
+
+    <ImageButton
+        android:id="@+id/btnOutCompanyInfor"
+        android:layout_width="43dp"
+        android:layout_height="41dp"
+        android:background="@drawable/ic_out">
+    </ImageButton>
+
+    <LinearLayout
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="96dp"
+            android:layout_height="93dp"
+            android:layout_gravity="center"
+            android:background="@drawable/ic_logoapp">
+        </ImageView>
+
+        <TextView
+            android:fontFamily="@font/ptn777"
+            android:layout_marginTop="5dp"
+            android:textSize="25dp"
+            android:textAlignment="center"
+            android:text="Loo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:text="Thông tin:"
+            android:fontFamily="@font/ptn777"
+            android:textSize="25dp"
+            android:textColor="@color/black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </TextView>
+
+        <TextView
+            android:text="        Chúng tôi chuyên cung cấp các sản phẩm về IOT cho chuyển đổi số nông nghiêp."
+            android:fontFamily="@font/ptn777"
+            android:textSize="18dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </TextView>
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:background="@color/grey"
+    tools:context=".ui.UserInforFragment">
+
+    <ImageButton
+        android:id="@+id/btnOutInfor"
+        android:layout_width="43dp"
+        android:layout_height="41dp"
+        android:background="@drawable/ic_out">
+    </ImageButton>
+
+    <LinearLayout
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="96dp"
+            android:layout_height="93dp"
+            android:layout_gravity="center"
+            android:background="@drawable/ic_user">
+        </ImageView>
+        
+        <TextView
+            android:id="@+id/txtUserName"
+            android:fontFamily="@font/ptn777"
+            android:layout_marginTop="5dp"
+            android:textSize="25dp"
+            android:textAlignment="center"
+            android:text="Update user"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"/>
+    </LinearLayout>
+    
+    <LinearLayout
+        android:layout_margin="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/shape"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="45dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/ic_userinfor" />
+
+            <Button
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:id="@+id/btnUpdateProfile"
+                android:layout_width="244dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:fontFamily="@font/ptn777"
+                android:text="Update Profile"
+                android:textAllCaps="false"
+                android:textAlignment="viewStart"
+                android:textSize="20dp"/>
+
+            <ImageView
+                android:layout_marginLeft="5dp"
+                android:layout_width="45dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/ic_chevron_right" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/shape"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="45dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/ic_signout" />
+
+            <Button
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:id="@+id/btnSignOut"
+                android:layout_width="244dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:fontFamily="@font/ptn777"
+                android:text="Sign Out"
+                android:textAllCaps="false"
+                android:textAlignment="viewStart"
+                android:textSize="20dp"/>
+
+            <ImageView
+                android:layout_marginLeft="5dp"
+                android:layout_width="45dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/ic_chevron_right" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
