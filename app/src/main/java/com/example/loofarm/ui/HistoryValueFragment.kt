@@ -65,20 +65,6 @@ class HistoryValueFragment : Fragment() {
     }
 
     private fun initEvents() {
-        binding.btnOutHistory.setOnClickListener(){
-            val targetFragment = FarmFragment()
-            // Thực hiện transaction để chuyển đổi Fragment
-            val transaction = requireActivity().supportFragmentManager
-                .beginTransaction().setCustomAnimations(
-                    R.anim.slide_in,
-                    R.anim.fade_out,
-                    R.anim.fade_in,
-                    R.anim.slide_out
-                )
-            transaction.replace(R.id.frLayout, targetFragment)
-            transaction.addToBackStack(null)
-            transaction.commit()
-        }
     }
 
     fun dataListing(){

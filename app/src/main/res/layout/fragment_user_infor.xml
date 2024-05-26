@@ -9,13 +9,6 @@
     android:background="@color/grey"
     tools:context=".ui.UserInforFragment">
 
-    <ImageButton
-        android:id="@+id/btnOutInfor"
-        android:layout_width="43dp"
-        android:layout_height="41dp"
-        android:background="@drawable/ic_out">
-    </ImageButton>
-
     <LinearLayout
         android:layout_marginTop="5dp"
         android:layout_width="match_parent"

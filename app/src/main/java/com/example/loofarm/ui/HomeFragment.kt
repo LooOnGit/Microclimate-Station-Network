@@ -93,8 +93,8 @@ class HomeFragment : Fragment() {
             transaction.commit()
         }
 
-        binding.btnCompanyInfor.setOnClickListener{
-            val targetFragment = CompanyInforFragment()
+        binding.btnAddFarm.setOnClickListener{
+            val targetFragment = AddFarmFragment()
             // Thực hiện transaction để chuyển đổi Fragment
             val transaction = requireActivity().supportFragmentManager
                 .beginTransaction().setCustomAnimations(
@@ -108,8 +108,8 @@ class HomeFragment : Fragment() {
             transaction.commit()
         }
 
-        binding.btnAddFarm.setOnClickListener{
-            val targetFragment = AddFarmFragment()
+        binding.btnNotify.setOnClickListener{
+            val targetFragment = NotificationFragment()
             // Thực hiện transaction để chuyển đổi Fragment
             val transaction = requireActivity().supportFragmentManager
                 .beginTransaction().setCustomAnimations(

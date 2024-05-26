@@ -20,11 +20,11 @@
         android:orientation="horizontal">
 
         <ImageButton
-            android:id="@+id/btnCompanyInfor"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="60dp"
-            android:background="@drawable/ic_logoapp"/>
+            android:id="@+id/btnNotify"
+            android:layout_width="5dp"
+            android:layout_height="40dp"
+            android:layout_weight="0.5"
+            android:background="@drawable/ic_notifynone" />
 
         <TextView
             android:layout_width="0dp"

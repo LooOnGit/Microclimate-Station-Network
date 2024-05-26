@@ -72,20 +72,6 @@ class FarmFragment : Fragment() {
             }
         }
 
-        binding.btnOutFarm.setOnClickListener{
-            val targetFragment = HomeFragment()
-            // Thực hiện transaction để chuyển đổi Fragment
-            val transaction = requireActivity().supportFragmentManager
-                .beginTransaction().setCustomAnimations(
-                    R.anim.slide_in,
-                    R.anim.fade_out,
-                    R.anim.fade_in,
-                    R.anim.slide_out
-                )
-            transaction.replace(R.id.frLayout, targetFragment)
-            transaction.addToBackStack(null)
-            transaction.commit()
-        }
         binding.lnTem.setOnClickListener{
             val targetFragment = HistoryValueFragment()
             // Thực hiện transaction để chuyển đổi Fragment
@@ -103,6 +89,21 @@ class FarmFragment : Fragment() {
 
         binding.lnHum.setOnClickListener{
             val targetFragment = HistoryValueFragment()
+            // Thực hiện transaction để chuyển đổi Fragment
+            val transaction = requireActivity().supportFragmentManager
+                .beginTransaction().setCustomAnimations(
+                    R.anim.slide_in,
+                    R.anim.fade_out,
+                    R.anim.fade_in,
+                    R.anim.slide_out
+                )
+            transaction.replace(R.id.frLayout, targetFragment)
+            transaction.addToBackStack(null)
+            transaction.commit()
+        }
+
+        binding.btnScanQRNode.setOnClickListener{
+            val targetFragment = ScanQRFragment()
             // Thực hiện transaction để chuyển đổi Fragment
             val transaction = requireActivity().supportFragmentManager
                 .beginTransaction().setCustomAnimations(

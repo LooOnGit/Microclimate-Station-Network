@@ -15,7 +15,7 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:text="History    "
+            android:text="Thông báo"
             android:textColor="@color/text"
             android:layout_gravity="center"
             android:textAlignment="center"
@@ -24,10 +24,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </LinearLayout>
-    <com.github.mikephil.charting.charts.LineChart
-        android:id="@+id/chart"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcNotification"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="15dp"
-        />
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"/>
+
+
 </LinearLayout>

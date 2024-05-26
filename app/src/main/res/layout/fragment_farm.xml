@@ -14,17 +14,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <ImageButton
-            android:id="@+id/btnOutFarm"
-            android:layout_marginLeft="5dp"
-            android:background="@drawable/ic_outwhite"
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-        </ImageButton>
-
         <TextView
-            android:text="FARM    "
+            android:id="@+id/txtNameFarm"
+            android:text="Nông trại"
             android:textColor="@color/text"
             android:layout_gravity="center"
             android:textAlignment="center"
@@ -373,6 +365,61 @@
             </ImageView>
 
         </LinearLayout>
-
     </LinearLayout>
+    <LinearLayout
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/shape">
+
+        <TextView
+            android:text="Thêm thiết bị"
+            android:textColor="@color/text"
+            android:fontFamily="@font/ptn777"
+            android:textAlignment="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </TextView>
+
+        <LinearLayout
+            android:layout_marginLeft="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:weightSum="5">
+
+            <TextView
+                android:text="ID:"
+                android:textColor="@color/text"
+                android:fontFamily="@font/ptn777"
+                android:textSize="20dp"
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content">
+            </TextView>
+
+
+            <TextView
+                android:id="@+id/txtID"
+                android:fontFamily="@font/ptn777"
+                android:textSize="20dp"
+                android:layout_width="0dp"
+                android:layout_weight="3.5"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content">
+            </TextView>
+
+            <Button
+                android:id="@+id/btnScanQRNode"
+                android:layout_width="0dp"
+                android:layout_weight="0.7"
+                android:layout_height="40dp"
+                android:layout_gravity="right"
+                android:background="@drawable/icon_scanqr"/>
+            </LinearLayout>
+        </LinearLayout>
 </LinearLayout>
