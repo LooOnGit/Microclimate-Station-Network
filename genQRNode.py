@@ -26,9 +26,9 @@ def qrCode(data):
     qr_img = qr.make_image(fill_color="black", back_color="white")
 
     # Lưu hình ảnh mã QR
-    qr_img.save("QRGate/"+str(data)+".png")
+    qr_img.save("QRNode/"+str(data)+".png")
 def writeFile(idNew):
-    path = "gateID.xlsx"
+    path = "nodeID.xlsx"
     wbObj = openpyxl.load_workbook(path)
     sheetObj = wbObj.active
     maxRow = sheetObj.max_row
@@ -56,7 +56,11 @@ def writeFile(idNew):
     wbObj.save(path)
 
 
-secure_numeric_id = 'GW'+ generate_secure_numeric_id(4)
+
+
+
+
+secure_numeric_id = 'ND'+ generate_secure_numeric_id(4)
 
 print("Secure Numeric ID:", secure_numeric_id)
 writeFile(secure_numeric_id)
