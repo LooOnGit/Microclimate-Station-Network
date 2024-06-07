@@ -35,6 +35,8 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+#define ID "ND7969"
+
 //#define RX
 #define TX
 #define sht3x
@@ -67,11 +69,13 @@ uint8_t send_data[128];
 int			RSSI;
 char msg[64];
 char buf[20];
+char buf1[20];
 #ifdef TX
 char jsonPack[100];
 #endif
 
 typedef struct{
+	char *id;
 	#ifdef sht3x
 	int temp;
 	char tempToStr[10];
@@ -80,6 +84,8 @@ typedef struct{
 	#endif
 	
 	#ifdef sen0451
+	float ec;
+	char ecToChar[10];
 	#endif
 	
 	#ifdef sen0186
@@ -120,6 +126,7 @@ static void MX_USART2_UART_Init(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 #ifdef TX
+
 void formatJson(sensors *sensorVal){
 	//xoa mang du lieu
 	for(int i = 0; i < 10; i++)
@@ -144,7 +151,11 @@ void formatJson(sensors *sensorVal){
 	sprintf(sensorVal->qToStr, "%d", sensorVal->q);
 	
 	//{"ND":"123","DA":"456"}
-	strcat(jsonPack,"{\"TEMP\":\"");
+	strcat(jsonPack,"{\"ID\":\"");
+	strcat(jsonPack,sensorVal->id);
+	strcat(jsonPack,"\",");
+	
+	strcat(jsonPack,"\"TEMP\":\"");
 	strcat(jsonPack,sensorVal->tempToStr);
 	strcat(jsonPack,"\",");
 	
@@ -175,12 +186,12 @@ void formatJson(sensors *sensorVal){
 	strcat(jsonPack,"\n");
 	int i=0;
 	
-	while(jsonPack[i]!=0)
-	{
-		unsigned char Send=jsonPack[i];
-		HAL_UART_Transmit(&huart1, &Send, 1, 1);
-		i++;
-	}
+//	while(jsonPack[i]!=0)
+//	{
+//		unsigned char Send=jsonPack[i];
+//		HAL_UART_Transmit(&huart1, &Send, 1, 1);
+//		i++;
+//	}
 }
 #endif 
 /* USER CODE END 0 */
@@ -242,21 +253,35 @@ int main(void)
 	myLoRa.preamble				       = 10;		  					// default = 8;
 	
 	LoRa_reset(&myLoRa);
-	LoRa_init(&myLoRa);
-	
-	
 	lcd_init();
+	
+	uint16_t LoRa_status = LoRa_init(&myLoRa);
+	
+	
 	// START CONTINUOUS RECEIVING -----------------------------------
 	LoRa_startReceiving(&myLoRa);
-	sprintf(msg,"Done configuring LoRaModule\r\n");
-	HAL_UART_Transmit(&huart1,(uint8_t *)msg,strlen(msg),1000);
+	if (LoRa_status==LORA_OK){
+		sprintf(msg,"LoRa is running...\n\r");
+		LoRa_transmit(&myLoRa, (uint8_t*)send_data, 120, 100);
+		HAL_UART_Transmit(&huart1,(uint8_t *)msg,strlen(msg),1000);
+	}
+	else{
+		sprintf(msg,"\n\r LoRa failed :( \n\r Error code: %d \n\r", LoRa_status);
+		HAL_UART_Transmit(&huart1, (uint8_t*)msg, strlen(msg),1000);
+	}
 	
+//	
+//	sprintf(msg,"Done configuring LoRaModule\r\n");
+//	HAL_UART_Transmit(&huart1,(uint8_t *)msg,strlen(msg),1000);
+//	
 	#ifdef TX
 	uint16_t count =0;
 	sprintf(buf,"LOOD");
 	#else
 	uint8_t ret;
 	#endif
+	
+	sensorVals.id = ID;
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -268,11 +293,16 @@ int main(void)
     /* USER CODE BEGIN 3 */
 		#ifdef TX
 		formatJson(&sensorVals);
-		LoRa_transmit(&myLoRa, (uint8_t*)jsonPack, 100, 500);
-		sprintf(msg,"%s\r\n",jsonPack);
-		HAL_UART_Transmit(&huart1,(uint8_t *)msg,strlen(msg),1000);
-		HAL_Delay(1000);
+
+		LoRa_receive(&myLoRa, (uint8_t*)buf1, 20);
+		if(strcmp(buf1,"ND7969")==0){
+			LoRa_transmit(&myLoRa, (uint8_t*)jsonPack, strlen(jsonPack), 500);
+			sprintf(msg,"%s\r\n",jsonPack);
+			HAL_UART_Transmit(&huart1,(uint8_t *)msg,strlen(msg),1000);
+		}
+		HAL_Delay(5000);
 		#endif
+
 		
 		#ifdef RX
 		RSSI = LoRa_getRSSI(&myLoRa);
