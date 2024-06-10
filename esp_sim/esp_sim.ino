@@ -240,7 +240,7 @@ void resetData(JsonObject& jsonObject)
 {
    for (JsonPair kvp : jsonObject)
    {
-     kvp.value() = 0;
+     kvp.value().set(0);
    }
 }
 
