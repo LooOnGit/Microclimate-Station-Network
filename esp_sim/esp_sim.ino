@@ -13,11 +13,10 @@ typedef struct id{
   int numberID;
   int addr;
   int addrNumberID;
+  JsonDocument idJson;
 }id;
 
 id managerID;
-char *nodeID[1000];
-JsonDocument idJson;
 //---------------------------------------------------------define EEPROM--------------------------------------------------------------------------------
 #define EEPROM_SIZE 1024
 
@@ -35,12 +34,13 @@ JsonDocument idJson;
 
 //-------------------------------------------------------------JSON---------------------------------------------------------------------------------
 // DynamicJsonDocument managerID(1024);
-int numberPartners = 0;
-JsonDocument recJson;
+// int numberPartners = 0;
+JsonDocument dataFull;
+JsonDocument recData;
+
 //================================================================Time=====================================================================================================
 int interval = 5000;          // interval between sends
 long lastSendTime = 0;        // time of last packet send
-
 
 
 //--------------------------------------------------------------Variable declaration to hold incoming and outgoing data.---------------------------------
@@ -58,8 +58,14 @@ bool atMode = true;
 const char* publishTopic ="main";
 const unsigned long postingInterval = 20L * 1000L;
 unsigned long lastUploadedTime = 0;
+
+PPPOSClient ppposClient;
+PubSubClient client(ppposClient);
+// char* server = "mqtt3.thingspeak.com";
+char* server = "127.0.0.1";
 //----------------------------------------------------------------function sim------------------------------------------------------------------------
-bool sendCommandWithAnswer(String cmd, String ans){
+bool sendCommandWithAnswer(String cmd, String ans)
+{
    PPPOS_write((char *)cmd.c_str());
    unsigned long _tg = millis();
    while(true){
@@ -82,7 +88,8 @@ bool sendCommandWithAnswer(String cmd, String ans){
    return false;
 }
 
-int8_t  AT_CheckCSQ(void){
+int8_t  AT_CheckCSQ(void)
+{
    int csq = 0;
    PPPOS_write("AT+CSQ\r\n");
    unsigned long _tg = millis();
@@ -111,7 +118,8 @@ int8_t  AT_CheckCSQ(void){
    return csq;
 }
 
-bool startPPPOS(){  
+bool startPPPOS()
+{  
   if (!sendCommandWithAnswer("ATD*99***1#\r\n", "CONNECT 115200")) { return false; }
   atMode = false;
   PPPOS_start(); 
@@ -179,12 +187,8 @@ void SIM_connect_PPP(void)
   }
 }
 
-PPPOSClient ppposClient;
-PubSubClient client(ppposClient);
-// char* server = "mqtt3.thingspeak.com";
-char* server = "127.0.0.1";
-
-void callback(char* topic, byte* payload, unsigned int length) {
+void callback(char* topic, byte* payload, unsigned int length) 
+{
   Serial.print("Message arrived [");
   Serial.print(topic);
   Serial.print("] ");
@@ -195,12 +199,14 @@ void callback(char* topic, byte* payload, unsigned int length) {
 }
 
 //======================================= publising as string
-void publishMessage(const char* topic, String payload , boolean retained){
+void publishMessage(const char* topic, String payload , boolean retained)
+{
   if (client.publish(topic, payload.c_str()))
       Serial.println("Message publised ["+String(topic)+"]: "+payload);
 }
 
-void reconnect() {
+void reconnect() 
+{
   // Loop until we're reconnected
   while (!client.connected()) {
     Serial.print("Attempting MQTT connection...");
@@ -221,45 +227,86 @@ void reconnect() {
   }
 }
 
+//===============================================================================Proceed Data Json========================================================
+void merge(JsonObject& dataFull, JsonObjectConst& dataRec)
+{
+   for (JsonPairConst kvp : dataRec)
+   {
+     dataFull[kvp.key()] = kvp.value();
+   }
+}
+
+void resetData(JsonObject& jsonObject)
+{
+   for (JsonPair kvp : jsonObject)
+   {
+     kvp.value() = 0;
+   }
+}
+
 //---------------------------------------------------------------------------function LoRa------------------------------------------------------------------
 
-void sendMessage(String Outgoing) {
+void sendMessage(String Outgoing) 
+{
   LoRa.beginPacket();             //--> start packet
   LoRa.print(Outgoing);           //--> add payload
   LoRa.endPacket();               //--> finish packet and send it
 }
 
-void onReceive(int packetSize) {
+void onReceive(int packetSize) 
+{
   if (packetSize == 0) return;  //--> if there's no packet, return
   Incoming = "";
 
   while (LoRa.available()) {
     Incoming += (char)LoRa.read();
   }
-  deserializeJson(recJson, Incoming);
-  serializeJson(recJson, Serial);
-  if(recJson["ID"] == "ND7969"){
-    Serial.println("Received");
-    sendMessage("Received");
-  }
-
-  const char *recID = recJson["ID"];
-  Serial.println("Received from: " + String(strlen(recID)));
+  Serial.println("\n");
+  deserializeJson(recData, Incoming);
+  serializeJson(recData, Serial);
+  JsonObjectConst object2 = recData.as<JsonObjectConst>();
+  JsonObject object1 = dataFull.as<JsonObject>();
+  merge(object1, object2);
+  const char *recID = recData["ID"];
+  Serial.println("\nReceived from: " + String(recID));
   Serial.println("Message length: " + String(Incoming.length()));
   Serial.println("RSSI: " + String(LoRa.packetRssi()));
-  Serial.println("Snr: " + String(LoRa.packetSnr()));
+  Serial.println("data FULL: ");
+  serializeJson(dataFull, Serial);
   //---------------------------------------- 
 }
 
+void receivedFromNodes()
+{
+  int times = 0;
+  for(int element = 0; element < managerID.numberID; element++){
+    while(times < 5){
+      if (millis() - lastSendTime > interval) {
+        sendMessage(managerID.idJson[element]);
+        const char *tempID = managerID.idJson[element];
+        Serial.println(String(times) + "st " + String(tempID)+ " request");
+        times++;
+        lastSendTime = millis();
+      }
+      onReceive(LoRa.parsePacket());
+      if(dataFull["ID"] == managerID.idJson[element]){
+        deserializeJson(dataFull, "{}");//clear Json
+        break;
+      }
+    }
+    times = 0;
+  }
+}
+
 //-------------------------------------------------------------------------------MANAGE ID-------------------------------------------------------------------
-void writeIdToRom(char *id){
+void writeIdToRom(char *id)
+{
   // writing byte-by-byte to EEPROM
-  idJson[managerID.numberID] = id;
+  managerID.idJson[managerID.numberID] = id;
   for (int i = 0; i < strlen(id); i++) {
       EEPROM.write(managerID.addr, id[i]);
       managerID.addr += 1;
   }
-  nodeID[managerID.numberID] = id;
   managerID.numberID++;
   if(EEPROM.read(1000) < managerID.numberID){
     EEPROM.write(1000, managerID.numberID);//write number ID in address 1000 
@@ -271,7 +318,8 @@ void writeIdToRom(char *id){
   EEPROM.commit();
 }
 
-void readIdfromRom(){
+void readIdfromRom()
+{
   int IDs = EEPROM.read(1000);
   Serial.println("\nNumber ID Read From ROM: " + String(managerID.numberID));
   for(int k = 0; k < IDs; k++){
@@ -287,17 +335,16 @@ void readIdfromRom(){
 
       strcat(readValueChar, tempStr);
     }
-    nodeID[k] = readValueChar;
   }
   Serial.println("All ID: ");
-  serializeJson(idJson, Serial);
+  serializeJson(managerID.idJson, Serial);
 }
-
 
 //--------------------------------------------------------------------------------setup---------------------------------------------------------------------
 void setup()
 {
   managerID.addr = 0;
+  dataFull["fd"] = 0;
   managerID.numberID = 0;
   Serial.begin(115200);
   char *id = ID;
@@ -311,6 +358,7 @@ void setup()
   EEPROM.write(1000, 0);
   //============================================================================Write MyID to EPPROM================================================================
   writeIdToRom(id);
+  writeIdToRom("ND7969");
   //============================================================================Init SIM======================================================================
   /*  Init PPP  */
   // PPPOS_init(GSM_TX, GSM_RX, GSM_BR, GSM_SERIAL, ppp_user, ppp_pass);
@@ -334,17 +382,12 @@ void setup()
   LoRa.setCodingRate4(5);
   LoRa.setSyncWord(0x12);
   Serial.println("LoRa init succeeded.");
-  // sendMessage("ND7969");
+  readIdfromRom();
 }
 
 void loop()
 {
-  if (millis() - lastSendTime > interval) {
-    sendMessage("ND7969");
-    lastSendTime = millis();
-  }
-  onReceive(LoRa.parsePacket());
-
+  receivedFromNodes();
   // if (!PPPOS_isConnected() || atMode){
   //   data = PPPOS_read();
   //   if (data != NULL){
