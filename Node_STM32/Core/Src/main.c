@@ -27,6 +27,7 @@
 #include <string.h>
 #include "cJSON.h"
 #include "i2c-lcd.h"
+#include "FLASH_PAGE_F1.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -36,14 +37,20 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define ID "ND7969"
+//=========================================================MY ID DEFINE===========================================================
+#define myID "ND7969"
 
-//#define RX
-#define TX
-#define sht3x
-#define sen0451 //Sensor Sal
-#define sen0186 //Kit Weather Station
-#define yf //sensor flow water 
+//=========================================================Address Flash DEFINE===================================================
+#define START_ADDRESS 		((uint32_t)0x0801F810)	//Page 126
+#define NUMBER_ID_ADDRESS	((uint32_t)0x0801F402)	//Page 125
+
+//========================================================ALL SENSOR DEFINE=======================================================
+#define SHT3x
+#define SAL //Sensor Sal
+#define KIT //Kit Weather Station
+#define FLOW_WATER //sensor flow water 
+#define ULTRASONIC //level water
+#define LCD
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -67,50 +74,59 @@ UART_HandleTypeDef huart2;
 
 osThreadId sendToGateHandle;
 /* USER CODE BEGIN PV */
-LoRa myLoRa;
-uint8_t read_data[128];
-uint8_t send_data[128];
-int			RSSI;
-char msg[64];
-char buf[20];
-char buf1[20];
-#ifdef TX
-char jsonPack[100];
-#endif
 
+LoRa myLoRa;
+char readData[128];
+char sendData[128];
+int	rssi;
+char msg[64];
+char idRecv[20];
+ 
+int i = 0;
+//=======================================================INIT json data==============================================================
+char jsonPack[100];
+//=======================================================INIT Sensors==========================================================
 typedef struct{
-	char *id;
-	#ifdef sht3x
-	int temp;
-	char tempToStr[10];
-	int hum;
-	char humToStr[10];
+	#ifdef SHT3x
+	int valTemp;
+	char valTempToStr[10];
+	int valHum;
+	char valHumToStr[10];
 	#endif
 	
-	#ifdef sen0451
-	float ec;
-	char ecToChar[10];
+	#ifdef SAL
+	float valEC;
+	char valECToStr[10];
 	#endif
 	
-	#ifdef sen0186
-	int windSpeed;
-	int windDirection;
-	int tempKit;
-	int humKit;
+	#ifdef KIT
+	int valWindSpeed;
+	int valWindDirection;
+	int valTempKit;
+	int valHumKit;
 	
-	char speedToStr[10];
-	char directionToStr[10];
-	char tempKitToStr[10];
-	char humKitToStr[10];
+	char valSpeedToStr[10];
+	char valDirectionToStr[10];
+	char valTempKitToStr[10];
+	char valHumKitToStr[10];
 	#endif
 	
-	#ifdef yf
-	int q;
-	char qToStr[10];
+	#ifdef FLOW_WATER
+	int valQ;
+	char valQToStr[10];
+	#endif
+	
+	#ifdef ULTRASONIC
+	int valLevelWater;
+	char valLevelWaterToStr[10];
 	#endif
 }sensors;
 
 sensors sensorVals;
+
+//====================================================================INIT TIME===================================================================
+int lastTime = 0;
+int wait = 5000;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -127,80 +143,27 @@ static void MX_TIM2_Init(void);
 void StartDefaultTask(void const * argument);
 
 /* USER CODE BEGIN PFP */
+//======================================================Function for Json====================================================
+void formatJson();
+void proceedJson(char *DataJSON);
 
+//======================================================Function for Flash===================================================
+void writeFlash();
+void readFlash();
 /* USER CODE END PFP */
-
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-#ifdef TX
-
-void formatJson(sensors *sensorVal){
-	//xoa mang du lieu
-	for(int i = 0; i < 10; i++)
-	{
-		jsonPack[i] = 0;
-		sensorVal->tempToStr[i] = 0;
-		sensorVal->humToStr[i] = 0;
-		sensorVal->speedToStr[i] = 0;
-		sensorVal->directionToStr[i] = 0;
-		sensorVal->tempKitToStr[i] = 0;
-		sensorVal->humKitToStr[i] = 0;
-		sensorVal->qToStr[i] = 0;
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
+	if(GPIO_Pin == DIO0_Pin){
+		LoRa_receive(&myLoRa, (uint8_t*)jsonPack, 128);
+		sprintf(msg,"%s\r\n",jsonPack);
+		HAL_UART_Transmit(&huart1,(uint8_t *)msg,strlen(msg),1000);
+		for(int i = 0; i < 100; i++)
+		{
+			jsonPack[i] = 0;
+		}
 	}
-	
-	//Truyen du lieu vao ve char
-	sprintf(sensorVal->tempToStr, "%d", sensorVal->temp);
-	sprintf(sensorVal->humToStr, "%d", sensorVal->hum);
-	sprintf(sensorVal->speedToStr, "%d", sensorVal->windSpeed);
-	sprintf(sensorVal->directionToStr, "%d", sensorVal->windDirection);
-	sprintf(sensorVal->tempKitToStr, "%d", sensorVal->tempKit);
-	sprintf(sensorVal->humKitToStr, "%d", sensorVal->humKit);
-	sprintf(sensorVal->qToStr, "%d", sensorVal->q);
-	
-	//{"ND":"123","DA":"456"}
-	strcat(jsonPack,"{\"ID\":\"");
-	strcat(jsonPack,sensorVal->id);
-	strcat(jsonPack,"\",");
-	
-	strcat(jsonPack,"\"TEMP\":\"");
-	strcat(jsonPack,sensorVal->tempToStr);
-	strcat(jsonPack,"\",");
-	
-	strcat(jsonPack,"\"HUM\":\"");
-	strcat(jsonPack,sensorVal->humToStr);
-	strcat(jsonPack,"\",");
-	
-	strcat(jsonPack,"\"WP\":\"");
-	strcat(jsonPack,sensorVal->speedToStr);
-	strcat(jsonPack,"\",");
-	
-	strcat(jsonPack,"\"WD\":\"");
-	strcat(jsonPack,sensorVal->directionToStr);
-	strcat(jsonPack,"\",");
-	
-	strcat(jsonPack,"\"TempKit\":\"");
-	strcat(jsonPack,sensorVal->tempKitToStr);
-	strcat(jsonPack,"\",");
-	
-	strcat(jsonPack,"\"HumKit\":\"");
-	strcat(jsonPack,sensorVal->humKitToStr);
-	strcat(jsonPack,"\",");
-	
-	strcat(jsonPack,"\"Q\":\"");
-	strcat(jsonPack,sensorVal->qToStr);
-	
-	strcat(jsonPack,"\"}");
-	strcat(jsonPack,"\n");
-	int i=0;
-	
-//	while(jsonPack[i]!=0)
-//	{
-//		unsigned char Send=jsonPack[i];
-//		HAL_UART_Transmit(&huart1, &Send, 1, 1);
-//		i++;
-//	}
 }
-#endif 
 /* USER CODE END 0 */
 
 /**
@@ -261,16 +224,13 @@ int main(void)
 	myLoRa.preamble				       = 10;		  					// default = 8;
 	
 	LoRa_reset(&myLoRa);
-	lcd_init();
-	
 	uint16_t LoRa_status = LoRa_init(&myLoRa);
-	
 	
 	// START CONTINUOUS RECEIVING -----------------------------------
 	LoRa_startReceiving(&myLoRa);
 	if (LoRa_status==LORA_OK){
 		sprintf(msg,"LoRa is running...\n\r");
-		LoRa_transmit(&myLoRa, (uint8_t*)send_data, 120, 100);
+		LoRa_transmit(&myLoRa, (uint8_t*)sendData, 120, 100);
 		HAL_UART_Transmit(&huart1,(uint8_t *)msg,strlen(msg),1000);
 	}
 	else{
@@ -278,18 +238,12 @@ int main(void)
 		HAL_UART_Transmit(&huart1, (uint8_t*)msg, strlen(msg),1000);
 	}
 	
-//	
-//	sprintf(msg,"Done configuring LoRaModule\r\n");
-//	HAL_UART_Transmit(&huart1,(uint8_t *)msg,strlen(msg),1000);
-//	
-	#ifdef TX
-	uint16_t count =0;
-	sprintf(buf,"LOOD");
-	#else
-	uint8_t ret;
+	//======================================================================INIT LCD======================================================================
+	#ifdef LCD
+	lcd_init();
 	#endif
 	
-	sensorVals.id = ID;
+	//======================================================================
   /* USER CODE END 2 */
 
   /* USER CODE BEGIN RTOS_MUTEX */
@@ -329,32 +283,6 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-		#ifdef TX
-//		formatJson(&sensorVals);
-//		LoRa_receive(&myLoRa, (uint8_t*)buf1, 20);
-//		if(strcmp(buf1,"ND7969")==0){
-//			LoRa_transmit(&myLoRa, (uint8_t*)jsonPack, strlen(jsonPack), 500);
-//			sprintf(msg,"%s\r\n",jsonPack);
-//			HAL_UART_Transmit(&huart1,(uint8_t *)msg,strlen(msg),1000);
-//			sprintf(buf1,"%s","");
-//		}
-//		HAL_Delay(5000);
-		#endif
-
-		
-		#ifdef RX
-		RSSI = LoRa_getRSSI(&myLoRa);
-		LoRa_receive(&myLoRa, (uint8_t*)buf, 128);
-		sprintf(msg,"packed: %s\r\n",buf);
-		lcd_goto_XY(1,0);
-		lcd_send_string(msg);
-		sprintf(msg,"RSSI: %d\r\n",RSSI);
-		lcd_goto_XY(2,0);
-		lcd_send_string(msg);
-		HAL_UART_Transmit(&huart1,(uint8_t *)msg,strlen(msg),1000);
-		HAL_Delay(5000);
-		#endif
-		
   }
   /* USER CODE END 3 */
 }
@@ -768,7 +696,7 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_Init(DIO0_GPIO_Port, &GPIO_InitStruct);
 
   /* EXTI interrupt init*/
-  HAL_NVIC_SetPriority(EXTI9_5_IRQn, 0, 0);
+  HAL_NVIC_SetPriority(EXTI9_5_IRQn, 6, 0);
   HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
 
 /* USER CODE BEGIN MX_GPIO_Init_2 */
@@ -776,6 +704,132 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+void formatJson(){
+	//xoa mang du lieu
+	sensorVals.valTemp = 0;
+	sensorVals.valHum = 0;
+	sensorVals.valEC = 0;
+	sensorVals.valHumKit = 0;
+	sensorVals.valTempKit = 0;
+	sensorVals.valLevelWater = 0;
+	sensorVals.valQ = 0;
+	sensorVals.valWindDirection= 0;
+	sensorVals.valWindSpeed = 0;
+	
+	
+	for(int i = 0; i < 100; i++)
+	{
+		jsonPack[i] = 0;
+	}
+	
+	for(int i = 0; i < 10; i++)
+	{
+		#ifdef SHT3x
+		sensorVals.valTempToStr[i] = 0;
+		sensorVals.valHumToStr[i] = 0;
+		#endif
+		
+		#ifdef KIT
+		sensorVals.valSpeedToStr[i] = 0;
+		sensorVals.valDirectionToStr[i] = 0;
+		sensorVals.valTempKitToStr[i] = 0;
+		sensorVals.valHumKitToStr[i] = 0;
+		#endif
+		
+		#ifdef FLOW_WATER
+		sensorVals.valQToStr[i] = 0;
+		#endif
+		
+		#ifdef ULTRASONIC
+		sensorVals.valLevelWater = 0;
+		#endif
+	}
+	
+	//Truyen du lieu vao ve char
+	#ifdef SHT3x
+	sprintf(sensorVals.valTempToStr, "%d", sensorVals.valTemp);
+	sprintf(sensorVals.valHumToStr, "%d", sensorVals.valHum);
+	#endif
+	
+	#ifdef KIT
+	sprintf(sensorVals.valSpeedToStr, "%d", sensorVals.valWindSpeed);
+	sprintf(sensorVals.valDirectionToStr, "%d", sensorVals.valWindDirection);
+	sprintf(sensorVals.valTempKitToStr, "%d", sensorVals.valTempKit);
+	sprintf(sensorVals.valHumKitToStr, "%d", sensorVals.valHumKit);
+	#endif
+	
+	#ifdef FLOW_WATER
+	sprintf(sensorVals.valQToStr, "%d", sensorVals.valQ);
+	#endif
+	
+	#ifdef ULTRASONIC
+	sprintf(sensorVals.valLevelWaterToStr, "%d", sensorVals.valLevelWater);
+	#endif
+	
+	strcat(jsonPack,"{\"ID\":\"");
+	strcat(jsonPack,myID);
+	strcat(jsonPack,"\",");
+	
+	#ifdef SHT3x
+	strcat(jsonPack,"\"TEMP\":\"");
+	strcat(jsonPack,sensorVals.valTempToStr);
+	strcat(jsonPack,"\",");
+	
+	strcat(jsonPack,"\"HUM\":\"");
+	strcat(jsonPack,sensorVals.valHumToStr);
+	strcat(jsonPack,"\",");
+	#endif
+	
+	#ifdef KIT
+	strcat(jsonPack,"\"WP\":\"");
+	strcat(jsonPack,sensorVals.valSpeedToStr);
+	strcat(jsonPack,"\",");
+	
+	strcat(jsonPack,"\"WD\":\"");
+	strcat(jsonPack,sensorVals.valDirectionToStr);
+	strcat(jsonPack,"\",");
+	
+	strcat(jsonPack,"\"TempKit\":\"");
+	strcat(jsonPack,sensorVals.valTempKitToStr);
+	strcat(jsonPack,"\",");
+	
+	strcat(jsonPack,"\"HumKit\":\"");
+	strcat(jsonPack,sensorVals.valHumKitToStr);
+	strcat(jsonPack,"\",");
+	#endif
+	
+	#ifdef FLOW_WATER
+	strcat(jsonPack,"\"Q\":\"");
+	strcat(jsonPack,sensorVals.valQToStr);
+	strcat(jsonPack,"\",");
+	#endif
+	
+	#ifdef ULTRASONIC
+	strcat(jsonPack,"\"LevelWater\":\"");
+	strcat(jsonPack,sensorVals.valLevelWaterToStr);
+	#endif
+	
+	strcat(jsonPack,"\"}");
+	strcat(jsonPack,"\n");
+	int i=0;
+}
+
+void proceedJson(char *DataJSON){
+	cJSON *strJson = cJSON_Parse(DataJSON);
+	if(!strJson)
+	{
+		char *error = "JSON ERROR!\r\n";
+		HAL_UART_Transmit(&huart1,(uint8_t *)error, strlen(error),1);
+		return;
+	}
+	else
+	{
+		char *OK = "JSON OK!\r\n";
+		HAL_UART_Transmit(&huart1,(uint8_t *)OK, strlen(OK),1);
+	}
+	
+}
+
 
 /* USER CODE END 4 */
 
@@ -789,20 +843,59 @@ static void MX_GPIO_Init(void)
 void StartDefaultTask(void const * argument)
 {
   /* USER CODE BEGIN 5 */
+	sprintf(msg,"%d",i);
+	lcd_goto_XY(1,0);
+	lcd_send_string(msg);
   /* Infinite loop */
   for(;;)
   {
-		formatJson(&sensorVals);
-		LoRa_receive(&myLoRa, (uint8_t*)buf1, 20);
-		if(strcmp(buf1,"ND7969")==0){
-			LoRa_transmit(&myLoRa, (uint8_t*)jsonPack, strlen(jsonPack), 500);
-			sprintf(msg,"%s\r\n",jsonPack);
-			HAL_UART_Transmit(&huart1,(uint8_t *)msg,strlen(msg),1000);
-			sprintf(buf1,"%s","");
+//		formatJson();
+//		LoRa_receive(&myLoRa, (uint8_t*)idRecv, 20);
+//		if(strcmp(idRecv,"ND7969")==0){
+//			LoRa_transmit(&myLoRa, (uint8_t*)jsonPack, strlen(jsonPack), 100);
+////			sprintf(msg,"%s\r\n",jsonPack);
+//			sprintf(msg,"%d",i);
+//			lcd_goto_XY(1,0);
+//			lcd_send_string(msg);
+////			HAL_UART_Transmit(&huart1,(uint8_t *)msg,strlen(msg),1000);
+////			sprintf(idRecv,"%s","");
+//			i++;
+//		}
+//		HAL_Delay(5000);
+		
+		char *id = "ND7969";
+		if(HAL_GetTick() - lastTime > wait){
+			LoRa_transmit(&myLoRa, (uint8_t*)id, strlen(id), 100);
+			lastTime = HAL_GetTick();
 		}
-    osDelay(5000);
+		lcd_goto_XY(1,0);
+		lcd_send_string(msg);
+		sprintf(msg,"RSSI: %d\r\n",rssi);
+		lcd_goto_XY(2,0);
+		lcd_send_string(msg);
   }
   /* USER CODE END 5 */
+}
+
+/**
+  * @brief  Period elapsed callback in non blocking mode
+  * @note   This function is called  when TIM4 interrupt took place, inside
+  * HAL_TIM_IRQHandler(). It makes a direct call to HAL_IncTick() to increment
+  * a global variable "uwTick" used as application time base.
+  * @param  htim : TIM handle
+  * @retval None
+  */
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+  /* USER CODE BEGIN Callback 0 */
+
+  /* USER CODE END Callback 0 */
+  if (htim->Instance == TIM4) {
+    HAL_IncTick();
+  }
+  /* USER CODE BEGIN Callback 1 */
+
+  /* USER CODE END Callback 1 */
 }
 
 /**
