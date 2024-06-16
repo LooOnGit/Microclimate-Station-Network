@@ -814,14 +814,14 @@
               <FilePath>..\User\cJSON.h</FilePath>
             </File>
             <File>
-              <FileName>FlASH_PAGE_F1.c</FileName>
+              <FileName>flash.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\User\FlASH_PAGE_F1.c</FilePath>
+              <FilePath>..\User\flash.c</FilePath>
             </File>
             <File>
-              <FileName>FLASH_PAGE_F1.h</FileName>
+              <FileName>flash.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\User\FLASH_PAGE_F1.h</FilePath>
+              <FilePath>..\User\flash.h</FilePath>
             </File>
           </Files>
         </Group>

@@ -27,7 +27,7 @@
 #include <string.h>
 #include "cJSON.h"
 #include "i2c-lcd.h"
-#include "FLASH_PAGE_F1.h"
+#include "flash.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -39,10 +39,19 @@
 /* USER CODE BEGIN PD */
 //=========================================================MY ID DEFINE===========================================================
 #define myID "ND7969"
+typedef struct id{
+  int numberID;
+  uint32_t addrStart;
+	uint32_t addrEnd;
+  uint32_t addrNumberID;
+  char ids[100][6];
+}id;
 
+id managerID;
 //=========================================================Address Flash DEFINE===================================================
 #define START_ADDRESS 		((uint32_t)0x0801F810)	//Page 126
-#define NUMBER_ID_ADDRESS	((uint32_t)0x0801F402)	//Page 125
+#define NUMBER_ID_ADDRESS	((uint32_t)0x0801F402)	//Page 126
+#define LENGTH_START_ADDRESS 		 	((uint32_t)0x0801FC00)	//Page 127
 
 //========================================================ALL SENSOR DEFINE=======================================================
 #define SHT3x
@@ -51,6 +60,7 @@
 #define FLOW_WATER //sensor flow water 
 #define ULTRASONIC //level water
 #define LCD
+
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -72,7 +82,8 @@ TIM_HandleTypeDef htim2;
 UART_HandleTypeDef huart1;
 UART_HandleTypeDef huart2;
 
-osThreadId sendToGateHandle;
+osThreadId sendMessageHandle;
+osThreadId recvMessageHandle;
 /* USER CODE BEGIN PV */
 
 LoRa myLoRa;
@@ -127,6 +138,7 @@ sensors sensorVals;
 //====================================================================INIT TIME===================================================================
 int lastTime = 0;
 int wait = 5000;
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -140,7 +152,8 @@ static void MX_I2C1_Init(void);
 static void MX_I2C2_Init(void);
 static void MX_USART2_UART_Init(void);
 static void MX_TIM2_Init(void);
-void StartDefaultTask(void const * argument);
+void sendMessageTask(void const * argument);
+void recvMessageTask(void const * argument);
 
 /* USER CODE BEGIN PFP */
 //======================================================Function for Json====================================================
@@ -148,22 +161,14 @@ void formatJson();
 void proceedJson(char *DataJSON);
 
 //======================================================Function for Flash===================================================
-void writeFlash();
-void readFlash();
+void writeIDToFlash(char *id);
+void readIDFromFlash();
+int loo;
 /* USER CODE END PFP */
+
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
-	if(GPIO_Pin == DIO0_Pin){
-		LoRa_receive(&myLoRa, (uint8_t*)jsonPack, 128);
-		sprintf(msg,"%s\r\n",jsonPack);
-		HAL_UART_Transmit(&huart1,(uint8_t *)msg,strlen(msg),1000);
-		for(int i = 0; i < 100; i++)
-		{
-			jsonPack[i] = 0;
-		}
-	}
-}
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin);
 /* USER CODE END 0 */
 
 /**
@@ -174,8 +179,17 @@ int main(void)
 {
 
   /* USER CODE BEGIN 1 */
+	//==================================================================INIT FLASH====================================================================
+	managerID.addrStart = START_ADDRESS;
+	managerID.addrEnd = START_ADDRESS;
+	managerID.addrNumberID = NUMBER_ID_ADDRESS;
+	managerID.numberID = 0;
+//	writeIDToFlash(myID);
 
+//	writeIDToFlash("ND4587");
 	
+//	Flash_Read_String(idTemp, START_ADDRESS, 6);
+	readIDFromFlash();
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -263,9 +277,13 @@ int main(void)
   /* USER CODE END RTOS_QUEUES */
 
   /* Create the thread(s) */
-  /* definition and creation of sendToGate */
-  osThreadDef(sendToGate, StartDefaultTask, osPriorityNormal, 0, 128);
-  sendToGateHandle = osThreadCreate(osThread(sendToGate), NULL);
+  /* definition and creation of sendMessage */
+//  osThreadDef(sendMessage, sendMessageTask, osPriorityNormal, 0, 128);
+//  sendMessageHandle = osThreadCreate(osThread(sendMessage), NULL);
+
+  /* definition and creation of recvMessage */
+//  osThreadDef(recvMessage, recvMessageTask, osPriorityIdle, 0, 128);
+//  recvMessageHandle = osThreadCreate(osThread(recvMessage), NULL);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
@@ -747,9 +765,11 @@ void formatJson(){
 	
 	//Truyen du lieu vao ve char
 	#ifdef SHT3x
-	sprintf(sensorVals.valTempToStr, "%d", sensorVals.valTemp);
+	sprintf(sensorVals.valTempToStr, "%d", loo);
 	sprintf(sensorVals.valHumToStr, "%d", sensorVals.valHum);
 	#endif
+	
+	loo++;
 	
 	#ifdef KIT
 	sprintf(sensorVals.valSpeedToStr, "%d", sensorVals.valWindSpeed);
@@ -831,25 +851,58 @@ void proceedJson(char *DataJSON){
 }
 
 
+void writeIDToFlash(char *id){
+	strcpy(managerID.ids[managerID.numberID], id);
+	Flash_Write_String((uint8_t *)id, managerID.addrEnd, 6);
+	managerID.addrEnd|=(strlen(id)*2);
+	managerID.numberID++;
+	
+	Flash_Write_Uint((uint16_t)managerID.numberID, managerID.addrNumberID);
+}
+
+void readIDFromFlash(){
+	uint16_t numberIDTemp;
+	numberIDTemp = Flash_Read_Uint(managerID.addrNumberID);
+	managerID.numberID = numberIDTemp;
+	for(int i = 0; i < numberIDTemp; i++){
+		uint8_t idTemp[6];
+		Flash_Read_String(idTemp, managerID.addrStart|((0x0C) * i), 6);
+		strcpy(managerID.ids[i], (char *)idTemp);
+	}
+}
+
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
+	if(GPIO_Pin == myLoRa.DIO0_pin){
+		LoRa_receive(&myLoRa, (uint8_t*)jsonPack, 128);
+		sprintf(msg,"%s\r\n",jsonPack);
+		HAL_UART_Transmit(&huart1,(uint8_t *)msg,strlen(msg),1000);
+		for(int i = 0; i < 100; i++)
+		{
+			jsonPack[i] = 0;
+		}
+	}
+}
+
+
 /* USER CODE END 4 */
 
-/* USER CODE BEGIN Header_StartDefaultTask */
+/* USER CODE BEGIN Header_sendMessageTask */
 /**
-  * @brief  Function implementing the sendToGate thread.
+  * @brief  Function implementing the sendMessage thread.
   * @param  argument: Not used
   * @retval None
   */
-/* USER CODE END Header_StartDefaultTask */
-void StartDefaultTask(void const * argument)
+/* USER CODE END Header_sendMessageTask */
+void sendMessageTask(void const * argument)
 {
   /* USER CODE BEGIN 5 */
-	sprintf(msg,"%d",i);
-	lcd_goto_XY(1,0);
-	lcd_send_string(msg);
+//	sprintf(msg,"%d",i);
+//	lcd_goto_XY(1,0);
+//	lcd_send_string(msg);
+//	formatJson();
   /* Infinite loop */
   for(;;)
   {
-//		formatJson();
 //		LoRa_receive(&myLoRa, (uint8_t*)idRecv, 20);
 //		if(strcmp(idRecv,"ND7969")==0){
 //			LoRa_transmit(&myLoRa, (uint8_t*)jsonPack, strlen(jsonPack), 100);
@@ -860,21 +913,39 @@ void StartDefaultTask(void const * argument)
 ////			HAL_UART_Transmit(&huart1,(uint8_t *)msg,strlen(msg),1000);
 ////			sprintf(idRecv,"%s","");
 //			i++;
+//			formatJson();
 //		}
-//		HAL_Delay(5000);
-		
-		char *id = "ND7969";
-		if(HAL_GetTick() - lastTime > wait){
-			LoRa_transmit(&myLoRa, (uint8_t*)id, strlen(id), 100);
-			lastTime = HAL_GetTick();
-		}
-		lcd_goto_XY(1,0);
-		lcd_send_string(msg);
-		sprintf(msg,"RSSI: %d\r\n",rssi);
-		lcd_goto_XY(2,0);
-		lcd_send_string(msg);
+//		osDelay(5000);
   }
   /* USER CODE END 5 */
+}
+
+/* USER CODE BEGIN Header_recvMessageTask */
+/**
+* @brief Function implementing the recvMessage thread.
+* @param argument: Not used
+* @retval None
+*/
+/* USER CODE END Header_recvMessageTask */
+void recvMessageTask(void const * argument)
+{
+  /* USER CODE BEGIN recvMessageTask */
+  /* Infinite loop */
+  for(;;)
+  {
+//		char *id = "ND7969";
+//		if(HAL_GetTick() - lastTime > wait){
+//			LoRa_transmit(&myLoRa, (uint8_t*)id, strlen(id), 100);
+//			lastTime = HAL_GetTick();
+//		}
+//		lcd_goto_XY(1,0);
+//		lcd_send_string(msg);
+//		sprintf(msg,"RSSI: %d\r\n",rssi);
+//		lcd_goto_XY(2,0);
+//		lcd_send_string(msg);
+    osDelay(1);
+  }
+  /* USER CODE END recvMessageTask */
 }
 
 /**
