@@ -37,6 +37,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+
 //=========================================================MY ID DEFINE===========================================================
 #define myID "ND7969"
 typedef struct id{
@@ -61,6 +62,12 @@ id managerID;
 #define ULTRASONIC //level water
 #define LCD
 
+//========================================================DEFINE EVENT===========================================================
+#define EVENT0 (1UL << 0)
+#define EVENT1 (1UL << 1)
+#define EVENT2 (1UL << 2)
+#define EVENT3 (1UL << 3)
+
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -84,6 +91,8 @@ UART_HandleTypeDef huart2;
 
 osThreadId sendMessageHandle;
 osThreadId recvMessageHandle;
+osSemaphoreId myBinarySemSendHandle;
+osSemaphoreId myBinarySemRecvHandle;
 /* USER CODE BEGIN PV */
 
 LoRa myLoRa;
@@ -164,11 +173,16 @@ void proceedJson(char *DataJSON);
 void writeIDToFlash(char *id);
 void readIDFromFlash();
 int loo;
+
+//======================================================FUNCT PRINT================================================================
+void printUart(char *str);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin);
+
+osMutexDef(myMutex01);
 /* USER CODE END 0 */
 
 /**
@@ -184,12 +198,7 @@ int main(void)
 	managerID.addrEnd = START_ADDRESS;
 	managerID.addrNumberID = NUMBER_ID_ADDRESS;
 	managerID.numberID = 0;
-//	writeIDToFlash(myID);
 
-//	writeIDToFlash("ND4587");
-	
-//	Flash_Read_String(idTemp, START_ADDRESS, 6);
-	readIDFromFlash();
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -243,13 +252,11 @@ int main(void)
 	// START CONTINUOUS RECEIVING -----------------------------------
 	LoRa_startReceiving(&myLoRa);
 	if (LoRa_status==LORA_OK){
-		sprintf(msg,"LoRa is running...\n\r");
 		LoRa_transmit(&myLoRa, (uint8_t*)sendData, 120, 100);
-		HAL_UART_Transmit(&huart1,(uint8_t *)msg,strlen(msg),1000);
+		printUart("LoRa is running...");
 	}
 	else{
-		sprintf(msg,"\n\r LoRa failed :( \n\r Error code: %d \n\r", LoRa_status);
-		HAL_UART_Transmit(&huart1, (uint8_t*)msg, strlen(msg),1000);
+		printUart("\n\r LoRa failed :( \n\r Error code: %d");
 	}
 	
 	//======================================================================INIT LCD======================================================================
@@ -257,12 +264,20 @@ int main(void)
 	lcd_init();
 	#endif
 	
-	//======================================================================
   /* USER CODE END 2 */
 
   /* USER CODE BEGIN RTOS_MUTEX */
   /* add mutexes, ... */
   /* USER CODE END RTOS_MUTEX */
+
+  /* Create the semaphores(s) */
+  /* definition and creation of myBinarySemSend */
+  osSemaphoreDef(myBinarySemSend);
+  myBinarySemSendHandle = osSemaphoreCreate(osSemaphore(myBinarySemSend), 1);
+
+  /* definition and creation of myBinarySemRecv */
+  osSemaphoreDef(myBinarySemRecv);
+  myBinarySemRecvHandle = osSemaphoreCreate(osSemaphore(myBinarySemRecv), 1);
 
   /* USER CODE BEGIN RTOS_SEMAPHORES */
   /* add semaphores, ... */
@@ -278,12 +293,12 @@ int main(void)
 
   /* Create the thread(s) */
   /* definition and creation of sendMessage */
-//  osThreadDef(sendMessage, sendMessageTask, osPriorityNormal, 0, 128);
-//  sendMessageHandle = osThreadCreate(osThread(sendMessage), NULL);
+  osThreadDef(sendMessage, sendMessageTask, osPriorityHigh, 0, 128);
+  sendMessageHandle = osThreadCreate(osThread(sendMessage), NULL);
 
   /* definition and creation of recvMessage */
-//  osThreadDef(recvMessage, recvMessageTask, osPriorityIdle, 0, 128);
-//  recvMessageHandle = osThreadCreate(osThread(recvMessage), NULL);
+  osThreadDef(recvMessage, recvMessageTask, osPriorityAboveNormal, 0, 128);
+  recvMessageHandle = osThreadCreate(osThread(recvMessage), NULL);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
@@ -714,7 +729,7 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_Init(DIO0_GPIO_Port, &GPIO_InitStruct);
 
   /* EXTI interrupt init*/
-  HAL_NVIC_SetPriority(EXTI9_5_IRQn, 6, 0);
+  HAL_NVIC_SetPriority(EXTI9_5_IRQn, 14, 0);
   HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
 
 /* USER CODE BEGIN MX_GPIO_Init_2 */
@@ -838,16 +853,13 @@ void proceedJson(char *DataJSON){
 	cJSON *strJson = cJSON_Parse(DataJSON);
 	if(!strJson)
 	{
-		char *error = "JSON ERROR!\r\n";
-		HAL_UART_Transmit(&huart1,(uint8_t *)error, strlen(error),1);
+		printUart("JSON ERROR!");
 		return;
 	}
 	else
 	{
-		char *OK = "JSON OK!\r\n";
-		HAL_UART_Transmit(&huart1,(uint8_t *)OK, strlen(OK),1);
+		printUart("JSON OK!");
 	}
-	
 }
 
 
@@ -871,17 +883,22 @@ void readIDFromFlash(){
 	}
 }
 
+void printUart(char *str){
+	char messPrint[100];
+	sprintf(messPrint,"%s\r\n",str);
+	HAL_UART_Transmit(&huart1,(uint8_t *)messPrint,strlen(messPrint),1000);
+}
+
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
 	if(GPIO_Pin == myLoRa.DIO0_pin){
-		LoRa_receive(&myLoRa, (uint8_t*)jsonPack, 128);
-		sprintf(msg,"%s\r\n",jsonPack);
-		HAL_UART_Transmit(&huart1,(uint8_t *)msg,strlen(msg),1000);
-		for(int i = 0; i < 100; i++)
-		{
-			jsonPack[i] = 0;
+		LoRa_receive(&myLoRa, (uint8_t*)idRecv, 20);
+		if(strcmp(idRecv,myID)==0){
+			osSemaphoreRelease(myBinarySemSendHandle);
+		}else{
 		}
 	}
 }
+
 
 
 /* USER CODE END 4 */
@@ -896,26 +913,35 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
 void sendMessageTask(void const * argument)
 {
   /* USER CODE BEGIN 5 */
-//	sprintf(msg,"%d",i);
-//	lcd_goto_XY(1,0);
-//	lcd_send_string(msg);
-//	formatJson();
+	sprintf(msg,"%d",i);
+	lcd_goto_XY(1,0);
+	lcd_send_string(msg);
+	formatJson();
   /* Infinite loop */
   for(;;)
   {
-//		LoRa_receive(&myLoRa, (uint8_t*)idRecv, 20);
-//		if(strcmp(idRecv,"ND7969")==0){
-//			LoRa_transmit(&myLoRa, (uint8_t*)jsonPack, strlen(jsonPack), 100);
-////			sprintf(msg,"%s\r\n",jsonPack);
+		printUart("SEND TASK");
+		osSemaphoreWait(myBinarySemSendHandle, osWaitForever);
+		formatJson();
+		if(strcmp(idRecv,"ND7969")==0){
 //			sprintf(msg,"%d",i);
 //			lcd_goto_XY(1,0);
 //			lcd_send_string(msg);
-////			HAL_UART_Transmit(&huart1,(uint8_t *)msg,strlen(msg),1000);
-////			sprintf(idRecv,"%s","");
-//			i++;
-//			formatJson();
-//		}
-//		osDelay(5000);
+			printUart("Reading sht30");
+			HAL_Delay(500);
+			printUart("Reading SEN2");
+			HAL_Delay(500);		
+			printUart("Reading SEN3");
+			HAL_Delay(500);
+			printUart("Reading SEN4");
+			HAL_Delay(500);
+			printUart("Reading SEN5");
+			HAL_Delay(500);
+			LoRa_transmit(&myLoRa, (uint8_t*)jsonPack, strlen(jsonPack), 100);
+			sprintf(msg,"%s\r\n",jsonPack);
+			HAL_UART_Transmit(&huart1,(uint8_t *)msg,strlen(msg),1000);
+			sprintf(idRecv,"%s","");
+		}
   }
   /* USER CODE END 5 */
 }
@@ -930,20 +956,25 @@ void sendMessageTask(void const * argument)
 void recvMessageTask(void const * argument)
 {
   /* USER CODE BEGIN recvMessageTask */
-  /* Infinite loop */
+	int i = 0;
+//  /* Infinite loop */
   for(;;)
   {
-//		char *id = "ND7969";
-//		if(HAL_GetTick() - lastTime > wait){
-//			LoRa_transmit(&myLoRa, (uint8_t*)id, strlen(id), 100);
-//			lastTime = HAL_GetTick();
-//		}
-//		lcd_goto_XY(1,0);
-//		lcd_send_string(msg);
-//		sprintf(msg,"RSSI: %d\r\n",rssi);
-//		lcd_goto_XY(2,0);
-//		lcd_send_string(msg);
-    osDelay(1);
+		printUart("RECV TASK");
+		//osSemaphoreWait(myBinarySemRecvHandle, osWaitForever);
+		printUart("RECV TASK OK");
+		
+		char *id = "ND7969";
+		if(HAL_GetTick() - lastTime > wait){
+			LoRa_transmit(&myLoRa, (uint8_t*)id, strlen(id), 100);
+			lastTime = HAL_GetTick();
+		}
+		sprintf(msg, "%s", idRecv);
+		lcd_goto_XY(1,0);
+		lcd_send_string(msg);
+		sprintf(msg,"RSSI: %d\r\n",rssi);
+		lcd_goto_XY(2,0);
+		lcd_send_string(msg);
   }
   /* USER CODE END recvMessageTask */
 }
