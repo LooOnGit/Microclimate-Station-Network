@@ -37,6 +37,8 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+cJSON* jsonTemp;
+cJSON *id_item;
 
 //=========================================================MY ID DEFINE===========================================================
 #define myID "ND7969"
@@ -52,7 +54,6 @@ id managerID;
 //=========================================================Address Flash DEFINE===================================================
 #define START_ADDRESS 		((uint32_t)0x0801F810)	//Page 126
 #define NUMBER_ID_ADDRESS	((uint32_t)0x0801F402)	//Page 126
-#define LENGTH_START_ADDRESS 		 	((uint32_t)0x0801FC00)	//Page 127
 
 //========================================================ALL SENSOR DEFINE=======================================================
 #define SHT3x
@@ -100,11 +101,11 @@ char readData[128];
 char sendData[128];
 int	rssi;
 char msg[64];
-char idRecv[20];
+char messRecv[200];
  
 int i = 0;
 //=======================================================INIT json data==============================================================
-char jsonPack[100];
+char jsonPack[250];
 //=======================================================INIT Sensors==========================================================
 typedef struct{
 	#ifdef SHT3x
@@ -168,14 +169,16 @@ void recvMessageTask(void const * argument);
 //======================================================Function for Json====================================================
 void formatJson();
 void proceedJson(char *DataJSON);
+void mergeJson(cJSON *json1, cJSON *json2);
 
 //======================================================Function for Flash===================================================
 void writeIDToFlash(char *id);
 void readIDFromFlash();
 int loo;
 
-//======================================================FUNCT PRINT================================================================
+//======================================================Funtion PRINT================================================================
 void printUart(char *str);
+
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -198,7 +201,9 @@ int main(void)
 	managerID.addrEnd = START_ADDRESS;
 	managerID.addrNumberID = NUMBER_ID_ADDRESS;
 	managerID.numberID = 0;
-
+	
+	writeIDToFlash("ND7961");
+//	readIDFromFlash();
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -296,7 +301,7 @@ int main(void)
   osThreadDef(sendMessage, sendMessageTask, osPriorityHigh, 0, 128);
   sendMessageHandle = osThreadCreate(osThread(sendMessage), NULL);
 
-  /* definition and creation of recvMessage */
+//  /* definition and creation of recvMessage */
   osThreadDef(recvMessage, recvMessageTask, osPriorityAboveNormal, 0, 128);
   recvMessageHandle = osThreadCreate(osThread(recvMessage), NULL);
 
@@ -739,15 +744,30 @@ static void MX_GPIO_Init(void)
 /* USER CODE BEGIN 4 */
 void formatJson(){
 	//xoa mang du lieu
+	#ifdef SHT3x
 	sensorVals.valTemp = 0;
 	sensorVals.valHum = 0;
+	#endif
+	
+	#ifdef SAL
 	sensorVals.valEC = 0;
+	#endif
+	
+	#ifdef KIT
 	sensorVals.valHumKit = 0;
 	sensorVals.valTempKit = 0;
-	sensorVals.valLevelWater = 0;
-	sensorVals.valQ = 0;
 	sensorVals.valWindDirection= 0;
 	sensorVals.valWindSpeed = 0;
+	#endif
+	
+	#ifdef ULTRASONIC
+	sensorVals.valLevelWater = 0;
+	#endif
+	
+	#ifdef FLOW_WATER
+	sensorVals.valQ = 0;
+	#endif
+
 	
 	
 	for(int i = 0; i < 100; i++)
@@ -803,19 +823,19 @@ void formatJson(){
 	
 	strcat(jsonPack,"{\"ID\":\"");
 	strcat(jsonPack,myID);
-	strcat(jsonPack,"\",");
 	
 	#ifdef SHT3x
+	strcat(jsonPack,"\",");
 	strcat(jsonPack,"\"TEMP\":\"");
 	strcat(jsonPack,sensorVals.valTempToStr);
 	strcat(jsonPack,"\",");
-	
 	strcat(jsonPack,"\"HUM\":\"");
 	strcat(jsonPack,sensorVals.valHumToStr);
-	strcat(jsonPack,"\",");
+//	strcat(jsonPack,"\",");
 	#endif
 	
 	#ifdef KIT
+	strcat(jsonPack,"\",");
 	strcat(jsonPack,"\"WP\":\"");
 	strcat(jsonPack,sensorVals.valSpeedToStr);
 	strcat(jsonPack,"\",");
@@ -830,23 +850,41 @@ void formatJson(){
 	
 	strcat(jsonPack,"\"HumKit\":\"");
 	strcat(jsonPack,sensorVals.valHumKitToStr);
-	strcat(jsonPack,"\",");
 	#endif
 	
 	#ifdef FLOW_WATER
+	strcat(jsonPack,"\",");
 	strcat(jsonPack,"\"Q\":\"");
 	strcat(jsonPack,sensorVals.valQToStr);
-	strcat(jsonPack,"\",");
 	#endif
 	
 	#ifdef ULTRASONIC
+	strcat(jsonPack,"\",");
 	strcat(jsonPack,"\"LevelWater\":\"");
 	strcat(jsonPack,sensorVals.valLevelWaterToStr);
 	#endif
 	
 	strcat(jsonPack,"\"}");
-	strcat(jsonPack,"\n");
+//	strcat(jsonPack,"\n");
 	int i=0;
+}
+
+void mergeJson(cJSON *json1, cJSON *json2){
+	  cJSON *item = NULL;
+    cJSON_ArrayForEach(item, json2) {
+        // Skip ID
+        if (strcmp(item->string, "ID") == 0) {
+            continue;
+        }
+
+        //Check if item already exists in json1 then skip
+        if (!cJSON_HasObjectItem(json1, item->string)) {
+            // Thêm item vào json1
+            cJSON_AddItemToObject(json1, item->string, cJSON_Duplicate(item, 1));
+        }
+    }
+		char *jsonTemp = cJSON_Print(json1);
+		strncpy(jsonPack, jsonTemp, sizeof(jsonPack) - 1);
 }
 
 void proceedJson(char *DataJSON){
@@ -884,17 +922,30 @@ void readIDFromFlash(){
 }
 
 void printUart(char *str){
-	char messPrint[100];
+	char messPrint[200];
 	sprintf(messPrint,"%s\r\n",str);
 	HAL_UART_Transmit(&huart1,(uint8_t *)messPrint,strlen(messPrint),1000);
 }
 
+
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
 	if(GPIO_Pin == myLoRa.DIO0_pin){
-		LoRa_receive(&myLoRa, (uint8_t*)idRecv, 20);
-		if(strcmp(idRecv,myID)==0){
+		LoRa_receive(&myLoRa, (uint8_t*)messRecv, 200);
+		rssi = LoRa_getRSSI(&myLoRa);
+		if(strcmp(messRecv,myID)==0){
 			osSemaphoreRelease(myBinarySemSendHandle);
 		}else{
+//			printUart(messRecv);
+//			osSemaphoreRelease(myBinarySemRecvHandle);
+			jsonTemp = cJSON_Parse(messRecv);
+			if(!jsonTemp)
+			{
+				printUart("JSON ERROR!");
+			}
+			else
+			{
+				printUart("JSON OK!");
+			}
 		}
 	}
 }
@@ -921,12 +972,35 @@ void sendMessageTask(void const * argument)
   for(;;)
   {
 		printUart("SEND TASK");
-		osSemaphoreWait(myBinarySemSendHandle, osWaitForever);
+//		osSemaphoreWait(myBinarySemSendHandle, osWaitForever);
 		formatJson();
-		if(strcmp(idRecv,"ND7969")==0){
-//			sprintf(msg,"%d",i);
-//			lcd_goto_XY(1,0);
-//			lcd_send_string(msg);
+//		if(strcmp(messRecv,myID)==0){
+			sprintf(msg,"%d",i);
+			lcd_goto_XY(1,0);
+			lcd_send_string(msg);
+			if(managerID.numberID != 0){
+				for(int element = 0; element < managerID.numberID; element++){
+					int st = 0;
+					while(st < 5){
+						if(HAL_GetTick() - lastTime > wait){
+							LoRa_transmit(&myLoRa, (uint8_t*)managerID.ids[element], strlen(managerID.ids[element]), 100);
+							st++;
+							printUart(managerID.ids[element]);
+							lastTime = HAL_GetTick();
+						}
+						cJSON *id_item = cJSON_GetObjectItemCaseSensitive(jsonTemp, "ID");
+						if (cJSON_IsString(id_item) && (id_item->valuestring != NULL)) {
+								// Ki?m tra giá tr? c?a m?c "ID"
+								if (strcmp(id_item->valuestring, managerID.ids[element]) == 0) {
+										cJSON_Delete(id_item); // Gi?i phóng b? nh? dã c?p phát cho d?i tu?ng JSON
+										cJSON_Delete(jsonTemp);
+									break;
+								}
+						}
+					}
+					st = 0;
+				}
+			}
 			printUart("Reading sht30");
 			HAL_Delay(500);
 			printUart("Reading SEN2");
@@ -940,9 +1014,10 @@ void sendMessageTask(void const * argument)
 			LoRa_transmit(&myLoRa, (uint8_t*)jsonPack, strlen(jsonPack), 100);
 			sprintf(msg,"%s\r\n",jsonPack);
 			HAL_UART_Transmit(&huart1,(uint8_t *)msg,strlen(msg),1000);
-			sprintf(idRecv,"%s","");
+			sprintf(messRecv,"%s","");
+			i++;
 		}
-  }
+//	}
   /* USER CODE END 5 */
 }
 
@@ -961,7 +1036,7 @@ void recvMessageTask(void const * argument)
   for(;;)
   {
 		printUart("RECV TASK");
-		//osSemaphoreWait(myBinarySemRecvHandle, osWaitForever);
+		osSemaphoreWait(myBinarySemRecvHandle, osWaitForever);
 		printUart("RECV TASK OK");
 		
 		char *id = "ND7969";
@@ -969,13 +1044,13 @@ void recvMessageTask(void const * argument)
 			LoRa_transmit(&myLoRa, (uint8_t*)id, strlen(id), 100);
 			lastTime = HAL_GetTick();
 		}
-		sprintf(msg, "%s", idRecv);
+		sprintf(msg, "%s", messRecv);
 		lcd_goto_XY(1,0);
 		lcd_send_string(msg);
 		sprintf(msg,"RSSI: %d\r\n",rssi);
 		lcd_goto_XY(2,0);
 		lcd_send_string(msg);
-  }
+	}
   /* USER CODE END recvMessageTask */
 }
 

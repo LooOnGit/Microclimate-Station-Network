@@ -152,9 +152,9 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>919</LineNumber>
+          <LineNumber>959</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134234094</Address>
+          <Address>134242790</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -163,92 +163,12 @@
           <BreakIfRCount>1</BreakIfRCount>
           <Filename>../Core/Src/main.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\Node_STM32\../Core/Src/main.c\919</Expression>
+          <Expression>\\Node_STM32\../Core/Src/main.c\959</Expression>
         </Bp>
         <Bp>
           <Number>1</Number>
           <Type>0</Type>
-          <LineNumber>915</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134234090</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>../Core/Src/main.c</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\Node_STM32\../Core/Src/main.c\915</Expression>
-        </Bp>
-        <Bp>
-          <Number>2</Number>
-          <Type>0</Type>
-          <LineNumber>249</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134231948</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>../Core/Src/main.c</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\Node_STM32\../Core/Src/main.c\249</Expression>
-        </Bp>
-        <Bp>
-          <Number>3</Number>
-          <Type>0</Type>
-          <LineNumber>925</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134234166</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>../Core/Src/main.c</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\Node_STM32\../Core/Src/main.c\925</Expression>
-        </Bp>
-        <Bp>
-          <Number>4</Number>
-          <Type>0</Type>
-          <LineNumber>922</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134234124</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>../Core/Src/main.c</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\Node_STM32\../Core/Src/main.c\922</Expression>
-        </Bp>
-        <Bp>
-          <Number>5</Number>
-          <Type>0</Type>
-          <LineNumber>923</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134234148</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>../Core/Src/main.c</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\Node_STM32\../Core/Src/main.c\923</Expression>
-        </Bp>
-        <Bp>
-          <Number>6</Number>
-          <Type>0</Type>
-          <LineNumber>247</LineNumber>
+          <LineNumber>979</LineNumber>
           <EnabledFlag>1</EnabledFlag>
           <Address>0</Address>
           <ByteObject>0</ByteObject>
@@ -322,6 +242,21 @@
           <count>11</count>
           <WinNumber>1</WinNumber>
           <ItemText>idTemp</ItemText>
+        </Ww>
+        <Ww>
+          <count>12</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>idRecv</ItemText>
+        </Ww>
+        <Ww>
+          <count>13</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>messRecv</ItemText>
+        </Ww>
+        <Ww>
+          <count>14</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>jsonTemp</ItemText>
         </Ww>
       </WatchWindow1>
       <WatchWindow2>
