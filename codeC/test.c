@@ -1,46 +1,96 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
 #include "cJSON.h"
 
-// Hàm kiểm tra giá trị của mục "ID" trong JSON có bằng "ND6961" không
-int check_id_value(const char *json_str, const char *expected_value);
+#define JSON_SIZE 250
 
-int main() {
-    // Chuỗi JSON đầu vào
-    const char *json_str = "{\"ID\":\"ND6961\", \"TEMP\":43}";
+// Giả sử cấu trúc dữ liệu của bạn như sau:
+typedef struct {
+    int valTemp;
+    int valHum;
+    int valEC;
+    int valWindDirection;
+    int valWindSpeed;
+    int valTempKit;
+    int valHumKit;
+    int valLevelWater;
+    int valQ;
+    char valTempToStr[10];
+    char valHumToStr[10];
+    char valSpeedToStr[10];
+    char valDirectionToStr[10];
+    char valTempKitToStr[10];
+    char valHumKitToStr[10];
+    char valQToStr[10];
+    char valLevelWaterToStr[10];
+} SensorVals;
 
-    // Kiểm tra giá trị của mục "ID"
-    if (check_id_value(json_str, "ND6961")) {
-        printf("The ID value is ND6961.\n");
-    } else {
-        printf("The ID value is not ND6961.\n");
-    }
+SensorVals sensorVals;
+char jsonPack[JSON_SIZE];
+const char* myID = "ND7961";
+int loo = 0;
 
-    return 0;
-}
+void formatJson(){
+    // Xóa mảng dữ liệu
+    memset(&sensorVals, 0, sizeof(sensorVals));
+    memset(jsonPack, 0, sizeof(jsonPack));
 
-int check_id_value(const char *json_str, const char *expected_value) {
+    // Chuyển đổi số sang chuỗi ký tự
+    sprintf(sensorVals.valTempToStr, "%d", sensorVals.valTemp);
+    sprintf(sensorVals.valHumToStr, "%d", sensorVals.valHum);
+    sprintf(sensorVals.valSpeedToStr, "%d", sensorVals.valWindSpeed);
+    sprintf(sensorVals.valDirectionToStr, "%d", sensorVals.valWindDirection);
+    sprintf(sensorVals.valTempKitToStr, "%d", sensorVals.valTempKit);
+    sprintf(sensorVals.valHumKitToStr, "%d", sensorVals.valHumKit);
+    sprintf(sensorVals.valQToStr, "%d", sensorVals.valQ);
+    sprintf(sensorVals.valLevelWaterToStr, "%d", sensorVals.valLevelWater);
+
+    // Tạo chuỗi JSON
+    strcat(jsonPack, "{\"ID\":\"");
+    strcat(jsonPack, myID);
+    strcat(jsonPack, "\"");
+
+    strcat(jsonPack, ",\"TEMP\":\"");
+    strcat(jsonPack, sensorVals.valTempToStr);
+    strcat(jsonPack, "\",\"HUM\":\"");
+    strcat(jsonPack, sensorVals.valHumToStr);
+    strcat(jsonPack, "\"");
+
+    strcat(jsonPack, ",\"WP\":\"");
+    strcat(jsonPack, sensorVals.valSpeedToStr);
+    strcat(jsonPack, "\",\"WD\":\"");
+    strcat(jsonPack, sensorVals.valDirectionToStr);
+    strcat(jsonPack, "\",\"TempKit\":\"");
+    strcat(jsonPack, sensorVals.valTempKitToStr);
+    strcat(jsonPack, "\",\"HumKit\":\"");
+    strcat(jsonPack, sensorVals.valHumKitToStr);
+    strcat(jsonPack, "\"");
+
+    strcat(jsonPack, ",\"Q\":\"");
+    strcat(jsonPack, sensorVals.valQToStr);
+    strcat(jsonPack, "\",\"LevelWater\":\"");
+    strcat(jsonPack, sensorVals.valLevelWaterToStr);
+    strcat(jsonPack, "\"}");
+
+    // In ra chuỗi JSON để kiểm tra
+    printf("Generated JSON string: %s\n", jsonPack);
+
     // Phân tích cú pháp chuỗi JSON
-    cJSON *root = cJSON_Parse(json_str);
-    if (root == NULL) {
+    cJSON *jsonTemp = cJSON_Parse(jsonPack);
+    if (!jsonTemp) {
+        printf("JSON ERROR!\n");
         const char *error_ptr = cJSON_GetErrorPtr();
         if (error_ptr != NULL) {
             fprintf(stderr, "Error before: %s\n", error_ptr);
         }
-        return 0;
+    } else {
+        printf("JSON OK!\n");
+        cJSON_Delete(jsonTemp);  // Đừng quên giải phóng bộ nhớ
     }
+}
 
-    // Lấy mục "ID"
-    cJSON *id_item = cJSON_GetObjectItemCaseSensitive(root, "ID");
-    if (cJSON_IsString(id_item) && (id_item->valuestring != NULL)) {
-        // Kiểm tra giá trị của mục "ID"
-        if (strcmp(id_item->valuestring, expected_value) == 0) {
-            cJSON_Delete(root); // Giải phóng bộ nhớ đã cấp phát cho đối tượng JSON
-            return 1; // Giá trị bằng expected_value
-        }
-    }
-
-    cJSON_Delete(root); // Giải phóng bộ nhớ đã cấp phát cho đối tượng JSON
-    return 0; // Giá trị không bằng expected_value hoặc mục "ID" không tồn tại
+int main() {
+    // Gọi hàm formatJson để kiểm tra
+    formatJson();
+    return 0;
 }

@@ -58,10 +58,10 @@ id managerID;
 //========================================================ALL SENSOR DEFINE=======================================================
 #define SHT3x
 #define SAL //Sensor Sal
-#define KIT //Kit Weather Station
+//#define KIT //Kit Weather Station
 #define FLOW_WATER //sensor flow water 
-#define ULTRASONIC //level water
-#define LCD
+//#define ULTRASONIC //level water
+//#define LCD
 
 //========================================================DEFINE EVENT===========================================================
 #define EVENT0 (1UL << 0)
@@ -174,7 +174,7 @@ void mergeJson(cJSON *json1, cJSON *json2);
 //======================================================Function for Flash===================================================
 void writeIDToFlash(char *id);
 void readIDFromFlash();
-int loo;
+int loo = 0;
 
 //======================================================Funtion PRINT================================================================
 void printUart(char *str);
@@ -743,131 +743,116 @@ static void MX_GPIO_Init(void)
 
 /* USER CODE BEGIN 4 */
 void formatJson(){
-	//xoa mang du lieu
-	#ifdef SHT3x
-	sensorVals.valTemp = 0;
-	sensorVals.valHum = 0;
-	#endif
-	
-	#ifdef SAL
-	sensorVals.valEC = 0;
-	#endif
-	
-	#ifdef KIT
-	sensorVals.valHumKit = 0;
-	sensorVals.valTempKit = 0;
-	sensorVals.valWindDirection= 0;
-	sensorVals.valWindSpeed = 0;
-	#endif
-	
-	#ifdef ULTRASONIC
-	sensorVals.valLevelWater = 0;
-	#endif
-	
-	#ifdef FLOW_WATER
-	sensorVals.valQ = 0;
-	#endif
-
-	
-	
-	for(int i = 0; i < 100; i++)
-	{
-		jsonPack[i] = 0;
-	}
-	
-	for(int i = 0; i < 10; i++)
-	{
-		#ifdef SHT3x
-		sensorVals.valTempToStr[i] = 0;
-		sensorVals.valHumToStr[i] = 0;
-		#endif
-		
-		#ifdef KIT
-		sensorVals.valSpeedToStr[i] = 0;
-		sensorVals.valDirectionToStr[i] = 0;
-		sensorVals.valTempKitToStr[i] = 0;
-		sensorVals.valHumKitToStr[i] = 0;
-		#endif
-		
-		#ifdef FLOW_WATER
-		sensorVals.valQToStr[i] = 0;
-		#endif
-		
-		#ifdef ULTRASONIC
-		sensorVals.valLevelWater = 0;
-		#endif
-	}
-	
-	//Truyen du lieu vao ve char
-	#ifdef SHT3x
-	sprintf(sensorVals.valTempToStr, "%d", loo);
-	sprintf(sensorVals.valHumToStr, "%d", sensorVals.valHum);
-	#endif
-	
+    // Xóa m?ng d? li?u
 	loo++;
-	
-	#ifdef KIT
-	sprintf(sensorVals.valSpeedToStr, "%d", sensorVals.valWindSpeed);
-	sprintf(sensorVals.valDirectionToStr, "%d", sensorVals.valWindDirection);
-	sprintf(sensorVals.valTempKitToStr, "%d", sensorVals.valTempKit);
-	sprintf(sensorVals.valHumKitToStr, "%d", sensorVals.valHumKit);
-	#endif
-	
-	#ifdef FLOW_WATER
-	sprintf(sensorVals.valQToStr, "%d", sensorVals.valQ);
-	#endif
-	
-	#ifdef ULTRASONIC
-	sprintf(sensorVals.valLevelWaterToStr, "%d", sensorVals.valLevelWater);
-	#endif
-	
-	strcat(jsonPack,"{\"ID\":\"");
-	strcat(jsonPack,myID);
-	
-	#ifdef SHT3x
-	strcat(jsonPack,"\",");
-	strcat(jsonPack,"\"TEMP\":\"");
-	strcat(jsonPack,sensorVals.valTempToStr);
-	strcat(jsonPack,"\",");
-	strcat(jsonPack,"\"HUM\":\"");
-	strcat(jsonPack,sensorVals.valHumToStr);
-//	strcat(jsonPack,"\",");
-	#endif
-	
-	#ifdef KIT
-	strcat(jsonPack,"\",");
-	strcat(jsonPack,"\"WP\":\"");
-	strcat(jsonPack,sensorVals.valSpeedToStr);
-	strcat(jsonPack,"\",");
-	
-	strcat(jsonPack,"\"WD\":\"");
-	strcat(jsonPack,sensorVals.valDirectionToStr);
-	strcat(jsonPack,"\",");
-	
-	strcat(jsonPack,"\"TempKit\":\"");
-	strcat(jsonPack,sensorVals.valTempKitToStr);
-	strcat(jsonPack,"\",");
-	
-	strcat(jsonPack,"\"HumKit\":\"");
-	strcat(jsonPack,sensorVals.valHumKitToStr);
-	#endif
-	
-	#ifdef FLOW_WATER
-	strcat(jsonPack,"\",");
-	strcat(jsonPack,"\"Q\":\"");
-	strcat(jsonPack,sensorVals.valQToStr);
-	#endif
-	
-	#ifdef ULTRASONIC
-	strcat(jsonPack,"\",");
-	strcat(jsonPack,"\"LevelWater\":\"");
-	strcat(jsonPack,sensorVals.valLevelWaterToStr);
-	#endif
-	
-	strcat(jsonPack,"\"}");
-//	strcat(jsonPack,"\n");
-	int i=0;
+    #ifdef SHT3x
+    sensorVals.valTemp = loo;
+    sensorVals.valHum = 0;
+    #endif
+    
+    #ifdef SAL
+    sensorVals.valEC = 0;
+    #endif
+    
+    #ifdef KIT
+    sensorVals.valHumKit = 0;
+    sensorVals.valTempKit = 0;
+    sensorVals.valWindDirection= 0;
+    sensorVals.valWindSpeed = 0;
+    #endif
+    
+    #ifdef ULTRASONIC
+    sensorVals.valLevelWater = 0;
+    #endif
+    
+    #ifdef FLOW_WATER
+    sensorVals.valQ = 0;
+    #endif
+
+    memset(jsonPack, 0, sizeof(jsonPack));
+
+    #ifdef SHT3x
+    memset(sensorVals.valTempToStr, 0, sizeof(sensorVals.valTempToStr));
+    memset(sensorVals.valHumToStr, 0, sizeof(sensorVals.valHumToStr));
+    #endif
+    
+    #ifdef KIT
+    memset(sensorVals.valSpeedToStr, 0, sizeof(sensorVals.valSpeedToStr));
+    memset(sensorVals.valDirectionToStr, 0, sizeof(sensorVals.valDirectionToStr));
+    memset(sensorVals.valTempKitToStr, 0, sizeof(sensorVals.valTempKitToStr));
+    memset(sensorVals.valHumKitToStr, 0, sizeof(sensorVals.valHumKitToStr));
+    #endif
+    
+    #ifdef FLOW_WATER
+    memset(sensorVals.valQToStr, 0, sizeof(sensorVals.valQToStr));
+    #endif
+    
+    #ifdef ULTRASONIC
+    memset(sensorVals.valLevelWaterToStr, 0, sizeof(sensorVals.valLevelWaterToStr));
+    #endif
+
+    
+    #ifdef SHT3x
+    sprintf(sensorVals.valTempToStr, "%d", sensorVals.valTemp);
+    sprintf(sensorVals.valHumToStr, "%d", sensorVals.valHum);
+    #endif
+    
+    #ifdef KIT
+    sprintf(sensorVals.valSpeedToStr, "%d", sensorVals.valWindSpeed);
+    sprintf(sensorVals.valDirectionToStr, "%d", sensorVals.valWindDirection);
+    sprintf(sensorVals.valTempKitToStr, "%d", sensorVals.valTempKit);
+    sprintf(sensorVals.valHumKitToStr, "%d", sensorVals.valHumKit);
+    #endif
+    
+    #ifdef FLOW_WATER
+    sprintf(sensorVals.valQToStr, "%d", sensorVals.valQ);
+    #endif
+    
+    #ifdef ULTRASONIC
+    sprintf(sensorVals.valLevelWaterToStr, "%d", sensorVals.valLevelWater);
+    #endif
+
+    // T?o chu?i JSON
+    strcat(jsonPack, "{\"ID\":\"");
+    strcat(jsonPack, myID);
+    strcat(jsonPack, "\"");
+
+    #ifdef SHT3x
+    strcat(jsonPack, ",\"TEMP\":\"");
+    strcat(jsonPack, sensorVals.valTempToStr);
+    strcat(jsonPack, "\",\"HUM\":\"");
+    strcat(jsonPack, sensorVals.valHumToStr);
+    strcat(jsonPack, "\"");
+    #endif
+    
+    #ifdef KIT
+    strcat(jsonPack, ",\"WP\":\"");
+    strcat(jsonPack, sensorVals.valSpeedToStr);
+    strcat(jsonPack, "\",\"WD\":\"");
+    strcat(jsonPack, sensorVals.valDirectionToStr);
+    strcat(jsonPack, "\",\"TempKit\":\"");
+    strcat(jsonPack, sensorVals.valTempKitToStr);
+    strcat(jsonPack, "\",\"HumKit\":\"");
+    strcat(jsonPack, sensorVals.valHumKitToStr);
+    strcat(jsonPack, "\"");
+    #endif
+    
+    #ifdef FLOW_WATER
+    strcat(jsonPack, ",\"Q\":\"");
+    strcat(jsonPack, sensorVals.valQToStr);
+    strcat(jsonPack, "\"");
+    #endif
+    
+    #ifdef ULTRASONIC
+    strcat(jsonPack, ",\"LevelWater\":\"");
+    strcat(jsonPack, sensorVals.valLevelWaterToStr);
+    strcat(jsonPack, "\"");
+    #endif
+
+    strcat(jsonPack, "}");
+    int i = 0;
 }
+
 
 void mergeJson(cJSON *json1, cJSON *json2){
 	  cJSON *item = NULL;
@@ -892,7 +877,6 @@ void proceedJson(char *DataJSON){
 	if(!strJson)
 	{
 		printUart("JSON ERROR!");
-		return;
 	}
 	else
 	{
@@ -936,7 +920,8 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
 			osSemaphoreRelease(myBinarySemSendHandle);
 		}else{
 //			printUart(messRecv);
-//			osSemaphoreRelease(myBinarySemRecvHandle);
+//			sprintf(msg,"%d\r\n",strlen(messRecv));
+//			HAL_UART_Transmit(&huart1,(uint8_t *)msg,strlen(msg),1000);
 			jsonTemp = cJSON_Parse(messRecv);
 			if(!jsonTemp)
 			{
@@ -990,10 +975,8 @@ void sendMessageTask(void const * argument)
 						}
 						cJSON *id_item = cJSON_GetObjectItemCaseSensitive(jsonTemp, "ID");
 						if (cJSON_IsString(id_item) && (id_item->valuestring != NULL)) {
-								// Ki?m tra giá tr? c?a m?c "ID"
 								if (strcmp(id_item->valuestring, managerID.ids[element]) == 0) {
-										cJSON_Delete(id_item); // Gi?i phóng b? nh? dã c?p phát cho d?i tu?ng JSON
-										cJSON_Delete(jsonTemp);
+									cJSON_Delete(id_item);
 									break;
 								}
 						}
@@ -1002,16 +985,16 @@ void sendMessageTask(void const * argument)
 				}
 			}
 			printUart("Reading sht30");
-			HAL_Delay(500);
+			HAL_Delay(100);
 			printUart("Reading SEN2");
-			HAL_Delay(500);		
+			HAL_Delay(100);		
 			printUart("Reading SEN3");
-			HAL_Delay(500);
+			HAL_Delay(100);
 			printUart("Reading SEN4");
-			HAL_Delay(500);
+			HAL_Delay(100);
 			printUart("Reading SEN5");
-			HAL_Delay(500);
-			LoRa_transmit(&myLoRa, (uint8_t*)jsonPack, strlen(jsonPack), 100);
+			HAL_Delay(100);
+			LoRa_transmit(&myLoRa, (uint8_t*)jsonPack, strlen(jsonPack), 1000);
 			sprintf(msg,"%s\r\n",jsonPack);
 			HAL_UART_Transmit(&huart1,(uint8_t *)msg,strlen(msg),1000);
 			sprintf(messRecv,"%s","");
