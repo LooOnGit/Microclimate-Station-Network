@@ -56,8 +56,8 @@ id managerID;
 #define NUMBER_ID_ADDRESS	((uint32_t)0x0801F402)	//Page 126
 
 //========================================================ALL SENSOR DEFINE=======================================================
-#define SHT3x
-#define SAL //Sensor Sal
+//#define SHT3x
+//#define SAL //Sensor Sal
 //#define KIT //Kit Weather Station
 #define FLOW_WATER //sensor flow water 
 //#define ULTRASONIC //level water
@@ -197,6 +197,7 @@ int main(void)
 
   /* USER CODE BEGIN 1 */
 	//==================================================================INIT FLASH====================================================================
+
 	managerID.addrStart = START_ADDRESS;
 	managerID.addrEnd = START_ADDRESS;
 	managerID.addrNumberID = NUMBER_ID_ADDRESS;
@@ -854,22 +855,76 @@ void formatJson(){
 }
 
 
-void mergeJson(cJSON *json1, cJSON *json2){
-	  cJSON *item = NULL;
-    cJSON_ArrayForEach(item, json2) {
-        // Skip ID
-        if (strcmp(item->string, "ID") == 0) {
+void mergeJsonStrings(char* json2) {
+		size_t len = strlen(jsonPack);
+    if (len > 0) {
+        jsonPack[len - 1] = '\0'; // Ghi dè ký t? cu?i b?ng ký t? k?t thúc chu?i '\0'
+    }
+		
+    // Thêm d?u ph?y d? ngan cách các ph?n t?
+    strcat(jsonPack, ",");
+
+    // Duy?t qua các ph?n t? c?a chu?i JSON th? hai (lo?i b? d?u ngo?c m?)
+    char* start = json2 + 1;
+    while (*start != '\0') {
+        // B? qua kho?ng tr?ng
+        while (*start == ' ' || *start == '\n' || *start == '\r' || *start == '\t') {
+            start++;
+        }
+
+        // Ki?m tra n?u ph?n t? là "ID"
+        if (strncmp(start, "\"ID\"", 4) == 0) {
+            // B? qua ph?n t? "ID"
+            start = strchr(start, ',');
+            if (start == NULL) {
+                break;
+            }
+            start++; // B? qua d?u ph?y
             continue;
         }
 
-        //Check if item already exists in json1 then skip
-        if (!cJSON_HasObjectItem(json1, item->string)) {
-            // Thêm item vào json1
-            cJSON_AddItemToObject(json1, item->string, cJSON_Duplicate(item, 1));
+        // Sao chép ph?n t? t? json2 vào result
+        char* end = strchr(start, ',');
+        if (end == NULL) {
+            end = strchr(start, '}');
+        }
+        if (end == NULL) {
+            break;
+        }
+
+        int length = end - start;
+        if (strlen(jsonPack) + length < 250 - 1) {
+            strncat(jsonPack, start, length);
+            strcat(jsonPack, ",");
+        } else {
+//            printf("Result buffer too small.\n");
+            return;
+        }
+
+        start = end + 1;
+    }
+
+    // Thêm ph?n còn l?i c?a json2 (sau d?u ph?y cu?i cùng)
+    char* lastPart = strchr(start, '{');
+    if (lastPart != NULL) {
+        start = lastPart + 1; // B? qua d?u ngo?c m?
+    }
+
+    if (*start != '\0' && strchr(start, '}') != NULL) {
+        if (strlen(jsonPack) + strlen(start) - 1 < 250 - 1) {
+            strncat(jsonPack, start, strlen(start) - 1); // Sao chép ph?n còn l?i tr? d?u ngo?c dóng
+        } else {
+//            printf("Result buffer too small.\n");
+            return;
         }
     }
-		char *jsonTemp = cJSON_Print(json1);
-		strncpy(jsonPack, jsonTemp, sizeof(jsonPack) - 1);
+
+    // Thay d?u ph?y cu?i cùng b?ng d?u ngo?c dóng
+    if (strlen(jsonPack) > 0 && jsonPack[strlen(jsonPack) - 1] == ',') {
+        jsonPack[strlen(jsonPack) - 1] = '}';
+    } else {
+        strcat(jsonPack, "}");
+    }
 }
 
 void proceedJson(char *DataJSON){
@@ -963,6 +1018,18 @@ void sendMessageTask(void const * argument)
 			sprintf(msg,"%d",i);
 			lcd_goto_XY(1,0);
 			lcd_send_string(msg);
+
+			printUart("Reading sht30");
+			HAL_Delay(100);
+			printUart("Reading SEN2");
+			HAL_Delay(100);		
+			printUart("Reading SEN3");
+			HAL_Delay(100);
+			printUart("Reading SEN4");
+			HAL_Delay(100);
+			printUart("Reading SEN5");
+			HAL_Delay(100);
+		
 			if(managerID.numberID != 0){
 				for(int element = 0; element < managerID.numberID; element++){
 					int st = 0;
@@ -976,6 +1043,9 @@ void sendMessageTask(void const * argument)
 						cJSON *id_item = cJSON_GetObjectItemCaseSensitive(jsonTemp, "ID");
 						if (cJSON_IsString(id_item) && (id_item->valuestring != NULL)) {
 								if (strcmp(id_item->valuestring, managerID.ids[element]) == 0) {
+									size_t len = strlen(jsonPack);
+									char* tempDataSensor = jsonPack;
+									mergeJsonStrings(messRecv);
 									cJSON_Delete(id_item);
 									break;
 								}
@@ -984,19 +1054,9 @@ void sendMessageTask(void const * argument)
 					st = 0;
 				}
 			}
-			printUart("Reading sht30");
-			HAL_Delay(100);
-			printUart("Reading SEN2");
-			HAL_Delay(100);		
-			printUart("Reading SEN3");
-			HAL_Delay(100);
-			printUart("Reading SEN4");
-			HAL_Delay(100);
-			printUart("Reading SEN5");
-			HAL_Delay(100);
+		
 			LoRa_transmit(&myLoRa, (uint8_t*)jsonPack, strlen(jsonPack), 1000);
-			sprintf(msg,"%s\r\n",jsonPack);
-			HAL_UART_Transmit(&huart1,(uint8_t *)msg,strlen(msg),1000);
+			HAL_UART_Transmit(&huart1,(uint8_t *)jsonPack,strlen(jsonPack),1000);
 			sprintf(messRecv,"%s","");
 			i++;
 		}
