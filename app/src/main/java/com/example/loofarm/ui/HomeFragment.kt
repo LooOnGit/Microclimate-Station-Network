@@ -64,6 +64,7 @@ class HomeFragment : Fragment() {
 
         itemAdapter.onItemClick = { position ->
             ManagerUser.setPosition(position)
+
             val targetFragment = FarmFragment()
             // Thực hiện transaction để chuyển đổi Fragment
             val transaction = requireActivity().supportFragmentManager
@@ -93,20 +94,20 @@ class HomeFragment : Fragment() {
             transaction.commit()
         }
 
-        binding.btnAddFarm.setOnClickListener{
-            val targetFragment = AddFarmFragment()
-            // Thực hiện transaction để chuyển đổi Fragment
-            val transaction = requireActivity().supportFragmentManager
-                .beginTransaction().setCustomAnimations(
-                    R.anim.slide_in,
-                    R.anim.fade_out,
-                    R.anim.fade_in,
-                    R.anim.slide_out
-                )
-            transaction.replace(R.id.frLayout, targetFragment)
-            transaction.addToBackStack(null)
-            transaction.commit()
-        }
+//        binding.btnAddFarm.setOnClickListener{
+//            val targetFragment = AddFarmFragment()
+//            // Thực hiện transaction để chuyển đổi Fragment
+//            val transaction = requireActivity().supportFragmentManager
+//                .beginTransaction().setCustomAnimations(
+//                    R.anim.slide_in,
+//                    R.anim.fade_out,
+//                    R.anim.fade_in,
+//                    R.anim.slide_out
+//                )
+//            transaction.replace(R.id.frLayout, targetFragment)
+//            transaction.addToBackStack(null)
+//            transaction.commit()
+//        }
 
         binding.btnNotify.setOnClickListener{
             val targetFragment = NotificationFragment()

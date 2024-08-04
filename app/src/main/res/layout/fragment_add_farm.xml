@@ -9,7 +9,7 @@
 
     <TextView
         android:background="@color/bgRecycle"
-        android:text="Update Farm"
+        android:text="Thêm trang trại"
         android:textColor="@color/text"
         android:fontFamily="@font/ptn777"
         android:textSize="25dp"
@@ -34,10 +34,10 @@
 
             <TextView
                 android:layout_width="0dp"
-                android:layout_weight="1.5"
+                android:layout_weight="2"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/ptn777"
-                android:text="Farm type: "
+                android:text="Kiểu trang trại: "
                 android:textSize="20dp" />
 
             <Spinner
@@ -59,11 +59,11 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_weight="1.5"
+                android:layout_weight="1.7"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/ptn777"
-                android:text="Sensor 1: "
+                android:text="Cảm biến 1: "
                 android:textSize="20dp" />
 
             <TextView
@@ -86,11 +86,11 @@
 
             <TextView
                 android:id="@+id/txtSensor2Title"
-                android:layout_weight="1.5"
+                android:layout_weight="1.7"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/ptn777"
-                android:text="Sensor 2: "
+                android:text="Cảm biến 2: "
                 android:textSize="20dp" />
 
             <TextView
@@ -116,7 +116,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/ptn777"
-                android:text="Actuator 1"
+                android:text="Motor 1:"
                 android:textSize="20dp" />
 
             <TextView
@@ -141,7 +141,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/ptn777"
-                android:text="Actuator 2"
+                android:text="Motor 2:"
                 android:textSize="20dp" />
 
             <TextView
@@ -169,7 +169,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/ptn777"
-            android:text="Plant day:"
+            android:text="Ngày trồng:"
             android:textSize="20dp" />
 
         <TextView
@@ -207,7 +207,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/ptn777"
-            android:text="ÍD:"
+            android:text="ID:"
             android:textSize="20dp" />
 
         <TextView
@@ -244,7 +244,7 @@
         android:layout_height="32dp"
         android:background="@color/bgRecycle"
         android:fontFamily="@font/ptn777"
-        android:text="Add Farm"
+        android:text="Thêm"
         android:layout_marginTop="20dp"
         android:textAllCaps="false"
         android:textSize="25dp" />
@@ -255,7 +255,7 @@
         android:layout_height="32dp"
         android:background="@color/btnExit"
         android:fontFamily="@font/ptn777"
-        android:text="Exit"
+        android:text="Thoát"
         android:layout_marginTop="20dp"
         android:textAllCaps="false"
         android:textSize="25dp" />

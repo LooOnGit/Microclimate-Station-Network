@@ -29,7 +29,7 @@
             android:layout_marginTop="5dp"
             android:textSize="25dp"
             android:textAlignment="center"
-            android:text="Update user"
+            android:text="Tên người dùng"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"/>
@@ -60,7 +60,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:fontFamily="@font/ptn777"
-                android:text="Update Profile"
+                android:text="Cập nhập thông tin"
                 android:textAllCaps="false"
                 android:textAlignment="viewStart"
                 android:textSize="20dp"/>
@@ -92,7 +92,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:fontFamily="@font/ptn777"
-                android:text="Sign Out"
+                android:text="Đăng xuất"
                 android:textAllCaps="false"
                 android:textAlignment="viewStart"
                 android:textSize="20dp"/>

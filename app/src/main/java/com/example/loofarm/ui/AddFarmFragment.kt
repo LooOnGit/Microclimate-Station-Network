@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.example.loofarm.R
 import com.example.loofarm.databinding.FragmentAddFarmBinding
@@ -18,7 +17,6 @@ import com.example.loofarm.model.Farm
 import com.example.loofarm.model.ManagerUser
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
-import java.util.Date
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -76,21 +74,21 @@ class AddFarmFragment : Fragment() {
                 farmName = arrType[position]
                 when(arrType[position]){
                     arrType[0]->{
-                        sensor1 = "Temperature"
-                        sensor2 = "Humidity"
-                        actuator1 = "Watering"
-                        actuator2 = "Fan"
-                        binding.txtActuator2Title.text = "Actuator2"
-                        binding.txtSensor2Title.text = "Sensor2"
+                        sensor1 = "Nhiệt độ"
+                        sensor2 = "Độ ẩm"
+                        actuator1 = "Motor"
+                        actuator2 = "Motor"
+                        binding.txtActuator2Title.text = "Motor 2:"
+                        binding.txtSensor2Title.text = "Cảm biến 2:"
                         binding.imgPlant.setImageResource(R.drawable.img_vegetable)
                     }
                     arrType[1]->{
-                        sensor1 = "Temperature"
-                        sensor2 = "Humidity"
-                        actuator1 = "Watering"
-                        actuator2 = "Refrigerator"
-                        binding.txtActuator2Title.text = "Actuator2"
-                        binding.txtSensor2Title.text = "Sensor2"
+                        sensor1 = "Nhiệt độ"
+                        sensor2 = "Độ ẩm"
+                        actuator1 = "Motor"
+                        actuator2 = "Motor"
+                        binding.txtActuator2Title.text = "Motor 2:"
+                        binding.txtSensor2Title.text = "Cảm biến 2:"
                         binding.imgPlant.setImageResource(R.drawable.img_mush)
                     }
                 }
@@ -141,7 +139,7 @@ class AddFarmFragment : Fragment() {
             transaction.commit()
             var databaseReference = Firebase.database.reference
             val users = ManagerUser.getUser()
-            databaseReference.child(ManagerUser.getId().toString()).setValue(users)
+//            databaseReference.child(ManagerUser.getId().toString()).setValue(users)
         }
 
         binding.btnExitFarm.setOnClickListener{

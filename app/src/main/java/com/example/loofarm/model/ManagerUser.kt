@@ -5,28 +5,36 @@ object ManagerUser {
 
     private var position:Int = 0
 
+    private var sensorCurrent:Int = 0
+
+    private var link: String = ""
+
     fun createUser() {
-        user = User(id = "", email = "", userName = "", farms = mutableListOf())
+        user = User(userName = "", pass = " ",farms = mutableListOf())
     }
 
-    fun setMail(email: String){
-        user.email = email
-    }
     fun setName(name:String){
         user.userName = name
     }
-
-    fun setId(id: String){
-        user.id = id
+    fun setPass(pass:String){
+        user.pass = pass
     }
+
+//    fun setId(id: String){
+//        user.id = id
+//    }
 
     fun getName(): String? {
         return user.userName
     }
 
-    fun getId(): String? {
-        return user.id
+    fun getPass(): String? {
+        return user.pass
     }
+
+//    fun getId(): String? {
+//        return user.id
+//    }
 
     fun addFarm(farm: Farm){
         user.farms.add(farm)
@@ -71,4 +79,21 @@ object ManagerUser {
     fun setDeviceValue(positionFarm: Int, positionDevice: Int, value: Int){
         user.farms[positionFarm].devices[positionDevice].valueDevice = value
     }
+
+    fun setSensorCurrent(position: Int){
+        sensorCurrent = position
+    }
+
+    fun getSensorCurrent(): Int?{
+        return sensorCurrent
+    }
+
+    fun setLink(http: String){
+        link = http
+    }
+
+    fun getLink(): String{
+        return link
+    }
+
 }

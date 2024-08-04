@@ -9,7 +9,7 @@
 
     <TextView
         android:background="@color/bgRecycle"
-        android:text="Update"
+        android:text="Cập nhập"
         android:textColor="@color/text"
         android:fontFamily="@font/ptn777"
         android:textSize="25dp"
@@ -27,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/ptn777"
-            android:text="User name: "
+            android:text="Tên người dùng: "
             android:textSize="15dp"/>
 
         <EditText
@@ -48,7 +48,7 @@
         android:layout_height="32dp"
         android:background="@color/bgRecycle"
         android:fontFamily="@font/ptn777"
-        android:text="Save"
+        android:text="Lưu lại"
         android:textAllCaps="false"
         android:textSize="25dp" />
 
@@ -59,7 +59,7 @@
         android:layout_height="32dp"
         android:background="@color/btnExit"
         android:fontFamily="@font/ptn777"
-        android:text="Exit"
+        android:text="Thoát"
         android:textAllCaps="false"
         android:textSize="25dp" />
 

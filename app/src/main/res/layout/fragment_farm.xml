@@ -34,7 +34,7 @@
         android:weightSum="2">
 
         <LinearLayout
-            android:id="@+id/lnTem"
+            android:id="@+id/lnTemp"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:background="@drawable/shape"
@@ -45,7 +45,7 @@
                 android:id="@+id/txtNameSensor1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Nhiet do"
+                android:text="Nhiệt độ"
                 android:layout_gravity="center"
                 android:fontFamily="@font/ptn777"
                 android:layout_marginTop="5dp"
@@ -95,7 +95,7 @@
                 android:id="@+id/txtNameSensor2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Do am"
+                android:text="Độ ẩm"
                 android:layout_gravity="center"
                 android:fontFamily="@font/ptn777"
                 android:layout_marginTop="5dp"
@@ -150,10 +150,10 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/txtNameAc1"
+                android:id="@+id/txtNameSensor3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Nhiet do"
+                android:text="Độ mặn"
                 android:layout_gravity="center"
                 android:fontFamily="@font/ptn777"
                 android:layout_marginTop="5dp"
@@ -174,12 +174,15 @@
                     android:layout_gravity="center"
                     android:layout_weight="2">
 
-                    <Switch
-                        android:id="@+id/swAc1"
-                        android:layout_marginLeft="10dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent">
-                    </Switch>
+                    <TextView
+                        android:id="@+id/txtValueSensor3"
+                        android:layout_gravity="center"
+                        android:text="10 g/m³"
+                        android:textSize="25dp"
+                        android:layout_width="0dp"
+                        android:layout_weight="2"
+                        android:layout_height="wrap_content">
+                    </TextView>
 
                 </LinearLayout>
                 <ImageView
@@ -187,6 +190,7 @@
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     android:layout_weight="1"
+                    android:background="@drawable/ic_salinity"
                     android:layout_gravity="center">
                 </ImageView>
 
@@ -195,7 +199,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/vD"
+            android:id="@+id/lnFlow"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:background="@drawable/shape"
@@ -204,14 +208,14 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/txtNameAc2"
+                android:id="@+id/txtNameSensor4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Do am"
-                android:textColor="@color/text"
+                android:text="Lưu lượng"
                 android:layout_gravity="center"
                 android:fontFamily="@font/ptn777"
                 android:layout_marginTop="5dp"
+                android:textColor="@color/text"
                 android:textSize="15dp">
             </TextView>
 
@@ -222,28 +226,22 @@
                 android:weightSum="3"
                 android:orientation="horizontal">
 
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                <TextView
+                    android:id="@+id/txtValueSensor4"
                     android:layout_gravity="center"
-                    android:layout_weight="1.5">
-
-                    <Switch
-                        android:id="@+id/swAc2"
-                        android:layout_marginLeft="10dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent">
-                    </Switch>
-
-                </LinearLayout>
-
+                    android:text="10 g/m³"
+                    android:textSize="25dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content">
+                </TextView>
 
                 <ImageView
                     android:layout_width="0dp"
                     android:layout_height="55dp"
-                    android:layout_weight="1.5"
                     android:layout_gravity="center"
-                    android:background="@drawable/ic_waterspray">
+                    android:layout_weight="1"
+                    android:background="@drawable/ic_flow">
                 </ImageView>
 
             </LinearLayout>
@@ -262,7 +260,7 @@
         android:background="@drawable/shape">
 
         <TextView
-            android:text="Start date"
+            android:text="Ngày bắt đầu"
             android:textColor="@color/text"
             android:fontFamily="@font/ptn777"
             android:textAlignment="center"
@@ -278,7 +276,7 @@
             android:weightSum="5">
 
             <TextView
-                android:text="Date:"
+                android:text="Ngày:"
                 android:textColor="@color/text"
                 android:fontFamily="@font/ptn777"
                 android:textSize="20dp"
@@ -320,7 +318,7 @@
         android:background="@drawable/shape">
 
         <TextView
-            android:text="Harvest date"
+            android:text="Ngày thu hoạch"
             android:textColor="@color/text"
             android:fontFamily="@font/ptn777"
             android:textAlignment="center"
@@ -336,7 +334,7 @@
             android:weightSum="5">
 
             <TextView
-                android:text="Date:"
+                android:text="Ngày:"
                 android:textColor="@color/text"
                 android:fontFamily="@font/ptn777"
                 android:textSize="20dp"
@@ -366,60 +364,60 @@
 
         </LinearLayout>
     </LinearLayout>
-    <LinearLayout
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@drawable/shape">
+<!--    <LinearLayout-->
+<!--        android:layout_marginLeft="20dp"-->
+<!--        android:layout_marginRight="20dp"-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="vertical"-->
+<!--        android:background="@drawable/shape">-->
 
-        <TextView
-            android:text="Thêm thiết bị"
-            android:textColor="@color/text"
-            android:fontFamily="@font/ptn777"
-            android:textAlignment="center"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        </TextView>
+<!--        <TextView-->
+<!--            android:text="Thêm thiết bị"-->
+<!--            android:textColor="@color/text"-->
+<!--            android:fontFamily="@font/ptn777"-->
+<!--            android:textAlignment="center"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent">-->
+<!--        </TextView>-->
 
-        <LinearLayout
-            android:layout_marginLeft="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:weightSum="5">
+<!--        <LinearLayout-->
+<!--            android:layout_marginLeft="5dp"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginBottom="10dp"-->
+<!--            android:weightSum="5">-->
 
-            <TextView
-                android:text="ID:"
-                android:textColor="@color/text"
-                android:fontFamily="@font/ptn777"
-                android:textSize="20dp"
-                android:layout_width="0dp"
-                android:layout_weight="0.5"
-                android:layout_gravity="center"
-                android:layout_height="wrap_content">
-            </TextView>
+<!--            <TextView-->
+<!--                android:text="ID:"-->
+<!--                android:textColor="@color/text"-->
+<!--                android:fontFamily="@font/ptn777"-->
+<!--                android:textSize="20dp"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_weight="0.5"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:layout_height="wrap_content">-->
+<!--            </TextView>-->
 
 
-            <TextView
-                android:id="@+id/txtID"
-                android:fontFamily="@font/ptn777"
-                android:textSize="20dp"
-                android:layout_width="0dp"
-                android:layout_weight="3.5"
-                android:layout_gravity="center"
-                android:layout_height="wrap_content">
-            </TextView>
+<!--            <TextView-->
+<!--                android:id="@+id/txtID"-->
+<!--                android:fontFamily="@font/ptn777"-->
+<!--                android:textSize="20dp"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_weight="3.5"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:layout_height="wrap_content">-->
+<!--            </TextView>-->
 
-            <Button
-                android:id="@+id/btnScanQRNode"
-                android:layout_width="0dp"
-                android:layout_weight="0.7"
-                android:layout_height="40dp"
-                android:layout_gravity="right"
-                android:background="@drawable/icon_scanqr"/>
-            </LinearLayout>
-        </LinearLayout>
+<!--            <Button-->
+<!--                android:id="@+id/btnScanQRNode"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_weight="0.7"-->
+<!--                android:layout_height="40dp"-->
+<!--                android:layout_gravity="right"-->
+<!--                android:background="@drawable/icon_scanqr"/>-->
+<!--            </LinearLayout>-->
+<!--        </LinearLayout>-->
 </LinearLayout>

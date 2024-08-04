@@ -50,29 +50,8 @@ class FarmFragment : Fragment() {
     }
 
     private fun initEvents() {
-        binding.swAc1.setOnCheckedChangeListener{_, isChecked ->
-            if(isChecked){
-                binding.imgFan.setImageResource(R.drawable.ic_fanon)
-                Toast.makeText(requireContext(), "Fan on", Toast.LENGTH_SHORT).show()
-                ManagerUser.setDeviceValue(ManagerUser.getPosition(), 2, 1)
-            }else{
-                binding.imgFan.setImageResource(R.drawable.ic_fanoff)
-                Toast.makeText(requireContext(), "Fan off", Toast.LENGTH_SHORT).show()
-                ManagerUser.setDeviceValue(ManagerUser.getPosition(), 2, 0)
-            }
-        }
-
-        binding.swAc2.setOnCheckedChangeListener{_, isChecked ->
-            if(isChecked){
-                Toast.makeText(requireContext(), "Watering on", Toast.LENGTH_SHORT).show()
-                ManagerUser.setDeviceValue(ManagerUser.getPosition(), 3, 1)
-            }else{
-                Toast.makeText(requireContext(), "Watering off", Toast.LENGTH_SHORT).show()
-                ManagerUser.setDeviceValue(ManagerUser.getPosition(), 3, 0)
-            }
-        }
-
-        binding.lnTem.setOnClickListener{
+        binding.lnTemp.setOnClickListener{
+            ManagerUser.setSensorCurrent(1)
             val targetFragment = HistoryValueFragment()
             // Thực hiện transaction để chuyển đổi Fragment
             val transaction = requireActivity().supportFragmentManager
@@ -88,6 +67,7 @@ class FarmFragment : Fragment() {
         }
 
         binding.lnHum.setOnClickListener{
+            ManagerUser.setSensorCurrent(2)
             val targetFragment = HistoryValueFragment()
             // Thực hiện transaction để chuyển đổi Fragment
             val transaction = requireActivity().supportFragmentManager
@@ -102,20 +82,20 @@ class FarmFragment : Fragment() {
             transaction.commit()
         }
 
-        binding.btnScanQRNode.setOnClickListener{
-            val targetFragment = ScanQRFragment()
-            // Thực hiện transaction để chuyển đổi Fragment
-            val transaction = requireActivity().supportFragmentManager
-                .beginTransaction().setCustomAnimations(
-                    R.anim.slide_in,
-                    R.anim.fade_out,
-                    R.anim.fade_in,
-                    R.anim.slide_out
-                )
-            transaction.replace(R.id.frLayout, targetFragment)
-            transaction.addToBackStack(null)
-            transaction.commit()
-        }
+//        binding.btnScanQRNode.setOnClickListener{
+//            val targetFragment = ScanQRFragment()
+//            // Thực hiện transaction để chuyển đổi Fragment
+//            val transaction = requireActivity().supportFragmentManager
+//                .beginTransaction().setCustomAnimations(
+//                    R.anim.slide_in,
+//                    R.anim.fade_out,
+//                    R.anim.fade_in,
+//                    R.anim.slide_out
+//                )
+//            transaction.replace(R.id.frLayout, targetFragment)
+//            transaction.addToBackStack(null)
+//            transaction.commit()
+//        }
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -123,11 +103,13 @@ class FarmFragment : Fragment() {
 //        Toast.makeText(requireContext(), "${ManagerUser.getPosition()}", Toast.LENGTH_SHORT).show()
         binding.txtStartDate.text = ManagerUser.getDate(ManagerUser.getPosition())
         binding.txtNameSensor1.text = "Nhiệt độ"
-        binding.txtValueSensor1.text = "6"+"°C"
+        binding.txtValueSensor1.text = ManagerUser.getDeviceValue(ManagerUser.getPosition(), 0).toString() + " °C"
         binding.txtNameSensor2.text = "Độ Ẩm"
-        binding.txtValueSensor2.text = "5"+"g/m³"
-        binding.txtNameAc1.text = "Động cơ 1"
-        binding.txtNameAc2.text = "Động cơ 2"
+        binding.txtValueSensor2.text = ManagerUser.getDeviceValue(ManagerUser.getPosition(), 1).toString() + " %"
+        binding.txtNameSensor3.text = "Độ mặn"
+        binding.txtValueSensor3.text = ManagerUser.getDeviceValue(ManagerUser.getPosition()?: 0, 2).toString() + " %"
+        binding.txtNameSensor4.text = "Lưu lượng"
+        binding.txtValueSensor4.text = ManagerUser.getDeviceValue(ManagerUser.getPosition()?: 0, 3).toString() + " %"
 
         var dateStart = ManagerUser.getDate(ManagerUser.getPosition())
         val parts = dateStart?.split("/")

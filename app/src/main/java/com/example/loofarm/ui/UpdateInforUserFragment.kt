@@ -59,7 +59,7 @@ class UpdateInforUserFragment : Fragment() {
             transaction.commit()
             var databaseReference = Firebase.database.reference
             val users = ManagerUser.getUser()
-            databaseReference.child(ManagerUser.getId().toString()).setValue(users)
+//            databaseReference.child(ManagerUser.getId().toString()).setValue(users)
         }
 
         binding.btnExitInfor.setOnClickListener{
