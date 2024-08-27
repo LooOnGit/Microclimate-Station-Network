@@ -52,3 +52,4 @@ node_stm32\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 node_stm32\main.o: ../User/cJSON.h
 node_stm32\main.o: ../User/i2c-lcd.h
 node_stm32\main.o: ../User/flash.h
+node_stm32\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h

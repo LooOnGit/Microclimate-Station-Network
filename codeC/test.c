@@ -1,42 +1,49 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include "cJSON.h"
 
-char jsonPack[250];
-
-// Hàm gộp hai chuỗi JSON và trả về chuỗi JSON kết quả
-char* merge_json_strings(const char *json_str1, const char *json_str2) {
-    cJSON *json1 = cJSON_Parse(json_str1);
-    cJSON *json2 = cJSON_Parse(json_str2);
-
-    if (json1 == NULL || json2 == NULL) {
-        fprintf(stderr, "Error parsing JSON.\n");
-        return NULL;
+// Hàm sắp xếp mảng con theo thứ tự tăng dần
+void sort(int arr[], int n) {
+    for (int i = 0; i < n-1; i++) {
+        for (int j = i+1; j < n; j++) {
+            if (arr[i] > arr[j]) {
+                int temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+        }
     }
+}
 
-    cJSON *id = cJSON_GetObjectItem(json2, "ID");
-    if (id == NULL) {
-        fprintf(stderr, "Error: ID not found in json2.\n");
-        cJSON_Delete(json1);
-        cJSON_Delete(json2);
-        return NULL;
-    }
-
-    cJSON_AddItemToObject(json1, "TEMP", cJSON_Duplicate(id, 1));
-
-    strcpy(jsonPack,cJSON_Print(json1));
-    cJSON_Delete(json1);
-    cJSON_Delete(json2);
+// Hàm áp dụng bộ lọc trung vị
+int median_filter(int window[], int size) {
+    sort(window, size);
+    // Trả về giá trị trung vị
+    return window[size / 2];
 }
 
 int main() {
-    const char *json_str1 = "{\"ID\":\"ND5434\", \"Q\":\"34\"}";
-    const char *json_str2 = "{\"ID\":\"ND5435\", \"TEMP\":\"34\"}";
+    // Mảng dữ liệu cảm biến
+    int sensor_data[] = {10, 12, 15, 14, 11, 17, 18, 16, 15};
+    int data_size = sizeof(sensor_data) / sizeof(sensor_data[0]);
 
-    merge_json_strings(json_str1, json_str2);
+    // Kích thước của cửa sổ bộ lọc
+    int window_size = 3;
+    int filtered_data[data_size];
 
-    printf("Merged JSON: %s\n", jsonPack);
+    // Áp dụng bộ lọc trung vị
+    for (int i = 0; i < data_size - window_size + 1; i++) {
+        int window[window_size];
+        for (int j = 0; j < window_size; j++) {
+            window[j] = sensor_data[i + j];
+        }
+        filtered_data[i + window_size / 2] = median_filter(window, window_size);
+    }
+
+    // In ra dữ liệu đã được lọc
+    printf("Dữ liệu cảm biến sau khi lọc trung vị:\n");
+    for (int i = 0; i < data_size; i++) {
+        printf("%d ", filtered_data[i]);
+    }
+    printf("\n");
 
     return 0;
 }
