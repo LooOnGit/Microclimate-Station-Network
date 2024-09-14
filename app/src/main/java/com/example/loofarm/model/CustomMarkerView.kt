@@ -1,4 +1,5 @@
 import android.content.Context
+import android.graphics.Canvas
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
@@ -30,4 +31,33 @@ class CustomMarkerView(
         tvContent.text = "X: $timeStamp\nY: $valueY"
         super.refreshContent(e, highlight)
     }
+
+    // Điều chỉnh vị trí của MarkerView để không vượt quá màn hình
+    override fun draw(canvas: Canvas, posX: Float, posY: Float) {
+        var x = posX
+        var y = posY
+
+        // Điều chỉnh lại vị trí x và y nếu MarkerView vượt quá màn hình
+        val width = width.toFloat()
+        val height = height.toFloat()
+
+        // Nếu vượt quá bên phải màn hình, điều chỉnh x
+        if (x + width > canvas.width) {
+            x = canvas.width - width
+        }
+
+        // Nếu vượt quá bên trái màn hình, điều chỉnh x
+        if (x < 0) {
+            x = 0f
+        }
+
+        // Nếu vượt quá chiều cao màn hình, điều chỉnh y
+        if (y + height > canvas.height) {
+            y = canvas.height - height
+        }
+
+        // Gọi phương thức draw của MarkerView với vị trí mới
+        super.draw(canvas, x, y)
+    }
 }
+

@@ -172,8 +172,9 @@ class HistoryValueFragment : Fragment() {
             binding.chart.legend.isEnabled = false
             binding.chart.description.isEnabled = false
             binding.chart.setNoDataText("No data available")
-            binding.chart.axisLeft.axisMinimum = 10f
-            binding.chart.axisRight.axisMinimum = 10f
+            
+            binding.chart.axisLeft.axisMinimum = -1f
+            binding.chart.axisRight.axisMinimum = -1f
             binding.chart.animateXY(1400, 1400)
             binding.chart.setTouchEnabled(true)
             binding.chart.setPinchZoom(true)

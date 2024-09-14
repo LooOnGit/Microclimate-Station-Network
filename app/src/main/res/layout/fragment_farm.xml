@@ -143,6 +143,7 @@
         android:weightSum="2">
 
         <LinearLayout
+            android:id="@+id/lnSal"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:background="@drawable/shape"

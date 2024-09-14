@@ -8,7 +8,6 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.android.volley.Request
 import com.android.volley.RequestQueue
-import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.loofarm.R
@@ -16,17 +15,8 @@ import com.example.loofarm.databinding.FragmentLoginBinding
 import com.example.loofarm.model.Device
 import com.example.loofarm.model.Farm
 import com.example.loofarm.model.ManagerUser
-import com.example.loofarm.model.SignInWithGoogle
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount
-import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.GoogleAuthProvider
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
 import org.json.JSONObject
 
 
@@ -74,10 +64,10 @@ class LoginFragment : Fragment() {
 
                     ManagerUser.setName(binding.txtUserLogin.text.toString())
                     ManagerUser.setPass(binding.txtPassLogin.text.toString())
-                    arrDevice.add(Device("TEMP",firstFeed.getString("field1").toInt()))
-                    arrDevice.add(Device("HUM",firstFeed.getString("field2").toInt()))
-                    arrDevice.add(Device("SAL",firstFeed.getString("field3").toIntOrNull() ?: 0))
-                    arrDevice.add(Device("FLOW",firstFeed.getString("field4").toIntOrNull() ?: 0))
+                    arrDevice.add(Device("TEMP",firstFeed.getString("field1").toFloatOrNull() ?: 0))
+                    arrDevice.add(Device("HUM",firstFeed.getString("field2").toFloatOrNull() ?: 0))
+                    arrDevice.add(Device("SAL",firstFeed.getString("field3").toFloatOrNull() ?: 0))
+                    arrDevice.add(Device("FLOW",firstFeed.getString("field4").toFloatOrNull() ?: 0))
                     ManagerUser.addFarm(Farm(ManagerUser.getName().toString(), arrDevice,"23/07/2024"))
 //                            // Tạo Fragment mục tiêu
                     val targetFragment = HomeFragment()

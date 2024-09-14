@@ -60,7 +60,7 @@ object ManagerUser {
         return user.farms[positionFarm].devices[positionDevice].name
     }
 
-    fun getDeviceValue(positionFarm: Int, positionDevice: Int): Int? {
+    fun getDeviceValue(positionFarm: Int, positionDevice: Int): Number {
         return user.farms[positionFarm].devices[positionDevice].valueDevice
     }
 
