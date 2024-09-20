@@ -1,0 +1,10 @@
+node_stm32\cjson.o: ..\User\cJSON.c
+node_stm32\cjson.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+node_stm32\cjson.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+node_stm32\cjson.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
+node_stm32\cjson.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+node_stm32\cjson.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\limits.h
+node_stm32\cjson.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\ctype.h
+node_stm32\cjson.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\float.h
+node_stm32\cjson.o: ..\User\cJSON.h
+node_stm32\cjson.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
