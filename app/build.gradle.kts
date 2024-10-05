@@ -70,5 +70,5 @@ dependencies {
 //    implementation("org.eclipse.paho:org.eclipse.paho.android.service:1.1.1")
 
     //thingspeak
-    implementation("com.android.volley:volley:1.1.1")
+    implementation("com.android.volley:volley:1.2.1")
 }
