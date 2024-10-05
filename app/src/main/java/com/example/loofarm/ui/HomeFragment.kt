@@ -1,10 +1,12 @@
 package com.example.loofarm.ui
 
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.loofarm.adapter.FarmAdapter
@@ -14,6 +16,8 @@ import com.example.loofarm.model.ManagerUser
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 class HomeFragment : Fragment() {
 
@@ -41,6 +45,7 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun initViews() {
         listFarms.clear()
         val numberFarm = ManagerUser.getFarmsSize()
@@ -51,9 +56,11 @@ class HomeFragment : Fragment() {
                 }
             }
         }
-        binding.rcFarmView.layoutManager = GridLayoutManager(requireActivity(), 2)
+        binding.rcFarmView.layoutManager = GridLayoutManager(requireActivity(), 1)
         itemAdapter = FarmAdapter(listFarms)
         binding.rcFarmView.adapter = itemAdapter
+
+        binding.txtToday.text = getCurrentDate()
     }
 
     private fun initEvents() {
@@ -124,5 +131,12 @@ class HomeFragment : Fragment() {
             transaction.commit()
         }
 
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun getCurrentDate(): String {
+        val currentDate = LocalDate.now()
+        val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy") // Định dạng ngày
+        return currentDate.format(formatter)
     }
 }

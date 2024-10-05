@@ -1,5 +1,6 @@
 package com.example.loofarm.ui
 
+import android.content.pm.ActivityInfo
 import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -100,7 +101,8 @@ class FarmFragment : Fragment() {
 
         binding.lnFlow.setOnClickListener{
             ManagerUser.setSensorCurrent(4)
-            val targetFragment = HistoryValueFragment()
+//            val targetFragment = HistoryValueFragment()
+            val targetFragment = BlankFragment2()
             // Thực hiện transaction để chuyển đổi Fragment
             val transaction = requireActivity().supportFragmentManager
                 .beginTransaction().setCustomAnimations(
@@ -139,9 +141,9 @@ class FarmFragment : Fragment() {
         binding.txtNameSensor2.text = "Độ Ẩm"
         binding.txtValueSensor2.text = ManagerUser.getDeviceValue(ManagerUser.getPosition(), 1).toString() + " %"
         binding.txtNameSensor3.text = "Độ mặn"
-        binding.txtValueSensor3.text = ManagerUser.getDeviceValue(ManagerUser.getPosition()?: 0, 2).toString() + " %"
+        binding.txtValueSensor3.text = String.format("%.2f", ManagerUser.getDeviceValue(ManagerUser.getPosition()?: 0, 2)) + " ppt"
         binding.txtNameSensor4.text = "Lưu lượng"
-        binding.txtValueSensor4.text = ManagerUser.getDeviceValue(ManagerUser.getPosition()?: 0, 3).toString() + " %"
+        binding.txtValueSensor4.text = String.format("%.4f", ManagerUser.getDeviceValue(ManagerUser.getPosition()?: 0, 3)) + " L"
 
         var dateStart = ManagerUser.getDate(ManagerUser.getPosition())
         val parts = dateStart?.split("/")
