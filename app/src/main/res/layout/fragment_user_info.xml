@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:padding="10dp"
     android:background="@color/grey"
-    tools:context=".ui.UserInforFragment">
+    tools:context=".ui.user_info.UserInfoFragment">
 
     <LinearLayout
         android:layout_marginTop="5dp"

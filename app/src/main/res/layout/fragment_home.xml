@@ -9,7 +9,7 @@
     android:paddingTop="10dp"
     android:id="@+id/frHome"
     android:background="@color/grey"
-    tools:context=".ui.HomeFragment">
+    tools:context=".ui.home.HomeFragment">
 
     <LinearLayout
         android:layout_width="match_parent"

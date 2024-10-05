@@ -7,7 +7,7 @@
     android:padding="30dp"
     android:orientation="vertical"
     android:background="@color/white"
-    tools:context=".ui.LoginFragment">
+    tools:context=".ui.login.LoginFragment">
 
     <LinearLayout
         android:layout_width="234dp"
