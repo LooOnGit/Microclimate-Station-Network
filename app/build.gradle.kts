@@ -2,6 +2,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("com.google.gms.google-services")
+    id("androidx.navigation.safeargs.kotlin")
 }
 
 
@@ -71,4 +72,10 @@ dependencies {
 
     //thingspeak
     implementation("com.android.volley:volley:1.2.1")
+
+    // navigation (https://developer.android.com/jetpack/androidx/releases/navigation)
+    val nav_version = "2.8.2"
+    // Views/Fragments Integration
+    implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
+    implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
 }
