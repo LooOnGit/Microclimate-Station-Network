@@ -49,11 +49,11 @@ class HomeFragment : Fragment() {
     @RequiresApi(Build.VERSION_CODES.O)
     private fun initViews() {
         listFarms.clear()
-        val numberFarm = ManagerUser.getFarmsSize()
+        val numberFarm = 1 //ManagerUser.getFarmsSize()
         if (numberFarm != 0) {
             if (numberFarm != null) {
                 for (i in 0..(numberFarm - 1)!!) {
-                    listFarms.add(ManagerUser.getFarmName(i))
+                    listFarms.add("ManagerUser.getFarmName(i)")
                 }
             }
         }
@@ -67,7 +67,7 @@ class HomeFragment : Fragment() {
 
     private fun initEvents() {
         itemAdapter.onItemClick = { position ->
-            ManagerUser.setPosition(position)
+            //ManagerUser.setPosition(position)
             findNavController().navigate(R.id.action_homeFragment_to_farmFragment)
         }
 

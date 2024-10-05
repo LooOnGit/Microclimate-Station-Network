@@ -33,7 +33,7 @@ class UpdateInfoUserFragment : Fragment() {
     private fun initEvents() {
         binding?.apply {
             btnSaveInfor.setOnClickListener {
-                ManagerUser.setName(edtUserName.text.toString())
+//                ManagerUser.setName(edtUserName.text.toString())
                 findNavController().navigate(R.id.action_updateInfoUserFragment_to_userInfoFragment)
             }
 

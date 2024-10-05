@@ -37,7 +37,7 @@ class UserInfoFragment : Fragment() {
     }
 
     private fun initControls() {
-        binding?.txtUserName?.text = ManagerUser.getName().toString()
+       // binding?.txtUserName?.text = ManagerUser.getName().toString()
     }
 
     private fun initEvents() {

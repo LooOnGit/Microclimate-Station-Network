@@ -84,32 +84,32 @@ class HistoryValueFragment : Fragment() {
         val requestQueue: RequestQueue = Volley.newRequestQueue(requireContext())
 
         // Tạo một StringRequest
-        val stringRequest = StringRequest(Request.Method.GET, ManagerUser.getLink() + "7",
-            { response ->
-                val jsonObject = JSONObject(response)
-                val feedsArray = jsonObject.getJSONArray("feeds")
-
-                for (i in 0..6) {
-                    val feed = feedsArray.getJSONObject(i)
-                    val value = feed.getString("field" + ManagerUser.getSensorCurrent().toString())
-                        .toFloatOrNull() ?: 0f
-                    val time = feed.getString("created_at").toString()
-                    profitValues.add(Entry(i.toFloat(), value))
-                    val timeConv = convertDateFormat(time)
-                    timeStamps.add(timeConv)
-
-
-                }
-
-                //error
-                if (isAdded) {
-                    setChart()
-                }
-            },
-            { _ ->
-                // Xử lý lỗi
-            })
-        requestQueue.add(stringRequest)
+//        val stringRequest = StringRequest(Request.Method.GET, ManagerUser.getLink() + "7",
+//            { response ->
+//                val jsonObject = JSONObject(response)
+//                val feedsArray = jsonObject.getJSONArray("feeds")
+//
+//                for (i in 0..6) {
+//                    val feed = feedsArray.getJSONObject(i)
+////                    val value = feed.getString("field" + ManagerUser.getSensorCurrent().toString())
+////                        .toFloatOrNull() ?: 0f
+//                    val time = feed.getString("created_at").toString()
+//                    profitValues.add(Entry(i.toFloat(), 0f))
+//                    val timeConv = convertDateFormat(time)
+//                    timeStamps.add(timeConv)
+//
+//
+//                }
+//
+//                //error
+//                if (isAdded) {
+//                    setChart()
+//                }
+//            },
+//            { _ ->
+//                // Xử lý lỗi
+//            })
+//        requestQueue.add(stringRequest)
     }
 
     private fun setChart() {
@@ -122,7 +122,7 @@ class HistoryValueFragment : Fragment() {
                 chart.data.notifyDataChanged()
                 chart.notifyDataSetChanged()
             } else {
-                dataSet = when (ManagerUser.getSensorCurrent()) {
+                dataSet = when (1) {//ManagerUser.getSensorCurrent()
                     1 -> LineDataSet(profitValues, "Cảm biến nhiệt độ")
                     2 -> LineDataSet(profitValues, "Cảm biến độ ẩm")
                     3 -> LineDataSet(profitValues, "Cảm biến độ mặn")

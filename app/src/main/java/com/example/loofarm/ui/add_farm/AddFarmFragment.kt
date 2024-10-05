@@ -112,7 +112,7 @@ class AddFarmFragment : Fragment() {
                     arrDevice.add(Device(actuator2, 0))
                 }
 
-                ManagerUser.addFarm(Farm(farmName, arrDevice, date))
+                //ManagerUser.addFarm(Farm(farmName, arrDevice, date))
                 val targetFragment = HomeFragment()
                 // Thực hiện transaction để chuyển đổi Fragment
                 val transaction = requireActivity().supportFragmentManager
@@ -126,7 +126,7 @@ class AddFarmFragment : Fragment() {
                 transaction.addToBackStack(null)
                 transaction.commit()
                 var databaseReference = Firebase.database.reference
-                val users = ManagerUser.getUser()
+               // val users = ManagerUser.getUser()
 //            databaseReference.child(ManagerUser.getId().toString()).setValue(users)
             }
 

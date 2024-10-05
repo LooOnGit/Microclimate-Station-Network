@@ -37,7 +37,7 @@ class FarmFragment : Fragment() {
     private fun initEvents() {
         binding?.apply {
             lnTemp.setOnClickListener {
-                ManagerUser.setSensorCurrent(1)
+                //ManagerUser.setSensorCurrent(1)
                 val targetFragment = HistoryValueFragment()
                 // Thực hiện transaction để chuyển đổi Fragment
                 val transaction = requireActivity().supportFragmentManager
@@ -53,7 +53,7 @@ class FarmFragment : Fragment() {
             }
 
             lnHum.setOnClickListener {
-                ManagerUser.setSensorCurrent(2)
+                //ManagerUser.setSensorCurrent(2)
                 val targetFragment = HistoryValueFragment()
                 // Thực hiện transaction để chuyển đổi Fragment
                 val transaction = requireActivity().supportFragmentManager
@@ -69,7 +69,7 @@ class FarmFragment : Fragment() {
             }
 
             lnSal.setOnClickListener {
-                ManagerUser.setSensorCurrent(3)
+                //ManagerUser.setSensorCurrent(3)
                 val targetFragment = HistoryValueFragment()
                 // Thực hiện transaction để chuyển đổi Fragment
                 val transaction = requireActivity().supportFragmentManager
@@ -85,7 +85,7 @@ class FarmFragment : Fragment() {
             }
 
             lnFlow.setOnClickListener {
-                ManagerUser.setSensorCurrent(4)
+                //ManagerUser.setSensorCurrent(4)
 //            val targetFragment = HistoryValueFragment()
                 val targetFragment = BlankFragment2()
                 // Thực hiện transaction để chuyển đổi Fragment
@@ -106,44 +106,44 @@ class FarmFragment : Fragment() {
     @RequiresApi(Build.VERSION_CODES.O)
     private fun initControls() {
         binding?.apply {
-            txtStartDate.text = ManagerUser.getDate(ManagerUser.getPosition())
-            txtNameSensor1.text = "Nhiệt độ"
-            txtValueSensor1.text =
-                ManagerUser.getDeviceValue(ManagerUser.getPosition(), 0).toString() + " °C"
-            txtNameSensor2.text = "Độ Ẩm"
-            txtValueSensor2.text =
-                ManagerUser.getDeviceValue(ManagerUser.getPosition(), 1).toString() + " %"
-            txtNameSensor3.text = "Độ mặn"
-            txtValueSensor3.text = String.format(
-                "%.2f",
-                ManagerUser.getDeviceValue(ManagerUser.getPosition() ?: 0, 2)
-            ) + " ppt"
-            txtNameSensor4.text = "Lưu lượng"
-            txtValueSensor4.text = String.format(
-                "%.4f",
-                ManagerUser.getDeviceValue(ManagerUser.getPosition() ?: 0, 3)
-            ) + " L"
+//            txtStartDate.text = ManagerUser.getDate(ManagerUser.getPosition())
+//            txtNameSensor1.text = "Nhiệt độ"
+//            txtValueSensor1.text =
+//                ManagerUser.getDeviceValue(ManagerUser.getPosition(), 0).toString() + " °C"
+//            txtNameSensor2.text = "Độ Ẩm"
+//            txtValueSensor2.text =
+//                ManagerUser.getDeviceValue(ManagerUser.getPosition(), 1).toString() + " %"
+//            txtNameSensor3.text = "Độ mặn"
+//            txtValueSensor3.text = String.format(
+//                "%.2f",
+//                ManagerUser.getDeviceValue(ManagerUser.getPosition() ?: 0, 2)
+//            ) + " ppt"
+//            txtNameSensor4.text = "Lưu lượng"
+//            txtValueSensor4.text = String.format(
+//                "%.4f",
+//                ManagerUser.getDeviceValue(ManagerUser.getPosition() ?: 0, 3)
+//            ) + " L"
         }
 
-        var dateStart = ManagerUser.getDate(ManagerUser.getPosition())
-        val parts = dateStart?.split("/")
-
-        val resultList = parts?.map { it.trim() }
-        var date: MutableList<Int> = mutableListOf()
-        if (resultList != null) {
-            for (element in resultList) {
-                date.add(element.toInt())
-            }
-        }
-
-        val originalDate = LocalDate.of(date[2], date[1], date[0])
-        val daysToAdd = 90
-
-        val newDate = originalDate.plusDays(daysToAdd.toLong())
-
-        val formatter = DateTimeFormatter.ofPattern("d/M/yyyy")
-        val formattedNewDate = newDate.format(formatter)
-
-        binding?.txtHavestDate?.text = formattedNewDate
+//        var dateStart = ManagerUser.getDate(ManagerUser.getPosition())
+//        val parts = dateStart?.split("/")
+//
+//        val resultList = parts?.map { it.trim() }
+//        var date: MutableList<Int> = mutableListOf()
+//        if (resultList != null) {
+//            for (element in resultList) {
+//                date.add(element.toInt())
+//            }
+//        }
+//
+//        val originalDate = LocalDate.of(date[2], date[1], date[0])
+//        val daysToAdd = 90
+//
+//        val newDate = originalDate.plusDays(daysToAdd.toLong())
+//
+//        val formatter = DateTimeFormatter.ofPattern("d/M/yyyy")
+//        val formattedNewDate = newDate.format(formatter)
+//
+//        binding?.txtHavestDate?.text = formattedNewDate
     }
 }
