@@ -1,6 +1,7 @@
 package com.example.loofarm.ui
 
 import CustomMarkerView
+import android.content.pm.ActivityInfo
 import android.graphics.Color
 import android.icu.text.SimpleDateFormat
 import android.os.Build
@@ -75,6 +76,7 @@ class HistoryValueFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        requireActivity().requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
         // Inflate the layout for this fragment
         binding = FragmentHistoryValueBinding.inflate(layoutInflater, container, false)
 
@@ -126,16 +128,18 @@ class HistoryValueFragment : Fragment() {
                     val time = feed.getString("created_at").toString()
                     profitValues.add(Entry(i.toFloat(), value))
                     val timeConv = convertDateFormat(time)
-                    binding.textView.text = timeConv
                     timeStamps.add(timeConv)
 
 
                 }
-                setChart()
+
+                //error
+                if (isAdded) {
+                    setChart()
+                }
             },
             { _ ->
                 // Xử lý lỗi
-                Toast.makeText(requireContext(), "Tài khoản không đúng", Toast.LENGTH_SHORT).show()
             })
         requestQueue.add(stringRequest)
     }
@@ -143,6 +147,7 @@ class HistoryValueFragment : Fragment() {
     private fun setChart() {
         val dataSet: LineDataSet
 
+        // Add data
         if (binding.chart.data != null && binding.chart.data.dataSetCount > 0) {
             dataSet = binding.chart.data.getDataSetByIndex(0) as LineDataSet
             dataSet.values = profitValues
@@ -171,22 +176,26 @@ class HistoryValueFragment : Fragment() {
 
             binding.chart.legend.isEnabled = false
             binding.chart.description.isEnabled = false
-            binding.chart.setNoDataText("No data available")
-            
-            binding.chart.axisLeft.axisMinimum = -1f
-            binding.chart.axisRight.axisMinimum = -1f
-            binding.chart.animateXY(1400, 1400)
-            binding.chart.setTouchEnabled(true)
-            binding.chart.setPinchZoom(true)
-            binding.chart.axisRight.isEnabled = false
-            binding.chart.xAxis.position = XAxis.XAxisPosition.BOTTOM
 
-            // Thiết lập ValueFormatter cho trục X để hiển thị ngày tháng và giờ
+            // Thay đổi trục Y để chứa giá trị
+            binding.chart.axisLeft.axisMinimum = 0f // Tùy chỉnh giá trị tối thiểu
+            binding.chart.axisRight.isEnabled = false // Tắt trục Y bên phải
+
+            // Thay đổi trục X để chứa thời gian
             val xAxis = binding.chart.xAxis
+            xAxis.position = XAxis.XAxisPosition.BOTTOM // Giữ vị trí dưới
             xAxis.valueFormatter = object : ValueFormatter() {
+                private val inputFormat = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault())
+                private val timeFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
+
                 override fun getFormattedValue(value: Float): String {
                     return if (value.toInt() in timeStamps.indices) {
-                        timeStamps[value.toInt()]
+                        try {
+                            val date = inputFormat.parse(timeStamps[value.toInt()])
+                            date?.let { timeFormat.format(it) } ?: ""
+                        } catch (e: Exception) {
+                            ""
+                        }
                     } else {
                         ""
                     }
@@ -194,8 +203,13 @@ class HistoryValueFragment : Fragment() {
             }
 
             // Cài đặt thêm cho xAxis
-            xAxis.granularity = 1f // Đặt khoảng cách giữa các nhãn
-            xAxis.setDrawGridLines(false) // Tùy chọn không vẽ đường lưới cho trục X
+            xAxis.granularity = 1f // Giữ khoảng cách giữa các nhãn
+            xAxis.setDrawGridLines(false) // Không vẽ đường lưới cho trục X
+
+            // Cài đặt trục Y
+            val yAxis = binding.chart.axisLeft
+            yAxis.axisMinimum = 0f // Đặt giá trị tối thiểu cho trục Y
+            yAxis.axisMaximum = 100f // Đặt giá trị tối đa nếu cần thiết
 
             // Chuyển đổi định dạng thời gian
             val formattedTimeStamps = timeStamps.map { timeStamp ->
@@ -206,11 +220,12 @@ class HistoryValueFragment : Fragment() {
             }
 
             // Thiết lập MarkerView với formattedTimeStamps
-            val markerView =
-                CustomMarkerView(requireContext(), R.layout.marker_view, formattedTimeStamps)
+            val markerView = CustomMarkerView(requireContext(), R.layout.marker_view, formattedTimeStamps)
             binding.chart.marker = markerView // Gán MarkerView cho biểu đồ
         }
     }
+
+
 
 
     companion object {
