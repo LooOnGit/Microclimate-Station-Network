@@ -79,7 +79,7 @@ class LoginFragment : Fragment() {
                             R.anim.fade_in,
                             R.anim.slide_out
                         )
-                    transaction.replace(R.id.frLayout, targetFragment)
+                    //transaction.replace(R.id.frLayout, targetFragment)
                     transaction.addToBackStack(null)
                     transaction.commit()
 //                        }
