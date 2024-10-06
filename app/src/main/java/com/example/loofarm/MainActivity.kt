@@ -5,12 +5,13 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
+import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.example.loofarm.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private var binding: ActivityMainBinding? = null
+    private var navController: NavController? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,7 +26,7 @@ class MainActivity : AppCompatActivity() {
     private fun createNavigationController() {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.navHostFragment) as? NavHostFragment
-        val navController = navHostFragment?.navController
+        navController = navHostFragment?.navController
 
         // Theo dõi navigation
         navController?.addOnDestinationChangedListener { _, destination, _ ->
@@ -40,12 +41,14 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-//    override fun onBackPressed() {
-//        val navController = findNavController(R.id.navHostFragment)
-//        if (!navController.popBackStack()) {
-//            super.onBackPressed() // Nếu không còn Fragment nào, thực hiện hành động quay lại bình thường
-//        }
-//    }
+    @Deprecated("Deprecated in Java")
+    override fun onBackPressed() {
+        super.onBackPressed()
+        when (navController?.currentDestination?.id) {
+            R.id.homeFragment -> finish()
+            else -> navController?.navigateUp()
+        }
+    }
 
     companion object {
         private val TAG by lazy { MainActivity::class.java.name }

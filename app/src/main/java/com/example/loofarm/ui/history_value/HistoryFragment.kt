@@ -53,10 +53,10 @@ class HistoryFragment : Fragment() {
         observeViewModels()
     }
 
-//    override fun onDestroyView() {
-//        super.onDestroyView()
-//        requireActivity().requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
-//    }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        requireActivity().requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
+    }
 
     private fun observeViewModels() {
         viewModel.getFeeds()
