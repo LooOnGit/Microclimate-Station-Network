@@ -1,5 +1,6 @@
 package com.example.loofarm
 
+import android.annotation.SuppressLint
 import android.content.res.Resources
 import android.os.Bundle
 import android.util.Log
@@ -41,9 +42,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("MissingSuperCall")
     @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
-        super.onBackPressed()
         when (navController?.currentDestination?.id) {
             R.id.homeFragment -> finish()
             else -> navController?.navigateUp()

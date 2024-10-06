@@ -18,12 +18,8 @@ import com.example.loofarm.adapter.OnItemClickListener
 import com.example.loofarm.databinding.FragmentHomeBinding
 import com.example.loofarm.model.ThingSpeakManager
 import com.example.loofarm.ui.share_viewmodel.LooFarmViewModel
-import com.example.loofarm.utils.formatDate
-import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
-import java.util.Calendar
-import java.util.Locale
 
 class HomeFragment : Fragment(), OnItemClickListener {
 
