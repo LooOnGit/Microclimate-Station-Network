@@ -46,7 +46,11 @@
         app:exitAnim="@anim/fade_out"
         app:popEnterAnim="@anim/fade_in"
         app:popExitAnim="@anim/slide_out"
-        tools:layout="@layout/fragment_farm" />
+        tools:layout="@layout/fragment_farm">
+        <action
+            android:id="@+id/action_farmFragment_to_historyFragment"
+            app:destination="@id/historyFragment" />
+    </fragment>
     <fragment
         android:id="@+id/userInfoFragment"
         android:name="com.example.loofarm.ui.user_info.UserInfoFragment"
@@ -84,5 +88,39 @@
         app:exitAnim="@anim/fade_out"
         app:popEnterAnim="@anim/fade_in"
         app:popExitAnim="@anim/slide_out" />
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="com.example.loofarm.ui.history_value.HistoryFragment"
+        android:label="fragment_history"
+        app:enterAnim="@anim/slide_in"
+        app:exitAnim="@anim/fade_out"
+        app:popEnterAnim="@anim/fade_in"
+        app:popExitAnim="@anim/slide_out"
+        tools:layout="@layout/fragment_history" />
+    <fragment
+        android:id="@+id/addFarmFragment"
+        android:name="com.example.loofarm.ui.add_farm.AddFarmFragment"
+        android:label="fragment_add_farm"
+        app:enterAnim="@anim/slide_in"
+        app:exitAnim="@anim/fade_out"
+        app:popEnterAnim="@anim/fade_in"
+        app:popExitAnim="@anim/slide_out"
+        tools:layout="@layout/fragment_add_farm">
+        <action
+            android:id="@+id/action_addFarmFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_addFarmFragment_to_scanQRFragment"
+            app:destination="@id/scanQRFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/scanQRFragment"
+        android:name="com.example.loofarm.ui.scan_qr.ScanQRFragment"
+        android:label="fragment_scan_q_r"
+        app:enterAnim="@anim/slide_in"
+        app:exitAnim="@anim/fade_out"
+        app:popEnterAnim="@anim/fade_in"
+        app:popExitAnim="@anim/slide_out"
+        tools:layout="@layout/fragment_scan_q_r" />
 
 </navigation>

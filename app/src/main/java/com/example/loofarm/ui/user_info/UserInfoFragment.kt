@@ -5,21 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.loofarm.R
 import com.example.loofarm.databinding.FragmentUserInfoBinding
-import com.example.loofarm.model.ManagerUser
-import com.example.loofarm.model.SignInWithGoogle
-import com.google.firebase.auth.FirebaseAuth
+import com.example.loofarm.ui.share_viewmodel.LooFarmViewModel
 
 class UserInfoFragment : Fragment() {
     private var binding: FragmentUserInfoBinding? = null
-    private lateinit var auth: FirebaseAuth
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        auth = FirebaseAuth.getInstance()
-    }
+    private val viewModel: LooFarmViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,14 +31,15 @@ class UserInfoFragment : Fragment() {
     }
 
     private fun initControls() {
-       // binding?.txtUserName?.text = ManagerUser.getName().toString()
+        viewModel.thingSpeakResponse.observe(viewLifecycleOwner) {
+            // TODO: API update add username
+            binding?.txtUserName?.text = it?.channel?.name
+        }
     }
 
     private fun initEvents() {
         binding?.apply {
             btnSignOut.setOnClickListener {
-                auth.signOut()
-                SignInWithGoogle(requireContext()).logOut()
                 findNavController().navigate(R.id.action_userInfoFragment_to_loginFragment)
             }
 

@@ -1,28 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="5dp"
-    android:orientation="vertical"
     android:background="@color/grey"
-    tools:context=".ui.farm.FarmFragment">
+    android:orientation="vertical"
+    android:padding="5dp"
+    tools:context=".ui.history_value.HistoryFragment">
 
     <LinearLayout
-        android:background="@color/bgRecycle"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/bgRecycle">
 
         <TextView
-            android:text="Lịch sử giá trị"
-            android:textColor="@color/text"
-            android:layout_gravity="center"
-            android:textAlignment="center"
-            android:textSize="25dp"
-            android:fontFamily="@font/ptn777"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/ptn777"
+            android:text="Lịch sử giá trị"
+            android:textAlignment="center"
+            android:textColor="@color/text"
+            android:textSize="25dp" />
     </LinearLayout>
 
     <com.github.mikephil.charting.charts.LineChart

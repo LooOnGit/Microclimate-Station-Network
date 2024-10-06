@@ -12,6 +12,7 @@ interface LooFarmService {
     @GET("channels/{channelId}/feeds.json")
     suspend fun getFeeds(
         @Path("channelId") channelId: Long,
-        @Query("api_key") apiKey: String
+        @Query("api_key") apiKey: String,
+        @Query("results") results: Int
     ): ThingSpeakResponse
 }

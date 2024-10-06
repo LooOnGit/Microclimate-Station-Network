@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import com.example.loofarm.databinding.ActivityMainBinding
 
@@ -38,6 +39,13 @@ class MainActivity : AppCompatActivity() {
             Log.d(TAG, "Navigated to $dest")
         }
     }
+
+//    override fun onBackPressed() {
+//        val navController = findNavController(R.id.navHostFragment)
+//        if (!navController.popBackStack()) {
+//            super.onBackPressed() // Nếu không còn Fragment nào, thực hiện hành động quay lại bình thường
+//        }
+//    }
 
     companion object {
         private val TAG by lazy { MainActivity::class.java.name }

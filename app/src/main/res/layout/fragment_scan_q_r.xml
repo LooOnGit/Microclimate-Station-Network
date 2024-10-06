@@ -7,7 +7,7 @@
     android:padding="5dp"
     android:orientation="vertical"
     android:background="@color/grey"
-    tools:context=".ui.farm.FarmFragment">
+    tools:context=".ui.scan_qr.ScanQRFragment">
 
     <LinearLayout
         android:background="@color/bgRecycle"

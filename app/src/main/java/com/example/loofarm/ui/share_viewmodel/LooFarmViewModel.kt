@@ -1,20 +1,19 @@
-package com.example.loofarm.ui.login
+package com.example.loofarm.ui.share_viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.loofarm.model.Feed
+import com.example.loofarm.model.ThingSpeakResponse
 import com.example.loofarm.repository.LooFarmRepository
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class LoginViewModel : ViewModel() {
+class LooFarmViewModel : ViewModel() {
     private val repository = LooFarmRepository()
 
     // LiveData to hold the API response
-    private val _feeds = MutableLiveData<List<Feed>?>()
-    val feeds: LiveData<List<Feed>?> = _feeds
+    private val _thingSpeakResponse = MutableLiveData<ThingSpeakResponse?>()
+    val thingSpeakResponse: LiveData<ThingSpeakResponse?> = _thingSpeakResponse
 
     // LiveData to handle loading state
     private val _loading = MutableLiveData<Boolean>()
@@ -25,14 +24,15 @@ class LoginViewModel : ViewModel() {
     val error: LiveData<String?> = _error
 
     // Function to fetch data from API
-    fun getFeeds(channelId: Long, apiKey: String) {
+    fun getThingSpeakData(channelId: Long, apiKey: String) {
         _loading.value = true
         viewModelScope.launch {
             try {
-                val response = repository.getFeeds(channelId = channelId, apiKey = apiKey)
-                _feeds.value = response.feeds
+                val response = repository.getThingSpeakData(channelId = channelId, apiKey = apiKey)
+                _thingSpeakResponse.value = response
             } catch (e: Exception) {
                 _error.value = e.message
+                _thingSpeakResponse.value = null
             } finally {
                 _loading.value = false
             }

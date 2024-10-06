@@ -1,5 +1,6 @@
 package com.example.loofarm.ui.farm
 
+import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,16 +8,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.loofarm.R
 import com.example.loofarm.databinding.FragmentFarmBinding
-import com.example.loofarm.model.ManagerUser
-import com.example.loofarm.ui.BlankFragment2
-import com.example.loofarm.ui.history_value.HistoryValueFragment
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
+import com.example.loofarm.model.ThingSpeakManager
+import com.example.loofarm.ui.share_viewmodel.LooFarmViewModel
+import com.example.loofarm.utils.addDays
+import com.example.loofarm.utils.formatDate
 
 class FarmFragment : Fragment() {
     private var binding: FragmentFarmBinding? = null
+    private val viewModel: LooFarmViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,114 +39,56 @@ class FarmFragment : Fragment() {
 
     private fun initEvents() {
         binding?.apply {
-            lnTemp.setOnClickListener {
-                //ManagerUser.setSensorCurrent(1)
-                val targetFragment = HistoryValueFragment()
-                // Thực hiện transaction để chuyển đổi Fragment
-                val transaction = requireActivity().supportFragmentManager
-                    .beginTransaction().setCustomAnimations(
-                        R.anim.slide_in,
-                        R.anim.fade_out,
-                        R.anim.fade_in,
-                        R.anim.slide_out
-                    )
-                //transaction.replace(R.id.frLayout, targetFragment)
-                transaction.addToBackStack(null)
-                transaction.commit()
+            llTemp.setOnClickListener {
+                navigateToHistory(sensorId = ThingSpeakManager.SENSOR_TEMP)
             }
 
-            lnHum.setOnClickListener {
-                //ManagerUser.setSensorCurrent(2)
-                val targetFragment = HistoryValueFragment()
-                // Thực hiện transaction để chuyển đổi Fragment
-                val transaction = requireActivity().supportFragmentManager
-                    .beginTransaction().setCustomAnimations(
-                        R.anim.slide_in,
-                        R.anim.fade_out,
-                        R.anim.fade_in,
-                        R.anim.slide_out
-                    )
-                //transaction.replace(R.id.frLayout, targetFragment)
-                transaction.addToBackStack(null)
-                transaction.commit()
+            llHum.setOnClickListener {
+                navigateToHistory(sensorId = ThingSpeakManager.SENSOR_HUM)
             }
 
-            lnSal.setOnClickListener {
-                //ManagerUser.setSensorCurrent(3)
-                val targetFragment = HistoryValueFragment()
-                // Thực hiện transaction để chuyển đổi Fragment
-                val transaction = requireActivity().supportFragmentManager
-                    .beginTransaction().setCustomAnimations(
-                        R.anim.slide_in,
-                        R.anim.fade_out,
-                        R.anim.fade_in,
-                        R.anim.slide_out
-                    )
-                //transaction.replace(R.id.frLayout, targetFragment)
-                transaction.addToBackStack(null)
-                transaction.commit()
+            llSal.setOnClickListener {
+                navigateToHistory(sensorId = ThingSpeakManager.SENSOR_SAL)
             }
 
-            lnFlow.setOnClickListener {
-                //ManagerUser.setSensorCurrent(4)
-//            val targetFragment = HistoryValueFragment()
-                val targetFragment = BlankFragment2()
-                // Thực hiện transaction để chuyển đổi Fragment
-                val transaction = requireActivity().supportFragmentManager
-                    .beginTransaction().setCustomAnimations(
-                        R.anim.slide_in,
-                        R.anim.fade_out,
-                        R.anim.fade_in,
-                        R.anim.slide_out
-                    )
-                //transaction.replace(R.id.frLayout, targetFragment)
-                transaction.addToBackStack(null)
-                transaction.commit()
+            llFlow.setOnClickListener {
+                navigateToHistory(sensorId = ThingSpeakManager.SENSOR_FLOW)
             }
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
-    private fun initControls() {
-        binding?.apply {
-//            txtStartDate.text = ManagerUser.getDate(ManagerUser.getPosition())
-//            txtNameSensor1.text = "Nhiệt độ"
-//            txtValueSensor1.text =
-//                ManagerUser.getDeviceValue(ManagerUser.getPosition(), 0).toString() + " °C"
-//            txtNameSensor2.text = "Độ Ẩm"
-//            txtValueSensor2.text =
-//                ManagerUser.getDeviceValue(ManagerUser.getPosition(), 1).toString() + " %"
-//            txtNameSensor3.text = "Độ mặn"
-//            txtValueSensor3.text = String.format(
-//                "%.2f",
-//                ManagerUser.getDeviceValue(ManagerUser.getPosition() ?: 0, 2)
-//            ) + " ppt"
-//            txtNameSensor4.text = "Lưu lượng"
-//            txtValueSensor4.text = String.format(
-//                "%.4f",
-//                ManagerUser.getDeviceValue(ManagerUser.getPosition() ?: 0, 3)
-//            ) + " L"
+    private fun navigateToHistory(sensorId: Int) {
+        val bundle = Bundle().apply {
+            putInt(ThingSpeakManager.SENSOR_KEY, sensorId)
         }
+        findNavController().navigate(R.id.action_farmFragment_to_historyFragment, bundle)
+    }
 
-//        var dateStart = ManagerUser.getDate(ManagerUser.getPosition())
-//        val parts = dateStart?.split("/")
-//
-//        val resultList = parts?.map { it.trim() }
-//        var date: MutableList<Int> = mutableListOf()
-//        if (resultList != null) {
-//            for (element in resultList) {
-//                date.add(element.toInt())
-//            }
-//        }
-//
-//        val originalDate = LocalDate.of(date[2], date[1], date[0])
-//        val daysToAdd = 90
-//
-//        val newDate = originalDate.plusDays(daysToAdd.toLong())
-//
-//        val formatter = DateTimeFormatter.ofPattern("d/M/yyyy")
-//        val formattedNewDate = newDate.format(formatter)
-//
-//        binding?.txtHavestDate?.text = formattedNewDate
+    @SuppressLint("SetTextI18n", "DefaultLocale")
+    private fun initControls() {
+        viewModel.getThingSpeakData(
+            channelId = ThingSpeakManager.channelId,
+            apiKey = ThingSpeakManager.apiKey
+        )
+        viewModel.thingSpeakResponse.observe(viewLifecycleOwner) { thingSpeakResponse ->
+            binding?.apply {
+                txtStartDate.text = thingSpeakResponse?.channel?.createdAt.toString().formatDate()
+                txtHavestDate.text =
+                    thingSpeakResponse?.channel?.createdAt.toString().addDays(90L).formatDate()
+
+                // Temp sensor
+                val temp = thingSpeakResponse?.feeds?.firstOrNull()?.field1
+                tvSensorTempValue.text = "$temp °C"
+                // Hum sensor
+                val hum = thingSpeakResponse?.feeds?.firstOrNull()?.field2
+                tvSensorHumValue.text = "$hum %"
+                // sal sensor
+                val sal = thingSpeakResponse?.feeds?.firstOrNull()?.field3
+                tvSensorSalValue.text = "$sal ppt"
+                // flow sensor
+                val flow = thingSpeakResponse?.feeds?.firstOrNull()?.field4
+                tvSensorFlowValue.text = "$flow L"
+            }
+        }
     }
 }

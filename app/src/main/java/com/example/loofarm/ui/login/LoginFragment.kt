@@ -13,11 +13,12 @@ import androidx.navigation.fragment.findNavController
 import com.example.loofarm.R
 import com.example.loofarm.databinding.FragmentLoginBinding
 import com.example.loofarm.model.ThingSpeakManager
+import com.example.loofarm.ui.share_viewmodel.LooFarmViewModel
 
 class LoginFragment : Fragment() {
 
     private var binding: FragmentLoginBinding? = null
-    private val viewModel: LoginViewModel by viewModels()
+    private val viewModel: LooFarmViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,7 +40,7 @@ class LoginFragment : Fragment() {
             btnLogin.setOnClickListener {
                 ThingSpeakManager.channelId = tvChannelId.text.toString().toLongOrNull() ?: 0L
                 ThingSpeakManager.apiKey = tvApiKey.text.toString()
-                viewModel.getFeeds(
+                viewModel.getThingSpeakData(
                     channelId = ThingSpeakManager.channelId,
                     apiKey = ThingSpeakManager.apiKey
                 )
@@ -49,10 +50,10 @@ class LoginFragment : Fragment() {
 
     private fun observeViewModels() {
         // Observe feeds LiveData
-        viewModel.feeds.observe(viewLifecycleOwner) { feeds ->
-            Log.d(TAG, "observeViewModels() called with: feeds = $feeds")
+        viewModel.thingSpeakResponse.observe(viewLifecycleOwner) { thingSpeakResponse ->
+            Log.d(TAG, "observeViewModels() called with: thingSpeakResponse = $thingSpeakResponse")
             //Todo: Update flow
-            if (feeds != null) findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+            if (thingSpeakResponse != null) findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
         }
 
         // Observe loading LiveData

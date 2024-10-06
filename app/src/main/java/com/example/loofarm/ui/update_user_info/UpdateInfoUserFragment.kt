@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.loofarm.R
 import com.example.loofarm.databinding.FragmentUpdateUserInfoBinding
-import com.example.loofarm.model.ManagerUser
 
 class UpdateInfoUserFragment : Fragment() {
     private var binding: FragmentUpdateUserInfoBinding? = null
@@ -33,7 +32,6 @@ class UpdateInfoUserFragment : Fragment() {
     private fun initEvents() {
         binding?.apply {
             btnSaveInfor.setOnClickListener {
-//                ManagerUser.setName(edtUserName.text.toString())
                 findNavController().navigate(R.id.action_updateInfoUserFragment_to_userInfoFragment)
             }
 

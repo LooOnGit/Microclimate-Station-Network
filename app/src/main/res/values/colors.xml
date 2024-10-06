@@ -10,4 +10,8 @@
     <color name="bgInfor">#F4F5F5</color>
     <color name="btnExit">#D4d0c7</color>
     <color name="loading">#19000000</color>
+    <color name="temp_color">#C34B1D</color>
+    <color name="hum_color">#003EFF</color>
+    <color name="sal_color">#373737</color>
+    <color name="flow_color">#01C309</color>
 </resources>

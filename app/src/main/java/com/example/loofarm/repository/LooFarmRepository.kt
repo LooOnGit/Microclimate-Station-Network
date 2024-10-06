@@ -7,7 +7,15 @@ import com.example.loofarm.network.LooFarmApi
  * Repository sẽ chịu trách nhiệm lấy dữ liệu từ API thông qua Retrofit và chuyển dữ liệu đó cho ViewModel
  */
 class LooFarmRepository {
-    suspend fun getFeeds(channelId: Long, apiKey: String): ThingSpeakResponse {
-        return LooFarmApi.retrofitService.getFeeds(channelId = channelId, apiKey = apiKey)
+    suspend fun getThingSpeakData(
+        channelId: Long,
+        apiKey: String,
+        results: Int = 1
+    ): ThingSpeakResponse {
+        return LooFarmApi.retrofitService.getFeeds(
+            channelId = channelId,
+            apiKey = apiKey,
+            results = results
+        )
     }
 }
