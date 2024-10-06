@@ -1,3 +1,4 @@
+//https://developer.android.com/build#properties-files
 pluginManagement {
     repositories {
         google()
@@ -17,4 +18,3 @@ dependencyResolutionManagement {
 
 rootProject.name = "LooFarm"
 include(":app")
- 

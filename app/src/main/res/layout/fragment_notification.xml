@@ -7,7 +7,7 @@
     android:padding="5dp"
     android:orientation="vertical"
     android:background="@color/grey"
-    tools:context=".ui.FarmFragment">
+    tools:context=".ui.farm.FarmFragment">
 
     <LinearLayout
         android:background="@color/bgRecycle"
