@@ -14,4 +14,5 @@
     <color name="hum_color">#003EFF</color>
     <color name="sal_color">#373737</color>
     <color name="flow_color">#01C309</color>
+    <color name="bg_du_bao">#D1D1D1</color>
 </resources>

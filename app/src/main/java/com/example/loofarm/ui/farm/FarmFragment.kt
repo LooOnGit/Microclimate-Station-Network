@@ -7,8 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.loofarm.R
 import com.example.loofarm.databinding.FragmentFarmBinding
@@ -16,10 +18,13 @@ import com.example.loofarm.model.ThingSpeakManager
 import com.example.loofarm.ui.share_viewmodel.LooFarmViewModel
 import com.example.loofarm.utils.addDays
 import com.example.loofarm.utils.formatDate
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class FarmFragment : Fragment() {
     private var binding: FragmentFarmBinding? = null
     private val viewModel: LooFarmViewModel by viewModels()
+    private var quantity = 1
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,8 +40,10 @@ class FarmFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initControls()
         initEvents()
+        updateButtonState()
     }
 
+    @SuppressLint("SetTextI18n")
     private fun initEvents() {
         binding?.apply {
             llTemp.setOnClickListener {
@@ -54,6 +61,42 @@ class FarmFragment : Fragment() {
             llFlow.setOnClickListener {
                 navigateToHistory(sensorId = ThingSpeakManager.SENSOR_FLOW)
             }
+
+            btnIncrease.setOnClickListener {
+                if (quantity < 10) {
+                    quantity++
+                    tvQuantity.text = quantity.toString()
+                }
+                updateButtonState()
+            }
+
+            btnDecrease.setOnClickListener {
+                if (quantity > 1) {
+                    quantity--
+                    tvQuantity.text = quantity.toString()
+                }
+                updateButtonState()
+            }
+
+            btnForecast.setOnClickListener {
+                progressBar.isVisible = true
+                val bundle = Bundle().apply {
+                    putBoolean(ThingSpeakManager.AI_KEY, true)
+                    putInt(ThingSpeakManager.FORECAST_KEY, tvQuantity.text.toString().toIntOrNull() ?: 1)
+                }
+                lifecycleScope.launch {
+                    delay(3000L)
+                    progressBar.isVisible = false
+                    findNavController().navigate(R.id.action_farmFragment_to_historyFragment, bundle)
+                }
+            }
+        }
+    }
+
+    fun updateButtonState() {
+        binding?.apply {
+            btnDecrease.isEnabled = quantity > 1
+            btnIncrease.isEnabled = quantity < 10
         }
     }
 
@@ -72,8 +115,8 @@ class FarmFragment : Fragment() {
         )
         viewModel.thingSpeakResponse.observe(viewLifecycleOwner) { thingSpeakResponse ->
             binding?.apply {
-                txtStartDate.text = thingSpeakResponse?.channel?.createdAt.toString().formatDate()
-                txtHavestDate.text =
+                textStartDate.text = thingSpeakResponse?.channel?.createdAt.toString().formatDate()
+                textHarvestDate.text =
                     thingSpeakResponse?.channel?.createdAt.toString().addDays(90L).formatDate()
 
                 // Temp sensor

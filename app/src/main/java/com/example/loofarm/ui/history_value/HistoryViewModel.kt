@@ -1,5 +1,6 @@
 package com.example.loofarm.ui.history_value
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -31,7 +32,7 @@ class HistoryViewModel : ViewModel() {
             try {
                 val response = repository.getThingSpeakData(
                     channelId = ThingSpeakManager.channelId,
-                    apiKey =  ThingSpeakManager.apiKey,
+                    apiKey = ThingSpeakManager.apiKey,
                     results = 10
                 )
                 _feeds.value = response.feeds
@@ -42,5 +43,28 @@ class HistoryViewModel : ViewModel() {
                 _loading.value = false
             }
         }
+    }
+
+    fun getFeedsAI(result: Int) {
+        Log.d(TAG, "getFeedsAI() called with: result = $result")
+        _loading.value = true
+        viewModelScope.launch {
+            try {
+                val response = repository.getThingSpeakDataAI(
+                    channelId = ThingSpeakManager.channelIdAI,
+                    results = result
+                )
+                _feeds.value = response.feeds
+            } catch (e: Exception) {
+                _error.value = e.message
+                _feeds.value = null
+            } finally {
+                _loading.value = false
+            }
+        }
+    }
+
+    companion object {
+        private val TAG by lazy { HistoryViewModel::class.java.simpleName }
     }
 }

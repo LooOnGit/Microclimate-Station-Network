@@ -18,4 +18,14 @@ class LooFarmRepository {
             results = results
         )
     }
+
+    suspend fun getThingSpeakDataAI(
+        channelId: Long,
+        results: Int = 1
+    ): ThingSpeakResponse {
+        return LooFarmApi.retrofitService.getFeedsAI(
+            channelId = channelId,
+            results = results
+        )
+    }
 }
