@@ -256,7 +256,7 @@ class HistoryFragment : Fragment() {
 
         // Optional: Customize line appearance
         lineDataSet.lineWidth = 2f
-        lineDataSet.circleRadius = 5f
+        lineDataSet.circleRadius = 2f
         lineDataSet.setCircleColor(color)
 
         // Set data to the chart

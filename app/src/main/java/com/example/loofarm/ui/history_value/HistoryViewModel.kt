@@ -33,7 +33,7 @@ class HistoryViewModel : ViewModel() {
                 val response = repository.getThingSpeakData(
                     channelId = ThingSpeakManager.channelId,
                     apiKey = ThingSpeakManager.apiKey,
-                    results = 10
+                    results = 100
                 )
                 _feeds.value = response.feeds
             } catch (e: Exception) {
