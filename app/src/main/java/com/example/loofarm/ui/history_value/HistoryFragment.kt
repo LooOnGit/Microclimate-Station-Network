@@ -17,6 +17,7 @@ import androidx.fragment.app.viewModels
 import com.example.loofarm.R
 import com.example.loofarm.databinding.FragmentHistoryBinding
 import com.example.loofarm.model.ThingSpeakManager
+import com.example.loofarm.utils.DecimalValueFormatter
 import com.example.loofarm.utils.MyXAxisValueFormatter
 import com.github.mikephil.charting.components.Description
 import com.github.mikephil.charting.data.Entry
@@ -192,6 +193,10 @@ class HistoryFragment : Fragment() {
         salLineDataSet.setCircleColor(ContextCompat.getColor(requireContext(), R.color.sal_color))
         //  flowLineDataSet.setCircleColor(ContextCompat.getColor(requireContext(), R.color.flow_color))
 
+        tempLineDataSet.valueFormatter = DecimalValueFormatter()
+        humLineDataSet.valueFormatter = DecimalValueFormatter()
+        salLineDataSet.valueFormatter = DecimalValueFormatter()
+
         // Set data to the chart
         binding?.lineChart?.apply {
             data = LineData(tempLineDataSet, humLineDataSet, salLineDataSet)
@@ -234,6 +239,8 @@ class HistoryFragment : Fragment() {
                 else -> "Unknown"
             }
         ) // Set label for the line
+
+        lineDataSet.valueFormatter = DecimalValueFormatter()
 
         val color = ContextCompat.getColor(
             requireContext(),
