@@ -24,7 +24,7 @@ import kotlinx.coroutines.launch
 class FarmFragment : Fragment() {
     private var binding: FragmentFarmBinding? = null
     private val viewModel: LooFarmViewModel by viewModels()
-    private var quantity = 1
+    private var quantity = 10
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -63,16 +63,16 @@ class FarmFragment : Fragment() {
             }
 
             btnIncrease.setOnClickListener {
-                if (quantity < 10) {
-                    quantity++
+                if (quantity < 100) {
+                    quantity += 10
                     tvQuantity.text = quantity.toString()
                 }
                 updateButtonState()
             }
 
             btnDecrease.setOnClickListener {
-                if (quantity > 1) {
-                    quantity--
+                if (quantity > 10) {
+                    quantity -= 10
                     tvQuantity.text = quantity.toString()
                 }
                 updateButtonState()
@@ -82,12 +82,18 @@ class FarmFragment : Fragment() {
                 progressBar.isVisible = true
                 val bundle = Bundle().apply {
                     putBoolean(ThingSpeakManager.AI_KEY, true)
-                    putInt(ThingSpeakManager.FORECAST_KEY, tvQuantity.text.toString().toIntOrNull() ?: 1)
+                    putInt(
+                        ThingSpeakManager.FORECAST_KEY,
+                        tvQuantity.text.toString().toIntOrNull() ?: 1
+                    )
                 }
                 lifecycleScope.launch {
                     delay(3000L)
                     progressBar.isVisible = false
-                    findNavController().navigate(R.id.action_farmFragment_to_historyFragment, bundle)
+                    findNavController().navigate(
+                        R.id.action_farmFragment_to_historyFragment,
+                        bundle
+                    )
                 }
             }
         }
@@ -95,8 +101,8 @@ class FarmFragment : Fragment() {
 
     fun updateButtonState() {
         binding?.apply {
-            btnDecrease.isEnabled = quantity > 1
-            btnIncrease.isEnabled = quantity < 10
+            btnDecrease.isEnabled = quantity > 10
+            btnIncrease.isEnabled = quantity < 100
         }
     }
 

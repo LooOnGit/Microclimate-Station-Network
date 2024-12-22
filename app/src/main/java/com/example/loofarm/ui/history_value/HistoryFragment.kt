@@ -82,7 +82,7 @@ class HistoryFragment : Fragment() {
                 TAG,
                 "observeViewModels() called with: feeds = $feeds"
             )
-            
+
             val listTime = if (isAI) {
                 generateTimeList(quantityForecastAI)
             } else {
@@ -115,7 +115,7 @@ class HistoryFragment : Fragment() {
                     temps = feeds?.map { it.field1.toString().toFloatOrNull() ?: 0f },
                     hums = feeds?.map { it.field2.toString().toFloatOrNull() ?: 0f },
                     sals = feeds?.map { it.field3.toString().toFloatOrNull() ?: 0f },
-                    flows = feeds?.map { it.field4.toString().toFloatOrNull() ?: 0f },
+                    //    flows = feeds?.map { it.field4.toString().toFloatOrNull() ?: 0f },
                 )
             } else {
                 drawChart(listTime = listTime, dataSensors = dataSensors)
@@ -147,11 +147,11 @@ class HistoryFragment : Fragment() {
         temps: List<Float>?,
         hums: List<Float>?,
         sals: List<Float>?,
-        flows: List<Float>?
+        // flows: List<Float>?
     ) {
         Log.d(
             TAG,
-            "drawChartAI() called with: listTime = $listTime, temps = $temps, hums = $hums, sals = $sals, flows = $flows"
+            "drawChartAI() called with: listTime = $listTime, temps = $temps, hums = $hums, sals = $sals"
         )
         val tempEntries = mutableListOf<Entry>()
         val humEntries = mutableListOf<Entry>()
@@ -161,17 +161,17 @@ class HistoryFragment : Fragment() {
         temps?.forEachIndexed { index, value -> tempEntries.add(Entry(index.toFloat(), value)) }
         hums?.forEachIndexed { index, value -> humEntries.add(Entry(index.toFloat(), value)) }
         sals?.forEachIndexed { index, value -> salEntries.add(Entry(index.toFloat(), value)) }
-        flows?.forEachIndexed { index, value -> flowEntries.add(Entry(index.toFloat(), value)) }
+        //  flows?.forEachIndexed { index, value -> flowEntries.add(Entry(index.toFloat(), value)) }
 
         val tempLineDataSet = LineDataSet(tempEntries, "Temp sensor") // Set label for the line
         val humLineDataSet = LineDataSet(humEntries, "Hum sensor") // Set label for the line
         val salLineDataSet = LineDataSet(salEntries, "SAL sensor") // Set label for the line
-        val flowLineDataSet = LineDataSet(flowEntries, "Flow sensor") // Set label for the line
+        //   val flowLineDataSet = LineDataSet(flowEntries, "Flow sensor") // Set label for the line
 
         tempLineDataSet.color = ContextCompat.getColor(requireContext(), R.color.temp_color)
         humLineDataSet.color = ContextCompat.getColor(requireContext(), R.color.hum_color)
         salLineDataSet.color = ContextCompat.getColor(requireContext(), R.color.sal_color)
-        flowLineDataSet.color = ContextCompat.getColor(requireContext(), R.color.flow_color)
+        // flowLineDataSet.color = ContextCompat.getColor(requireContext(), R.color.flow_color)
 
 //        lineDataSet.valueTextColor =
 //            ContextCompat.getColor(requireContext(), android.R.color.black) // Value text color
@@ -180,21 +180,21 @@ class HistoryFragment : Fragment() {
         tempLineDataSet.lineWidth = 2f
         humLineDataSet.lineWidth = 2f
         salLineDataSet.lineWidth = 2f
-        flowLineDataSet.lineWidth = 2f
+        // flowLineDataSet.lineWidth = 2f
 
-        tempLineDataSet.circleRadius = 5f
-        humLineDataSet.circleRadius = 5f
-        salLineDataSet.circleRadius = 5f
-        flowLineDataSet.circleRadius = 5f
+        tempLineDataSet.circleRadius = 2f
+        humLineDataSet.circleRadius = 2f
+        salLineDataSet.circleRadius = 2f
+        //  flowLineDataSet.circleRadius = 5f
 
         tempLineDataSet.setCircleColor(ContextCompat.getColor(requireContext(), R.color.temp_color))
         humLineDataSet.setCircleColor(ContextCompat.getColor(requireContext(), R.color.hum_color))
         salLineDataSet.setCircleColor(ContextCompat.getColor(requireContext(), R.color.sal_color))
-        flowLineDataSet.setCircleColor(ContextCompat.getColor(requireContext(), R.color.flow_color))
+        //  flowLineDataSet.setCircleColor(ContextCompat.getColor(requireContext(), R.color.flow_color))
 
         // Set data to the chart
         binding?.lineChart?.apply {
-            data = LineData(tempLineDataSet, humLineDataSet, salLineDataSet, flowLineDataSet)
+            data = LineData(tempLineDataSet, humLineDataSet, salLineDataSet)
 
             // Customize chart appearance
             xAxis?.apply {
