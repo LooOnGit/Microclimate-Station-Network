@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:padding="20dp"
     android:orientation="vertical"
-    tools:context=".ui.UpdateInforUserFragment">
+    tools:context=".ui.add_farm.AddFarmFragment">
 
     <TextView
         android:background="@color/bgRecycle"

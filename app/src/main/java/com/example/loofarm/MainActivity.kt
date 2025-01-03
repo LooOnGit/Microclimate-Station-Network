@@ -1,37 +1,57 @@
 package com.example.loofarm
 
-import androidx.appcompat.app.AppCompatActivity
+import android.annotation.SuppressLint
+import android.content.res.Resources
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
-import com.android.volley.Request
-import com.android.volley.RequestQueue
-import com.android.volley.toolbox.StringRequest
-import com.android.volley.toolbox.Volley
+import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
 import com.example.loofarm.databinding.ActivityMainBinding
-import com.example.loofarm.model.ManagerUser
-import com.example.loofarm.ui.LoginFragment
-import org.json.JSONObject
 
-class MainActivity : AppCompatActivity(){
-    private lateinit var binding: ActivityMainBinding
-    private val login = LoginFragment()
-
+class MainActivity : AppCompatActivity() {
+    private var binding: ActivityMainBinding? = null
+    private var navController: NavController? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+
         binding = ActivityMainBinding.inflate(layoutInflater)
-        val view = binding.root
+        val view = binding?.root
         setContentView(view)
 
-        initControls()
+        createNavigationController()
     }
 
-    private fun initControls() {
-        ManagerUser.createUser()
-        supportFragmentManager.beginTransaction().apply {
-            replace(R.id.frLayout, login)
-            commit()
+    private fun createNavigationController() {
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.navHostFragment) as? NavHostFragment
+        navController = navHostFragment?.navController
+
+        // Theo dõi navigation
+        navController?.addOnDestinationChangedListener { _, destination, _ ->
+            val dest: String = try {
+                resources.getResourceName(destination.id)
+            } catch (e: Resources.NotFoundException) {
+                Integer.toString(destination.id)
+            }
+
+            //Toast.makeText(this@MainActivity, "Navigated to $dest", Toast.LENGTH_SHORT).show()
+            Log.d(TAG, "Navigated to $dest")
         }
+    }
+
+    @SuppressLint("MissingSuperCall")
+    @Deprecated("Deprecated in Java")
+    override fun onBackPressed() {
+        when (navController?.currentDestination?.id) {
+            R.id.homeFragment -> finish()
+            else -> navController?.navigateUp()
+        }
+    }
+
+    companion object {
+        private val TAG by lazy { MainActivity::class.java.name }
     }
 }

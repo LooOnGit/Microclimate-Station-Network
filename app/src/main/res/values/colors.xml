@@ -3,9 +3,16 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="fff">#4BA26A</color>
+    <color name="bg_button">#1A623E</color>
     <color name="bgRecycle">#BEE3CB</color>
     <color name="grey">#F1F5F5</color>
     <color name="text">#013220</color>
     <color name="bgInfor">#F4F5F5</color>
     <color name="btnExit">#D4d0c7</color>
+    <color name="loading">#19000000</color>
+    <color name="temp_color">#C34B1D</color>
+    <color name="hum_color">#003EFF</color>
+    <color name="sal_color">#373737</color>
+    <color name="flow_color">#01C309</color>
+    <color name="bg_du_bao">#D1D1D1</color>
 </resources>

@@ -1,423 +1,439 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="5dp"
-    android:orientation="vertical"
-    android:background="@color/grey"
-    tools:context=".ui.FarmFragment">
-
+    tools:context=".ui.farm.FarmFragment">
 
     <LinearLayout
-        android:background="@color/bgRecycle"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:background="@color/grey"
+        android:orientation="vertical"
+        android:padding="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/txtNameFarm"
-            android:text="Nông trại"
-            android:textColor="@color/text"
-            android:layout_gravity="center"
-            android:textAlignment="center"
-            android:textSize="25dp"
-            android:fontFamily="@font/ptn777"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@color/bgRecycle"
+            android:fontFamily="@font/ptn777"
+            android:text="Nông trại"
+            android:textAlignment="center"
+            android:textColor="@color/text"
+            android:textSize="25sp" />
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_margin="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:weightSum="2">
-
+        <!-- Layout cho Nhiệt độ và Độ ẩm -->
         <LinearLayout
-            android:id="@+id/lnTemp"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:background="@drawable/shape"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:weightSum="2">
 
-            <TextView
-                android:id="@+id/txtNameSensor1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Nhiệt độ"
-                android:layout_gravity="center"
-                android:fontFamily="@font/ptn777"
-                android:layout_marginTop="5dp"
-                android:textColor="@color/text"
-                android:textSize="15dp">
-            </TextView>
-
+            <!-- Nhiệt độ -->
             <LinearLayout
-                android:layout_width="match_parent"
+                android:id="@+id/llTemp"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_margin="10dp"
-                android:weightSum="3"
-                android:orientation="horizontal">
+                android:layout_weight="1"
+                android:background="@drawable/shape"
+                android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/txtValueSensor1"
-                    android:layout_gravity="center"
-                    android:text="0"
-                    android:textSize="25dp"
-                    android:layout_width="0dp"
-                    android:layout_weight="2"
-                    android:layout_height="wrap_content">
-                </TextView>
-
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="55dp"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:background="@drawable/ic_temperature">
-                </ImageView>
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/lnHum"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:background="@drawable/shape"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/txtNameSensor2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Độ ẩm"
-                android:layout_gravity="center"
-                android:fontFamily="@font/ptn777"
-                android:layout_marginTop="5dp"
-                android:textColor="@color/text"
-                android:textSize="15dp">
-            </TextView>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="10dp"
-                android:weightSum="3"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/txtValueSensor2"
-                    android:layout_gravity="center"
-                    android:text="10 g/m³"
-                    android:textSize="25dp"
-                    android:layout_width="0dp"
-                    android:layout_weight="2"
-                    android:layout_height="wrap_content">
-                </TextView>
-
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="55dp"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:background="@drawable/ic_humidity">
-                </ImageView>
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="5dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:weightSum="2">
-
-        <LinearLayout
-            android:id="@+id/lnSal"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:background="@drawable/shape"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/txtNameSensor3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Độ mặn"
-                android:layout_gravity="center"
-                android:fontFamily="@font/ptn777"
-                android:layout_marginTop="5dp"
-                android:textColor="@color/text"
-                android:textSize="15dp">
-            </TextView>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="10dp"
-                android:weightSum="3"
-                android:orientation="horizontal">
-
-                <LinearLayout
-                    android:layout_width="0dp"
+                    android:id="@+id/tvSensorTemp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_weight="2">
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/ptn777"
+                    android:text="Nhiệt độ"
+                    android:textColor="@color/text"
+                    android:textSize="15sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
 
                     <TextView
-                        android:id="@+id/txtValueSensor3"
-                        android:text="10 g/m³"
-                        android:textSize="25dp"
+                        android:id="@+id/tvSensorTempValue"
                         android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="2"
+                        android:textSize="25sp"
+                        tools:text="0" />
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="55dp"
+                        android:layout_gravity="center"
                         android:layout_weight="1"
-                        android:layout_height="wrap_content">
-                    </TextView>
+                        android:background="@drawable/ic_temperature" />
 
                 </LinearLayout>
 
-                <ImageView
-                    android:id="@+id/imgFan"
-                    android:layout_height="40dp"
+            </LinearLayout>
+
+            <!-- Độ ẩm -->
+            <LinearLayout
+                android:id="@+id/llHum"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/shape"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvSensorHum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:background="@drawable/ic_salinity" android:layout_width="0dp">
-                </ImageView>
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/ptn777"
+                    android:text="Độ ẩm"
+                    android:textColor="@color/text"
+                    android:textSize="15sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
+                    <TextView
+                        android:id="@+id/tvSensorHumValue"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="2"
+                        android:textSize="25sp"
+                        tools:text="10 g/m³" />
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="55dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:background="@drawable/ic_humidity" />
+
+                </LinearLayout>
 
             </LinearLayout>
 
         </LinearLayout>
 
+        <!-- Layout cho Độ mặn và Lưu lượng -->
         <LinearLayout
-            android:id="@+id/lnFlow"
-            android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="20dp"
+            android:weightSum="2">
+
+            <!-- Độ mặn -->
+            <LinearLayout
+                android:id="@+id/llSal"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/shape"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvSensorSal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/ptn777"
+                    android:text="Độ mặn"
+                    android:textColor="@color/text"
+                    android:textSize="15dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
+                    <TextView
+                        android:id="@+id/tvSensorSalValue"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="2"
+                        android:textSize="25dp"
+                        tools:text="10 g/m³" />
+
+                    <ImageView
+                        android:id="@+id/imgFan"
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:background="@drawable/ic_salinity" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- Lưu lượng -->
+            <LinearLayout
+                android:id="@+id/llFlow"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/shape"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvSensorFlow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/ptn777"
+                    android:text="Lưu lượng"
+                    android:textColor="@color/text"
+                    android:textSize="15dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
+                    <TextView
+                        android:id="@+id/tvSensorFlowValue"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="2"
+                        android:textSize="25dp"
+                        tools:text="10 g/m³" />
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="55dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:background="@drawable/ic_flow" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- Ngày bắt đầu -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
             android:background="@drawable/shape"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingVertical="5dp">
 
             <TextView
-                android:id="@+id/txtNameSensor4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Lưu lượng"
-                android:layout_gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:fontFamily="@font/ptn777"
-                android:layout_marginTop="5dp"
-                android:textColor="@color/text"
-                android:textSize="15dp">
-            </TextView>
+                android:text="Ngày bắt đầu"
+                android:textAlignment="center"
+                android:textColor="@color/text" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="10dp"
-                android:weightSum="3"
-                android:orientation="horizontal">
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginBottom="10dp"
+                android:weightSum="5">
 
                 <TextView
-                    android:id="@+id/txtValueSensor4"
-                    android:layout_gravity="center"
-                    android:text="10 g/m³"
-                    android:textSize="25dp"
                     android:layout_width="0dp"
-                    android:layout_weight="2"
-                    android:layout_height="wrap_content">
-                </TextView>
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/ptn777"
+                    android:text="Ngày:"
+                    android:textColor="@color/text"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/textStartDate"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="3.5"
+                    android:fontFamily="@font/ptn777"
+                    android:textColor="@color/text"
+                    android:textSize="20dp" />
 
                 <ImageView
                     android:layout_width="0dp"
-                    android:layout_height="55dp"
+                    android:layout_height="40dp"
                     android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:background="@drawable/ic_flow">
-                </ImageView>
+                    android:layout_weight="0.5"
+                    android:background="@drawable/ic_startday" />
 
             </LinearLayout>
 
         </LinearLayout>
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@drawable/shape">
-
-        <TextView
-            android:text="Ngày bắt đầu"
-            android:textColor="@color/text"
-            android:fontFamily="@font/ptn777"
-            android:textAlignment="center"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        </TextView>
-
+        <!-- Ngày thu hoạch -->
         <LinearLayout
-            android:layout_marginLeft="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:weightSum="5">
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/shape"
+            android:orientation="vertical"
+            android:paddingVertical="5dp">
 
             <TextView
-                android:text="Ngày:"
-                android:textColor="@color/text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:fontFamily="@font/ptn777"
-                android:textSize="20dp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_gravity="center"
-                android:layout_height="wrap_content">
-            </TextView>
+                android:text="Ngày thu hoạch"
+                android:textAlignment="center"
+                android:textColor="@color/text" />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginBottom="10dp"
+                android:weightSum="5">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/ptn777"
+                    android:text="Ngày:"
+                    android:textColor="@color/text"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/textHarvestDate"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="3.5"
+                    android:fontFamily="@font/ptn777"
+                    android:textColor="@color/text"
+                    android:textSize="20sp" />
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.5"
+                    android:background="@drawable/ic_calendar" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="20dp"
+            android:orientation="vertical">
 
             <TextView
-                android:id="@+id/txtStartDate"
-                android:text="Start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:fontFamily="@font/ptn777"
-                android:textSize="20dp"
-                android:layout_width="0dp"
-                android:layout_weight="3.5"
-                android:layout_gravity="center"
-                android:layout_height="wrap_content">
-            </TextView>
+                android:text="AI dự báo cho những giờ tiếp theo:"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
 
-            <ImageView
-                android:background="@drawable/ic_startday"
-                android:layout_width="50dp"
-                android:layout_height="50dp">
-            </ImageView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/ptn777"
+                android:text="(Mỗi 1 step = 30 phút tiếp theo)"
+                android:textSize="15sp" />
 
+            <!-- Quantity control layout -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <!-- Button to decrease quantity -->
+                <ImageButton
+                    android:id="@+id/btn_decrease"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/bg_btn"
+                    android:src="@drawable/ic_remove"
+                    android:textSize="30sp" />
+
+                <!-- TextView to display quantity -->
+                <TextView
+                    android:id="@+id/tv_quantity"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="10"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+
+                <!-- Button to increase quantity -->
+                <ImageButton
+                    android:id="@+id/btn_increase"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/bg_btn"
+                    android:src="@drawable/ic_add"
+                    android:textSize="30sp" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnForecast"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/bg_btn"
+                android:backgroundTint="@color/bg_du_bao"
+                android:text="Dự báo ngay"
+                android:textAllCaps="false" />
         </LinearLayout>
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@drawable/shape">
-
-        <TextView
-            android:text="Ngày thu hoạch"
-            android:textColor="@color/text"
-            android:fontFamily="@font/ptn777"
-            android:textAlignment="center"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        </TextView>
-
-        <LinearLayout
-            android:layout_marginLeft="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:weightSum="5">
-
-            <TextView
-                android:text="Ngày:"
-                android:textColor="@color/text"
-                android:fontFamily="@font/ptn777"
-                android:textSize="20dp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_gravity="center"
-                android:layout_height="wrap_content">
-            </TextView>
-
-
-            <TextView
-                android:id="@+id/txtHavestDate"
-                android:text="Date"
-                android:fontFamily="@font/ptn777"
-                android:textSize="20dp"
-                android:layout_width="0dp"
-                android:layout_weight="3.5"
-                android:layout_gravity="center"
-                android:layout_height="wrap_content">
-            </TextView>
-
-            <ImageView
-                android:background="@drawable/ic_calendar"
-                android:layout_width="50dp"
-                android:layout_height="50dp">
-            </ImageView>
-
-        </LinearLayout>
-    </LinearLayout>
-<!--    <LinearLayout-->
-<!--        android:layout_marginLeft="20dp"-->
-<!--        android:layout_marginRight="20dp"-->
-<!--        android:layout_marginTop="20dp"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:orientation="vertical"-->
-<!--        android:background="@drawable/shape">-->
-
-<!--        <TextView-->
-<!--            android:text="Thêm thiết bị"-->
-<!--            android:textColor="@color/text"-->
-<!--            android:fontFamily="@font/ptn777"-->
-<!--            android:textAlignment="center"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent">-->
-<!--        </TextView>-->
-
-<!--        <LinearLayout-->
-<!--            android:layout_marginLeft="5dp"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginBottom="10dp"-->
-<!--            android:weightSum="5">-->
-
-<!--            <TextView-->
-<!--                android:text="ID:"-->
-<!--                android:textColor="@color/text"-->
-<!--                android:fontFamily="@font/ptn777"-->
-<!--                android:textSize="20dp"-->
-<!--                android:layout_width="0dp"-->
-<!--                android:layout_weight="0.5"-->
-<!--                android:layout_gravity="center"-->
-<!--                android:layout_height="wrap_content">-->
-<!--            </TextView>-->
-
-
-<!--            <TextView-->
-<!--                android:id="@+id/txtID"-->
-<!--                android:fontFamily="@font/ptn777"-->
-<!--                android:textSize="20dp"-->
-<!--                android:layout_width="0dp"-->
-<!--                android:layout_weight="3.5"-->
-<!--                android:layout_gravity="center"-->
-<!--                android:layout_height="wrap_content">-->
-<!--            </TextView>-->
-
-<!--            <Button-->
-<!--                android:id="@+id/btnScanQRNode"-->
-<!--                android:layout_width="0dp"-->
-<!--                android:layout_weight="0.7"-->
-<!--                android:layout_height="40dp"-->
-<!--                android:layout_gravity="right"-->
-<!--                android:background="@drawable/icon_scanqr"/>-->
-<!--            </LinearLayout>-->
-<!--        </LinearLayout>-->
-</LinearLayout>
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleInverse"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:indeterminate="true"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -34,7 +34,7 @@
             android:padding="5dp">
 
             <TextView
-                android:id="@+id/txtItem"
+                android:id="@+id/tvItemName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
@@ -44,7 +44,7 @@
                 android:textSize="24dp" />
 
             <TextView
-                android:id="@+id/txtItemInfor"
+                android:id="@+id/tvItemType"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"

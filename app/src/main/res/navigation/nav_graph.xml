@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.loofarm.ui.login.LoginFragment"
+        android:label="fragment_login"
+        app:enterAnim="@anim/slide_in"
+        app:exitAnim="@anim/fade_out"
+        app:popEnterAnim="@anim/fade_in"
+        app:popExitAnim="@anim/slide_out"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_loginFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.loofarm.ui.home.HomeFragment"
+        android:label="fragment_home"
+        app:enterAnim="@anim/slide_in"
+        app:exitAnim="@anim/fade_out"
+        app:popEnterAnim="@anim/fade_in"
+        app:popExitAnim="@anim/slide_out"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_farmFragment"
+            app:destination="@id/farmFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_userInfoFragment"
+            app:destination="@id/userInfoFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_notificationFragment"
+            app:destination="@id/notificationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/farmFragment"
+        android:name="com.example.loofarm.ui.farm.FarmFragment"
+        android:label="fragment_farm"
+        app:enterAnim="@anim/slide_in"
+        app:exitAnim="@anim/fade_out"
+        app:popEnterAnim="@anim/fade_in"
+        app:popExitAnim="@anim/slide_out"
+        tools:layout="@layout/fragment_farm">
+        <action
+            android:id="@+id/action_farmFragment_to_historyFragment"
+            app:destination="@id/historyFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/userInfoFragment"
+        android:name="com.example.loofarm.ui.user_info.UserInfoFragment"
+        android:label="fragment_user_info"
+        app:enterAnim="@anim/slide_in"
+        app:exitAnim="@anim/fade_out"
+        app:popEnterAnim="@anim/fade_in"
+        app:popExitAnim="@anim/slide_out"
+        tools:layout="@layout/fragment_user_info">
+        <action
+            android:id="@+id/action_userInfoFragment_to_updateInfoUserFragment"
+            app:destination="@id/updateInfoUserFragment" />
+        <action
+            android:id="@+id/action_userInfoFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/updateInfoUserFragment"
+        android:name="com.example.loofarm.ui.update_user_info.UpdateInfoUserFragment"
+        android:label="fragment_update_user_info"
+        app:enterAnim="@anim/slide_in"
+        app:exitAnim="@anim/fade_out"
+        app:popEnterAnim="@anim/fade_in"
+        app:popExitAnim="@anim/slide_out"
+        tools:layout="@layout/fragment_update_user_info">
+        <action
+            android:id="@+id/action_updateInfoUserFragment_to_userInfoFragment"
+            app:destination="@id/userInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/notificationFragment"
+        android:name="com.example.loofarm.ui.notification.NotificationFragment"
+        android:label="NotificationFragment"
+        app:enterAnim="@anim/slide_in"
+        app:exitAnim="@anim/fade_out"
+        app:popEnterAnim="@anim/fade_in"
+        app:popExitAnim="@anim/slide_out" />
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="com.example.loofarm.ui.history_value.HistoryFragment"
+        android:label="fragment_history"
+        app:enterAnim="@anim/slide_in"
+        app:exitAnim="@anim/fade_out"
+        app:popEnterAnim="@anim/fade_in"
+        app:popExitAnim="@anim/slide_out"
+        tools:layout="@layout/fragment_history" />
+    <fragment
+        android:id="@+id/addFarmFragment"
+        android:name="com.example.loofarm.ui.add_farm.AddFarmFragment"
+        android:label="fragment_add_farm"
+        app:enterAnim="@anim/slide_in"
+        app:exitAnim="@anim/fade_out"
+        app:popEnterAnim="@anim/fade_in"
+        app:popExitAnim="@anim/slide_out"
+        tools:layout="@layout/fragment_add_farm">
+        <action
+            android:id="@+id/action_addFarmFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+
+</navigation>
