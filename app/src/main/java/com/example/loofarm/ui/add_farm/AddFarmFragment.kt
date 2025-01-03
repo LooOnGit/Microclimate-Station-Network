@@ -108,9 +108,9 @@ class AddFarmFragment : Fragment() {
                 }
                 builder.create().show()
             }
-            btnScanQR.setOnClickListener {
-                findNavController().navigate(R.id.action_addFarmFragment_to_scanQRFragment)
-            }
+//            btnScanQR.setOnClickListener {
+//                findNavController().navigate(R.id.action_addFarmFragment_to_scanQRFragment)
+//            }
         }
     }
 

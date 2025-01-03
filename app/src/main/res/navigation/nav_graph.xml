@@ -109,18 +109,6 @@
         <action
             android:id="@+id/action_addFarmFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
-        <action
-            android:id="@+id/action_addFarmFragment_to_scanQRFragment"
-            app:destination="@id/scanQRFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/scanQRFragment"
-        android:name="com.example.loofarm.ui.scan_qr.ScanQRFragment"
-        android:label="fragment_scan_q_r"
-        app:enterAnim="@anim/slide_in"
-        app:exitAnim="@anim/fade_out"
-        app:popEnterAnim="@anim/fade_in"
-        app:popExitAnim="@anim/slide_out"
-        tools:layout="@layout/fragment_scan_q_r" />
 
 </navigation>

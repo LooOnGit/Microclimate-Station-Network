@@ -3,28 +3,33 @@ package com.example.loofarm.utils
 import android.annotation.SuppressLint
 import android.os.Build
 import java.text.SimpleDateFormat
-import java.time.LocalDate
 import java.time.LocalDateTime
+import java.time.ZoneId
 import java.time.ZoneOffset
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
-import java.util.Calendar
 import java.util.Locale
 
 @SuppressLint("NewApi")
 fun String?.formatTime(): String {
     if (this.isNullOrEmpty()) return "Unknown"
+
     // Định dạng chuỗi ISO 8601 thành LocalDateTime
     val formatterInput = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'")
 
     // Chuyển đổi chuỗi thành LocalDateTime
     val localDateTime = LocalDateTime.parse(this, formatterInput)
 
+    // Chuyển sang múi giờ Việt Nam (UTC+7)
+    val vietnamTime = localDateTime.atZone(ZoneOffset.UTC)
+        .withZoneSameInstant(ZoneId.of("Asia/Ho_Chi_Minh"))
+
     // Định dạng LocalDateTime thành chỉ giờ, phút, giây
     val formatterOutput = DateTimeFormatter.ofPattern("HH:mm:ss")
-    return localDateTime.atOffset(ZoneOffset.UTC).format(formatterOutput)
+    return vietnamTime.format(formatterOutput)
 }
+
 
 @SuppressLint("NewApi")
 fun String?.formatDate(): String {
