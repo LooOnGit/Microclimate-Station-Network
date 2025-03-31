@@ -372,7 +372,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/ptn777"
-                android:text="(Mỗi 1 step = 30 phút tiếp theo)"
+                android:text="(Mỗi 1 điểm = 3 phút tiếp theo)"
                 android:textSize="15sp" />
 
             <!-- Quantity control layout -->

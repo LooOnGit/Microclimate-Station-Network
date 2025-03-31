@@ -304,7 +304,7 @@ class HistoryFragment : Fragment() {
             result.add(currentTime.format(formatter))
 
             // Cộng thêm 30 phút cho các lần tiếp theo
-            currentTime = currentTime.plusMinutes(30)
+            currentTime = currentTime.plusMinutes(3)
         }
 
         return result
