@@ -22,6 +22,7 @@
 
 // #define SIM
 #define WIFI
+#define GSM_POWER           32      // GSM Power Enable
 
 
 void print_wakeup_reason(){
@@ -63,19 +64,10 @@ id managerID;
 //---------------------------------------------------------define EEPROM--------------------------------------------------------------------------------
 #define EEPROM_SIZE 1024
 
-//------------------------------------------------------------Module simA7680C---------------------------------------------------------------------------
-#ifdef SIM
-#define GSM_SERIAL          1
-#define GSM_RX              16      // ESP32 TX - SIM RX
-#define GSM_TX              17      // ESP32 RX - SIM TX
-#define GSM_POWER           32      // GSM Power Enable
-#define GSM_BR              115200
-#endif
-
 //=====================================================================WIFI=============================================================================
 #ifdef WIFI
-const char* ssid =  "Hoi Thuy";
-const char* password = "12345678@";
+const char* ssid =  "Trong Khoa";
+const char* password = "20021212";
 
 WiFiClient  espClient;
 #endif
@@ -122,12 +114,6 @@ PubSubClient client(espClient);
 char* server = "mqtt3.thingspeak.com";
 #endif
 
-#ifdef SIM
-PPPOSClient ppposClient;
-PubSubClient client(ppposClient);
-char* server = "mqtt3.thingspeak.com";
-#endif
-
 //================================================================function WiFi========================================================================
 #ifdef WIFI
 void reconnect() {
@@ -162,187 +148,6 @@ void callback(char* topic, byte* payload, unsigned int length) {
   }
 }
 #endif
-
-//----------------------------------------------------------------function sim------------------------------------------------------------------------
-#ifdef SIM
-bool sendCommandWithAnswer(String cmd, String ans){
-   PPPOS_write((char *)cmd.c_str());
-   unsigned long _tg = millis();
-   while(true){
-    data = PPPOS_read();
-    if (data != NULL){
-      char* command = strtok(data, "\n");
-      while (command != 0)
-      {
-        buffer = String(command);
-        buffer.replace("\r", "");
-        command = strtok(0, "\n");
-        if (buffer != "") { Serial.println(buffer); }
-        if (buffer == ans) {buffer = ""; return true; }
-        buffer = "";
-      } 
-    }
-    if (millis() > (_tg + 5000)) { buffer = ""; return false; } 
-   }
-   buffer = "";
-   return false;
-}
-
-int8_t  AT_CheckCSQ(void){
-   int csq = 0;
-   PPPOS_write("AT+CSQ\r\n");
-   unsigned long _tg = millis();
-   while(true){
-    data = PPPOS_read();
-    if (data != NULL){
-      char* command = strtok(data, "\n");
-      while (command != 0)
-      {
-        buffer = String(command);
-        buffer.replace("\r", "");
-        command = strtok(0, "\n");
-        if (buffer != "") { Serial.println(buffer); }
-        if(buffer.indexOf("+CSQ:") >= 0)
-        {
-          sscanf(buffer.c_str(),"+CSQ: %d", &csq);
-          if(csq == 99) csq = 0;
-          return csq;
-        }
-        buffer = "";
-      } 
-    }
-    if (millis() > (_tg + 5000)) { buffer = ""; return false; } 
-   }
-   buffer = "";
-   return csq;
-}
-
-int8_t  AT_CheckCLK(void){
-   int csq = 0;
-   PPPOS_write("AT+CLK?\r\n");
-   unsigned long _tg = millis();
-   while(true){
-    data = PPPOS_read();
-    if (data != NULL){
-      char* command = strtok(data, "\n");
-      while (command != 0)
-      {
-        buffer = String(command);
-        buffer.replace("\r", "");
-        command = strtok(0, "\n");
-        if (buffer != "") { Serial.println(buffer); }
-        if(buffer.indexOf("+CSQ:") >= 0)
-        {
-          sscanf(buffer.c_str(),"+CSQ: %d", &csq);
-          if(csq == 99) csq = 0;
-          return csq;
-        }
-        buffer = "";
-      } 
-    }
-    if (millis() > (_tg + 5000)) { buffer = ""; return false; } 
-   }
-   buffer = "";
-   return csq;
-}
-
-bool startPPPOS(){  
-  if (!sendCommandWithAnswer("ATD*99***1#\r\n", "CONNECT 115200")) { return false; }
-  atMode = false;
-  PPPOS_start(); 
-  unsigned long _tg = millis();
-  while(!PPPOS_isConnected()) {
-    if (millis() > (_tg + 10000)) { PPPOS_stop();  atMode = true; return false; }
-  }
-  Serial.println("PPPOS Started");
-  return true;
-}
-
-void SIM_reset(void)
-{
-  digitalWrite(GSM_POWER, LOW);
-  delay(100);
-  digitalWrite(GSM_POWER, HIGH);
-}
-
-void SIM_connect_PPP(void)
-{
-  while(true)
-  {
-      SIM_reset();
-      bool SyncOK = false;
-      Serial.println("SIM Sync"); 
-      for(int i = 0; i < 100; i++)
-      {
-        delay(1000);
-        Serial.print("."); 
-        if(!sendCommandWithAnswer("AT\r\n", "OK")){
-          continue;
-        }
-        if(!sendCommandWithAnswer("AT+CPIN?\r\n", "OK")){
-          continue;
-        }
-        SyncOK = true;
-        break;
-      }
-
-      Serial.println("Check Signal Quality"); 
-      for(int i = 0; i < 50; i++){
-        if(AT_CheckCSQ() > 0){
-          break;   
-        }
-        delay(1000);
-      }
-
-      for(int i = 0; i < 50; i++){
-        data = PPPOS_read();
-        if (data != NULL){
-          Serial.println(data);  
-        }
-        delay(100);
-      }
-
-      if(SyncOK){
-
-        Serial.println("Start PPPOS"); 
-        if (startPPPOS()) { 
-          Serial.println("Entering PPPOS... OK"); 
-          break;
-        } else { Serial.println("Entering PPPOS... Failed"); }
-      }
-  }
-}
-
-void callback(char* topic, byte* payload, unsigned int length) {
-  Serial.print("Message arrived [");
-  Serial.print(topic);
-  Serial.print("] ");
-  for (int i=0;i<length;i++) {
-    Serial.print((char)payload[i]);
-  }
-  Serial.println();
-}
-
-void publishMessage(const char* topic, String payload, boolean retained){
-  if (client.publish(topic, payload.c_str(), retained))
-    Serial.println("Message published ["+String(topic)+"]: "+payload);
-}
-
-void reconnect() {
-  while (!client.connected()) {
-    Serial.print("Attempting MQTT connection...");
-    if (client.connect("OjcNEyo1Iy0xFTApIzoVBgg", "OjcNEyo1Iy0xFTApIzoVBgg", "qDYTsURL6GZrknqpBlPRkiU6")) {
-      Serial.println("connected");
-    } else {
-      Serial.print("failed, rc=");
-      Serial.print(client.state());
-      Serial.println(" try again in 5 seconds");
-      delay(5000);
-    }
-  }
-}
-#endif 
-
 //===============================================================================Proceed Data Json========================================================
 void merge(JsonObject& dataFull, JsonObjectConst& dataRec)
 {
@@ -557,8 +362,11 @@ void setup()
   managerID.addr = 0;
   dataFull["MyID"] = ID;
   managerID.numberID = 0;
-  
-  #ifdef WIFI
+
+  pinMode(GSM_POWER, OUTPUT);
+  digitalWrite(GSM_POWER, LOW);
+  gpio_hold_en((gpio_num_t)GSM_POWER);
+
   WiFi.mode(WIFI_STA); 
     // Connect or reconnect to WiFi
   if(WiFi.status() != WL_CONNECTED){
@@ -569,26 +377,7 @@ void setup()
     } 
     Serial.println("\nConnected.");
     }
-  #endif 
 
-
-  #ifdef SIM
-  pinMode(GSM_POWER, OUTPUT);
-  gpio_hold_dis((gpio_num_t)GSM_POWER);
-  Serial.begin(115200);
-  Serial2.begin(115200);
-  digitalWrite(GSM_POWER, LOW);
-  delaySIM(500);
-  digitalWrite(GSM_POWER, HIGH);
-  delaySIM(10000);
-  Serial2.println("AT+CLBS=4");
-  delaySIM(500);
-  while (Serial2.available())
-  {
-    response = Serial2.readStringUntil('\n');
-  }
-  parseCLBSResponse(response);
-  #endif
 
   char *id = ID;
   //============================================================================My Device ID================================================================
@@ -603,21 +392,10 @@ void setup()
   writeIdToRom(id);
   writeIdToRom("ND7969");
   writeIdToRom("ND7970");
-  //============================================================================Init SIM======================================================================
-  #ifdef SIM
-  /*  Init PPP  */
-  PPPOS_init(GSM_TX, GSM_RX, GSM_BR, GSM_SERIAL, ppp_user, ppp_pass);
-
-  SIM_connect_PPP();
-  client.setServer(server, 1883);
-  client.setCallback(callback);
-  #endif
 
   //============================================================================Init WIFI=======================================================================
-  #ifdef WIFI
   client.setServer(server, 1883);
   client.setCallback(callback);
-  #endif
   //=============================================================================Init Lora====================================================================
   LoRa.setPins(ss, rst, dio0);
   
@@ -646,86 +424,25 @@ void loop()
   dataFull["Q"] = "0";
   receivedFromNodes();
 
-  #ifdef WIFI
-  if (!PPPOS_isConnected() || atMode){
-    data = PPPOS_read();
-    if (data != NULL){
-      Serial.println(data);  
-    }
-  }
+  if (!client.connected()) reconnect();
+  client.loop();
 
-  if (!PPPOS_isConnected() || atMode){
-      data = PPPOS_read();
-      if (data != NULL){
-        Serial.println(data);  
-      }
-    }
+    const char* temp = dataFull["TEMP"];
+    const char* hum = dataFull["HUM"];
+    const char* sal = dataFull["SAL"];
+    const char* q = dataFull["Q"];
+    const char* id = dataFull["MyID"];
+    // const char* time = dataFull["Time"];
+    // const char* date = dataFull["Date"];
 
-    if(PPPOS_isConnected()) {
-      if (!client.connected()) {
-        reconnect();
-      }
-      client.loop();
-      if (millis() - lastUploadedTime > postingInterval) {
-        const char* temp = dataFull["TEMP"];
-        const char* hum = dataFull["HUM"];
-        const char* sal = dataFull["SAL"];
-        const char* q = dataFull["Q"];
-        const char* id = dataFull["MyID"];
-        const char* time = dataFull["Time"];
-        const char* date = dataFull["Date"];
+    String dataText = String("field1=") + String(temp) + "&field2=" + String(hum) + "&field3=" + String(sal) +"&status=MQTTPUBLISH";
+    Serial.println(dataText);
+    publishMessage(publishTopic, dataText, true);    
+    lastUploadedTime = millis();
 
-        String dataText = String("field1=") + temp + "&field2=" + hum + "&field3=" + sal + "&field4=" + q +"&status=MQTTPUBLISH";
-        publishMessage(publishTopic, dataText, true);    
-        lastUploadedTime = millis();
-    }    
-  }
-  #endif 
-
-
-  #ifdef SIM
-  if (!PPPOS_isConnected() || atMode){
-    data = PPPOS_read();
-    if (data != NULL){
-      Serial.println(data);  
-    }
-  }
-
-  if (!PPPOS_isConnected() || atMode){
-      data = PPPOS_read();
-      if (data != NULL){
-        Serial.println(data);  
-      }
-    }
-
-    if(PPPOS_isConnected()) {
-      if (!client.connected()) {
-        reconnect();
-      }
-      client.loop();
-      if (millis() - lastUploadedTime > postingInterval) {
-        const char* temp = dataFull["TEMP"];
-        const char* hum = dataFull["HUM"];
-        const char* sal = dataFull["SAL"];
-        const char* q = dataFull["Q"];
-        const char* id = dataFull["MyID"];
-        const char* time = dataFull["Time"];
-        const char* date = dataFull["Date"];
-
-        String dataText = String("field1=") + temp + "&field2=" + hum + "&field3=" + sal + "&field4=" + q +"&status=MQTTPUBLISH";
-        publishMessage(publishTopic, dataText, true);    
-        lastUploadedTime = millis();
-    }    
-  }
-  #endif
   deserializeJson(recData, "{}");//clear Json
   deserializeJson(dataFull, "{}");//clear Json
   dataFull["MyID"] = ID;
-  #ifdef SIM
-  delay(1000);
-  digitalWrite(GSM_POWER, LOW);
-  gpio_hold_en((gpio_num_t)GSM_POWER);
-  #endif
   esp_deep_sleep_start();
 } 
 
