@@ -161,7 +161,7 @@ int main(void)
 		adcValue2 = HAL_ADC_GetValue(&hadc1)*3300/4095;
 		HAL_ADC_Stop(&hadc1);
 		
-		temp = convVoltagetoTemperature_C((float)te/ 1000);;
+		temp = convVoltagetoTemperature_C((float)adcValue2/ 1000);;
 		conductivity = getEC_us_cm(adcValue, temp);
 		
 		

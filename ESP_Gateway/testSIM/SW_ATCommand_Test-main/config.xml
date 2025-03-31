@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Configuration>
+  <Serial>
+    <Port>COM4 </Port>
+    <Baudrate>921600</Baudrate>
+  </Serial>
+  <Command>AT+QGPSCFG=?|AT+GPSINIT=2|AT+QGPS=1|AT+CMQSUB=0,"mytopic",1|AT+CMQPUB=0,"mytopic",1,0,0,8,"31323334"|AT+GCAP|AT+CREG|AT+CNBP?|AT+QAGPS=1|AT+QGPSLOC=0|AT+QAGPS?|AT+CFUN=1,1|AT+QGPSGNMEA="RMC"||</Command>
+</Configuration>

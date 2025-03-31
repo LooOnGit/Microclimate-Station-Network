@@ -868,22 +868,22 @@ Image Symbol Table
     i.__NVIC_SetPriority                     0x080014a0   Section        0  stm32f1xx_hal_cortex.o(i.__NVIC_SetPriority)
     __NVIC_SetPriority                       0x080014a1   Thumb Code    32  stm32f1xx_hal_cortex.o(i.__NVIC_SetPriority)
     i.main                                   0x080014c0   Section        0  main.o(i.main)
-    x$fpl$fadd                               0x080015e0   Section      196  faddsub_clz.o(x$fpl$fadd)
-    _fadd1                                   0x080015ef   Thumb Code     0  faddsub_clz.o(x$fpl$fadd)
-    x$fpl$fdiv                               0x080016a4   Section      388  fdiv.o(x$fpl$fdiv)
-    _fdiv1                                   0x080016a5   Thumb Code     0  fdiv.o(x$fpl$fdiv)
-    x$fpl$ffltu                              0x08001828   Section       38  fflt_clz.o(x$fpl$ffltu)
-    x$fpl$fmul                               0x08001850   Section      258  fmul.o(x$fpl$fmul)
-    x$fpl$fnaninf                            0x08001952   Section      140  fnaninf.o(x$fpl$fnaninf)
-    x$fpl$fretinf                            0x080019de   Section       10  fretinf.o(x$fpl$fretinf)
-    x$fpl$fsub                               0x080019e8   Section      234  faddsub_clz.o(x$fpl$fsub)
-    _fsub1                                   0x080019f7   Thumb Code     0  faddsub_clz.o(x$fpl$fsub)
-    .constdata                               0x08001ad2   Section       18  stm32f1xx_hal_rcc.o(.constdata)
-    x$fpl$usenofp                            0x08001ad2   Section        0  usenofp.o(x$fpl$usenofp)
-    aPredivFactorTable                       0x08001ad2   Data           2  stm32f1xx_hal_rcc.o(.constdata)
-    aPLLMULFactorTable                       0x08001ad4   Data          16  stm32f1xx_hal_rcc.o(.constdata)
-    .constdata                               0x08001ae4   Section       16  system_stm32f1xx.o(.constdata)
-    .constdata                               0x08001af4   Section        8  system_stm32f1xx.o(.constdata)
+    x$fpl$fadd                               0x080015dc   Section      196  faddsub_clz.o(x$fpl$fadd)
+    _fadd1                                   0x080015eb   Thumb Code     0  faddsub_clz.o(x$fpl$fadd)
+    x$fpl$fdiv                               0x080016a0   Section      388  fdiv.o(x$fpl$fdiv)
+    _fdiv1                                   0x080016a1   Thumb Code     0  fdiv.o(x$fpl$fdiv)
+    x$fpl$ffltu                              0x08001824   Section       38  fflt_clz.o(x$fpl$ffltu)
+    x$fpl$fmul                               0x0800184c   Section      258  fmul.o(x$fpl$fmul)
+    x$fpl$fnaninf                            0x0800194e   Section      140  fnaninf.o(x$fpl$fnaninf)
+    x$fpl$fretinf                            0x080019da   Section       10  fretinf.o(x$fpl$fretinf)
+    x$fpl$fsub                               0x080019e4   Section      234  faddsub_clz.o(x$fpl$fsub)
+    _fsub1                                   0x080019f3   Thumb Code     0  faddsub_clz.o(x$fpl$fsub)
+    .constdata                               0x08001ace   Section       18  stm32f1xx_hal_rcc.o(.constdata)
+    x$fpl$usenofp                            0x08001ace   Section        0  usenofp.o(x$fpl$usenofp)
+    aPredivFactorTable                       0x08001ace   Data           2  stm32f1xx_hal_rcc.o(.constdata)
+    aPLLMULFactorTable                       0x08001ad0   Data          16  stm32f1xx_hal_rcc.o(.constdata)
+    .constdata                               0x08001ae0   Section       16  system_stm32f1xx.o(.constdata)
+    .constdata                               0x08001af0   Section        8  system_stm32f1xx.o(.constdata)
     .data                                    0x20000000   Section       18  main.o(.data)
     .data                                    0x20000014   Section       12  stm32f1xx_hal.o(.data)
     .data                                    0x20000020   Section        4  system_stm32f1xx.o(.data)
@@ -1069,24 +1069,24 @@ Image Symbol Table
     SystemClock_Config                       0x0800143f   Thumb Code    94  main.o(i.SystemClock_Config)
     SystemInit                               0x0800149d   Thumb Code     2  system_stm32f1xx.o(i.SystemInit)
     UsageFault_Handler                       0x0800149f   Thumb Code     2  stm32f1xx_it.o(i.UsageFault_Handler)
-    main                                     0x080014c1   Thumb Code   248  main.o(i.main)
-    __aeabi_fadd                             0x080015e1   Thumb Code     0  faddsub_clz.o(x$fpl$fadd)
-    _fadd                                    0x080015e1   Thumb Code   196  faddsub_clz.o(x$fpl$fadd)
-    __aeabi_fdiv                             0x080016a5   Thumb Code     0  fdiv.o(x$fpl$fdiv)
-    _fdiv                                    0x080016a5   Thumb Code   384  fdiv.o(x$fpl$fdiv)
-    __aeabi_ui2f                             0x08001829   Thumb Code     0  fflt_clz.o(x$fpl$ffltu)
-    _ffltu                                   0x08001829   Thumb Code    38  fflt_clz.o(x$fpl$ffltu)
-    __aeabi_fmul                             0x08001851   Thumb Code     0  fmul.o(x$fpl$fmul)
-    _fmul                                    0x08001851   Thumb Code   258  fmul.o(x$fpl$fmul)
-    __fpl_fnaninf                            0x08001953   Thumb Code   140  fnaninf.o(x$fpl$fnaninf)
-    __fpl_fretinf                            0x080019df   Thumb Code    10  fretinf.o(x$fpl$fretinf)
-    __aeabi_fsub                             0x080019e9   Thumb Code     0  faddsub_clz.o(x$fpl$fsub)
-    _fsub                                    0x080019e9   Thumb Code   234  faddsub_clz.o(x$fpl$fsub)
-    __I$use$fp                               0x08001ad2   Number         0  usenofp.o(x$fpl$usenofp)
-    AHBPrescTable                            0x08001ae4   Data          16  system_stm32f1xx.o(.constdata)
-    APBPrescTable                            0x08001af4   Data           8  system_stm32f1xx.o(.constdata)
-    Region$$Table$$Base                      0x08001afc   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x08001b1c   Number         0  anon$$obj.o(Region$$Table)
+    main                                     0x080014c1   Thumb Code   244  main.o(i.main)
+    __aeabi_fadd                             0x080015dd   Thumb Code     0  faddsub_clz.o(x$fpl$fadd)
+    _fadd                                    0x080015dd   Thumb Code   196  faddsub_clz.o(x$fpl$fadd)
+    __aeabi_fdiv                             0x080016a1   Thumb Code     0  fdiv.o(x$fpl$fdiv)
+    _fdiv                                    0x080016a1   Thumb Code   384  fdiv.o(x$fpl$fdiv)
+    __aeabi_ui2f                             0x08001825   Thumb Code     0  fflt_clz.o(x$fpl$ffltu)
+    _ffltu                                   0x08001825   Thumb Code    38  fflt_clz.o(x$fpl$ffltu)
+    __aeabi_fmul                             0x0800184d   Thumb Code     0  fmul.o(x$fpl$fmul)
+    _fmul                                    0x0800184d   Thumb Code   258  fmul.o(x$fpl$fmul)
+    __fpl_fnaninf                            0x0800194f   Thumb Code   140  fnaninf.o(x$fpl$fnaninf)
+    __fpl_fretinf                            0x080019db   Thumb Code    10  fretinf.o(x$fpl$fretinf)
+    __aeabi_fsub                             0x080019e5   Thumb Code     0  faddsub_clz.o(x$fpl$fsub)
+    _fsub                                    0x080019e5   Thumb Code   234  faddsub_clz.o(x$fpl$fsub)
+    __I$use$fp                               0x08001ace   Number         0  usenofp.o(x$fpl$usenofp)
+    AHBPrescTable                            0x08001ae0   Data          16  system_stm32f1xx.o(.constdata)
+    APBPrescTable                            0x08001af0   Data           8  system_stm32f1xx.o(.constdata)
+    Region$$Table$$Base                      0x08001af8   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x08001b18   Number         0  anon$$obj.o(Region$$Table)
     command_buffer                           0x20000000   Data           2  main.o(.data)
     temperature                              0x20000004   Data           4  main.o(.data)
     humidity                                 0x20000008   Data           4  main.o(.data)
@@ -1108,9 +1108,9 @@ Memory Map of the image
 
   Image Entry point : 0x080000ed
 
-  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x00001b40, Max: 0x00010000, ABSOLUTE)
+  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x00001b3c, Max: 0x00010000, ABSOLUTE)
 
-    Execution Region ER_IROM1 (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x00001b1c, Max: 0x00010000, ABSOLUTE)
+    Execution Region ER_IROM1 (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x00001b18, Max: 0x00010000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -1210,33 +1210,33 @@ Memory Map of the image
     0x0800149c   0x0800149c   0x00000002   Code   RO         1740    i.SystemInit        system_stm32f1xx.o
     0x0800149e   0x0800149e   0x00000002   Code   RO          150    i.UsageFault_Handler  stm32f1xx_it.o
     0x080014a0   0x080014a0   0x00000020   Code   RO         1216    i.__NVIC_SetPriority  stm32f1xx_hal_cortex.o
-    0x080014c0   0x080014c0   0x00000120   Code   RO           15    i.main              main.o
-    0x080015e0   0x080015e0   0x000000c4   Code   RO         1784    x$fpl$fadd          fz_ws.l(faddsub_clz.o)
-    0x080016a4   0x080016a4   0x00000184   Code   RO         1791    x$fpl$fdiv          fz_ws.l(fdiv.o)
-    0x08001828   0x08001828   0x00000026   Code   RO         1794    x$fpl$ffltu         fz_ws.l(fflt_clz.o)
-    0x0800184e   0x0800184e   0x00000002   PAD
-    0x08001850   0x08001850   0x00000102   Code   RO         1800    x$fpl$fmul          fz_ws.l(fmul.o)
-    0x08001952   0x08001952   0x0000008c   Code   RO         1803    x$fpl$fnaninf       fz_ws.l(fnaninf.o)
-    0x080019de   0x080019de   0x0000000a   Code   RO         1805    x$fpl$fretinf       fz_ws.l(fretinf.o)
-    0x080019e8   0x080019e8   0x000000ea   Code   RO         1786    x$fpl$fsub          fz_ws.l(faddsub_clz.o)
-    0x08001ad2   0x08001ad2   0x00000000   Code   RO         1807    x$fpl$usenofp       fz_ws.l(usenofp.o)
-    0x08001ad2   0x08001ad2   0x00000012   Data   RO          914    .constdata          stm32f1xx_hal_rcc.o
-    0x08001ae4   0x08001ae4   0x00000010   Data   RO         1741    .constdata          system_stm32f1xx.o
-    0x08001af4   0x08001af4   0x00000008   Data   RO         1742    .constdata          system_stm32f1xx.o
-    0x08001afc   0x08001afc   0x00000020   Data   RO         1960    Region$$Table       anon$$obj.o
+    0x080014c0   0x080014c0   0x0000011c   Code   RO           15    i.main              main.o
+    0x080015dc   0x080015dc   0x000000c4   Code   RO         1784    x$fpl$fadd          fz_ws.l(faddsub_clz.o)
+    0x080016a0   0x080016a0   0x00000184   Code   RO         1791    x$fpl$fdiv          fz_ws.l(fdiv.o)
+    0x08001824   0x08001824   0x00000026   Code   RO         1794    x$fpl$ffltu         fz_ws.l(fflt_clz.o)
+    0x0800184a   0x0800184a   0x00000002   PAD
+    0x0800184c   0x0800184c   0x00000102   Code   RO         1800    x$fpl$fmul          fz_ws.l(fmul.o)
+    0x0800194e   0x0800194e   0x0000008c   Code   RO         1803    x$fpl$fnaninf       fz_ws.l(fnaninf.o)
+    0x080019da   0x080019da   0x0000000a   Code   RO         1805    x$fpl$fretinf       fz_ws.l(fretinf.o)
+    0x080019e4   0x080019e4   0x000000ea   Code   RO         1786    x$fpl$fsub          fz_ws.l(faddsub_clz.o)
+    0x08001ace   0x08001ace   0x00000000   Code   RO         1807    x$fpl$usenofp       fz_ws.l(usenofp.o)
+    0x08001ace   0x08001ace   0x00000012   Data   RO          914    .constdata          stm32f1xx_hal_rcc.o
+    0x08001ae0   0x08001ae0   0x00000010   Data   RO         1741    .constdata          system_stm32f1xx.o
+    0x08001af0   0x08001af0   0x00000008   Data   RO         1742    .constdata          system_stm32f1xx.o
+    0x08001af8   0x08001af8   0x00000020   Data   RO         1960    Region$$Table       anon$$obj.o
 
 
-    Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x08001b1c, Size: 0x00000730, Max: 0x00005000, ABSOLUTE)
+    Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x08001b18, Size: 0x00000730, Max: 0x00005000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x20000000   0x08001b1c   0x00000012   Data   RW           18    .data               main.o
-    0x20000012   0x08001b2e   0x00000002   PAD
-    0x20000014   0x08001b30   0x0000000c   Data   RW          751    .data               stm32f1xx_hal.o
-    0x20000020   0x08001b3c   0x00000004   Data   RW         1743    .data               system_stm32f1xx.o
+    0x20000000   0x08001b18   0x00000012   Data   RW           18    .data               main.o
+    0x20000012   0x08001b2a   0x00000002   PAD
+    0x20000014   0x08001b2c   0x0000000c   Data   RW          751    .data               stm32f1xx_hal.o
+    0x20000020   0x08001b38   0x00000004   Data   RW         1743    .data               system_stm32f1xx.o
     0x20000024        -       0x000000a8   Zero   RW           17    .bss                main.o
     0x200000cc        -       0x00000060   Zero   RW         1834    .bss                c_w.l(libspace.o)
-    0x2000012c   0x08001b40   0x00000004   PAD
+    0x2000012c   0x08001b3c   0x00000004   PAD
     0x20000130        -       0x00000200   Zero   RW            2    HEAP                startup_stm32f103xb.o
     0x20000330        -       0x00000400   Zero   RW            1    STACK               startup_stm32f103xb.o
 
@@ -1248,7 +1248,7 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
-       382         40          0         18        168     395284   main.o
+       378         40          0         18        168     395284   main.o
         64         26        236          0       1536        836   startup_stm32f103xb.o
        128         24          0         12          0       5465   stm32f1xx_hal.o
        172         14          0          0          0      28398   stm32f1xx_hal_cortex.o
@@ -1260,7 +1260,7 @@ Image component sizes
          2          0         24          4          0       1191   system_stm32f1xx.o
 
     ----------------------------------------------------------------------
-      5010        290        310         36       1704     456839   Object Totals
+      5006        290        310         36       1704     456839   Object Totals
          0          0         32          0          0          0   (incl. Generated)
          4          0          0          2          0          0   (incl. Padding)
 
@@ -1318,15 +1318,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-      6630        398        310         36       1804     455727   Grand Totals
-      6630        398        310         36       1804     455727   ELF Image Totals
-      6630        398        310         36          0          0   ROM Totals
+      6626        398        310         36       1804     455727   Grand Totals
+      6626        398        310         36       1804     455727   ELF Image Totals
+      6626        398        310         36          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                 6940 (   6.78kB)
+    Total RO  Size (Code + RO Data)                 6936 (   6.77kB)
     Total RW  Size (RW Data + ZI Data)              1840 (   1.80kB)
-    Total ROM Size (Code + RO Data + RW Data)       6976 (   6.81kB)
+    Total ROM Size (Code + RO Data + RW Data)       6972 (   6.81kB)
 
 ==============================================================================
 

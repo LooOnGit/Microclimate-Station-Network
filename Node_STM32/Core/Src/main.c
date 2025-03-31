@@ -50,7 +50,7 @@ typedef struct id{
   uint32_t addrNumberID;
   char ids[100][6];
 }id;
-	float salValue[30];
+	float salValue[100];
 id managerID;
 //=========================================================Address Flash DEFINE===================================================
 #define START_ADDRESS 		((uint32_t)0x0801F810)	//Page 126
@@ -60,7 +60,7 @@ id managerID;
 //#define SHT3x
 #define SAL //Sensor Sal
 //#define KIT //Kit Weather Station
-#define FLOW_WATER //sensor flow water 
+//#define FLOW_WATER //sensor flow water 
 //#define ULTRASONIC //level water
 #define LCD
 
@@ -87,6 +87,7 @@ UART_HandleTypeDef huart2;
 
 osThreadId sendMessageHandle;
 osThreadId flowWaterHandle;
+osThreadId salTaskHandle;
 osSemaphoreId myBinarySemSendHandle;
 osSemaphoreId myBinarySemFlowHandle;
 /* USER CODE BEGIN PV */
@@ -183,6 +184,7 @@ static void MX_TIM2_Init(void);
 static void MX_ADC2_Init(void);
 void sendMessageTask(void const * argument);
 void flowWaterTask(void const * argument);
+void measureSal(void const * argument);
 
 /* USER CODE BEGIN PFP */
 //======================================================Function for Json====================================================
@@ -239,9 +241,6 @@ int main(void)
 	managerID.addrEnd = START_ADDRESS;
 	managerID.addrNumberID = NUMBER_ID_ADDRESS;
 	managerID.numberID = 0;
-//	
-//	writeIDToFlash("ND7961");
-//	readIDFromFlash();
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -282,7 +281,7 @@ int main(void)
 	myLoRa.DIO0_pin							 = DIO0_Pin;
 	
 	myLoRa.frequency             = 433;							  // default = 433 MHz
-	myLoRa.spredingFactor        = SF_7;							// default = SF_7
+	myLoRa.spredingFactor        = SF_12;							// default = SF_7
 	myLoRa.bandWidth			       = BW_125KHz;				  // default = BW_125KHz
 	myLoRa.crcRate				       = CR_4_5;						// default = CR_4_5
 	myLoRa.power					       = POWER_20db;				// default = 20db
@@ -293,6 +292,8 @@ int main(void)
 	uint16_t LoRa_status = LoRa_init(&myLoRa);
 	
 	// START CONTINUOUS RECEIVING -----------------------------------
+//	writeIDToFlash("ND7961");
+//	readIDFromFlash();
 	LoRa_startReceiving(&myLoRa);
 	if (LoRa_status==LORA_OK){
 		LoRa_transmit(&myLoRa, (uint8_t*)sendData, 120, 100);
@@ -322,8 +323,10 @@ int main(void)
   myBinarySemSendHandle = osSemaphoreCreate(osSemaphore(myBinarySemSend), 1);
 
   /* definition and creation of myBinarySemFlow */
+	#ifdef FLOW
   osSemaphoreDef(myBinarySemFlow);
   myBinarySemFlowHandle = osSemaphoreCreate(osSemaphore(myBinarySemFlow), 1);
+	#endif
 
   /* USER CODE BEGIN RTOS_SEMAPHORES */
   /* add semaphores, ... */
@@ -343,9 +346,16 @@ int main(void)
   sendMessageHandle = osThreadCreate(osThread(sendMessage), NULL);
 
   /* definition and creation of flowWater */
+	#ifdef FLOW
   osThreadDef(flowWater, flowWaterTask, osPriorityIdle, 0, 128);
   flowWaterHandle = osThreadCreate(osThread(flowWater), NULL);
+	#endif
 
+  /* definition and creation of salTask */
+	#ifdef SAL
+  osThreadDef(salTask, measureSal, osPriorityAboveNormal, 0, 128);
+  salTaskHandle = osThreadCreate(osThread(salTask), NULL);
+	#endif
   /* USER CODE BEGIN RTOS_THREADS */
 	osSemaphoreRelease(myBinarySemSendHandle);
   /* add threads, ... */
@@ -830,7 +840,7 @@ void formatJson(){
     #endif
 		
 		#ifdef SAL
-    sprintf(sensorVals.valSalToStr, "%0.3f", sensorVals.valSal);
+    sprintf(sensorVals.valSalToStr, "%0.2f", sensorVals.valSal);
     #endif
     
     #ifdef KIT
@@ -841,7 +851,8 @@ void formatJson(){
     #endif
     
     #ifdef FLOW_WATER
-    sprintf(sensorVals.valQToStr, "%d", sensorVals.valQ);
+		sensorVals.valQ = sensorVals.valQ / 1000;
+    sprintf(sensorVals.valQToStr, "%f", sensorVals.valQ);
     #endif
     
     #ifdef ULTRASONIC
@@ -1074,9 +1085,9 @@ float getEC_us_cm(float voltage, float temperature)
 
 void readSal(){
 	setCalibration(calibrate(14131413.00));
-	for(int i = 0; i < 30; i++){
+	for(int i = 0; i < 100; i++){
 		HAL_ADC_Start(&hadc2);
-		HAL_Delay(1);
+		HAL_Delay(1000);
 		adcValue = HAL_ADC_GetValue(&hadc2)*3300/4095;            
 		HAL_ADC_Stop(&hadc2);
 		te = 783;
@@ -1090,11 +1101,11 @@ void readSal(){
 		conductivity = getEC_us_cm(adcValue, temp);
 		
 		salValue[i] = conductivity * 0.001 * 0.64;
+		sprintf(msg,"DO MAN: %.2f ppt",salValue[i]);
+		lcd_goto_XY(1,0);
+		lcd_send_string(msg);
 	}
-	sensorVals.valSal = medianFilter(salValue, 30);
-	sprintf(msg,"DO MAN: %.2f ",sensorVals.valSal);
-	lcd_goto_XY(1,0);
-	lcd_send_string(msg);
+	sensorVals.valSal = medianFilter(salValue, 100);
 }
 #endif
 
@@ -1103,7 +1114,7 @@ void readSal(){
 //===========================================================================INTERRUPT==================================================================
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
 	if(GPIO_Pin == myLoRa.DIO0_pin){
-		HAL_ResumeTick();
+//		HAL_ResumeTick();
 		LoRa_receive(&myLoRa, (uint8_t*)messRecv, 200);
 		rssi = LoRa_getRSSI(&myLoRa);
 		if(strcmp(messRecv,myID)==0){
@@ -1124,7 +1135,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
 		}
 	}
 	if(GPIO_Pin == GPIO_PIN_15){
-		HAL_ResumeTick();
+//		HAL_ResumeTick();
 		osSemaphoreRelease(myBinarySemFlowHandle);
 		pul++;
 	}
@@ -1176,10 +1187,6 @@ void sendMessageTask(void const * argument)
 			printUart("Reading sht30");
 			readSHT30();
 			#endif
-			
-			#ifdef SAL
-			readSal();
-			#endif
 		
 			if(managerID.numberID != 0){
 				for(int element = 0; element < managerID.numberID; element++){
@@ -1205,11 +1212,15 @@ void sendMessageTask(void const * argument)
 					st = 0;
 				}
 			}
-			HAL_Delay(1000);
+			osDelay(100);
+			
 			formatJson();
 			LoRa_transmit(&myLoRa, (uint8_t*)jsonPack, strlen(jsonPack), 1000);
 			HAL_UART_Transmit(&huart1,(uint8_t *)jsonPack,strlen(jsonPack),1000);
 			sprintf(messRecv,"%s","");
+			#ifdef FLOW_WATER
+			sensorVals.valQ = 0;
+			#endif
 			i++;
 			//=================================================================SETUP SLEEP MODE==============================================================
 //			HAL_SuspendTick();
@@ -1226,17 +1237,19 @@ void sendMessageTask(void const * argument)
 * @retval None
 */
 /* USER CODE END Header_flowWaterTask */
+#ifdef FLOW_WATER
 void flowWaterTask(void const * argument)
 {
   /* USER CODE BEGIN flowWaterTask */
   /* Infinite loop */
   for(;;)
   {
+		osSemaphoreWait(myBinarySemFlowHandle, osWaitForever);
 		if(HAL_GetTick() - lastTimeFlow > waitFlow){
-//			flowRate = ((1000.0 / (HAL_GetTick() - lastTimeFlow)) * pul) / 4.5;
       lastTimeFlow = HAL_GetTick();
       flowMilliLitres = ((pul / 7.5)/ 60);
-      totalMilliLitres += flowMilliLitres;
+	
+			sensorVals.valQ += flowMilliLitres;
 			pul = 0;
 			//=================================================================SETUP SLEEP MODE==============================================================
 //			HAL_SuspendTick();
@@ -1245,6 +1258,50 @@ void flowWaterTask(void const * argument)
   }
   /* USER CODE END flowWaterTask */
 }
+#endif
+
+/* USER CODE BEGIN Header_measureSal */
+/**
+* @brief Function implementing the salTask thread.
+* @param argument: Not used
+* @retval None
+*/
+/* USER CODE END Header_measureSal */
+#ifdef SAL
+void measureSal(void const * argument)
+{
+  /* USER CODE BEGIN measureSal */
+  /* Infinite loop */
+  for(;;)
+  {
+		#ifdef SAL
+		setCalibration(calibrate(14131413.00));
+		for(int i = 0; i < 100; i++){
+			HAL_ADC_Start(&hadc2);
+			adcValue = HAL_ADC_GetValue(&hadc2)*3300/4095;            
+			HAL_ADC_Stop(&hadc2);
+			te = 783;
+			HAL_ADC_Start(&hadc1);
+			HAL_Delay(1);
+			adcValue2 = HAL_ADC_GetValue(&hadc1)*3300/4095;
+			HAL_ADC_Stop(&hadc1);
+			
+//			temp = convVoltagetoTemperature_C((float)te/ 1000);
+			temp = convVoltagetoTemperature_C((float)adcValue2/ 1000);
+			conductivity = getEC_us_cm(adcValue, temp);
+			
+			salValue[i] = conductivity * 0.001 * 0.64;
+			sprintf(msg,"DO MAN: %.2f ppt",salValue[i]);
+			lcd_goto_XY(1,0);
+			lcd_send_string(msg);
+			osDelay(100);
+		}
+		sensorVals.valSal = medianFilter(salValue, 100);
+		#endif
+  }
+  /* USER CODE END measureSal */
+}
+#endif
 
 /**
   * @brief  Period elapsed callback in non blocking mode

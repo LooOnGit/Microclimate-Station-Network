@@ -122,10 +122,10 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-//		HAL_I2C_Master_Transmit(&hi2c2, 0x44 << 1u, command_buffer, sizeof(command_buffer), 200);
-		HAL_I2C_Master_Transmit(&hi2c1, 0x44 << 1u, command_buffer, sizeof(command_buffer), 200);
+		HAL_I2C_Master_Transmit(&hi2c2, 0x44 << 1u, command_buffer, sizeof(command_buffer), 200);
+//		HAL_I2C_Master_Transmit(&hi2c1, 0x44 << 1u, command_buffer, sizeof(command_buffer), 200);
 		//HAL_I2C_Master_Transmit(&hi2c1,0x44<<1u, buffer, sizeof(buffer),200);
-		HAL_I2C_Master_Receive(&hi2c1 , 0x44<<1u, buffer_r, sizeof(buffer_r), 200);
+		HAL_I2C_Master_Receive(&hi2c2 , 0x44<<1u, buffer_r, sizeof(buffer_r), 200);
 		uint16_t temperature_raw = uint8_to_uint16(buffer_r[0], buffer_r[1]);
 		uint16_t humidity_raw = uint8_to_uint16(buffer_r[3], buffer_r[4]);
 
