@@ -1,0 +1,7 @@
+DRC Rules Export File for PCB: D:\Microclimate Station Network\PCB\Microclimate-Station-Network\Node_stm32\PCB3.PcbDoc
+RuleKind=Width|RuleName=Width_signal|Scope=Board|Minimum=7.87
+RuleKind=Clearance|RuleName=Signal|Scope=Board|Minimum=5.00
+RuleKind=SolderMaskExpansion|RuleName=SolderMaskExpansion|Scope=Board|Minimum=4.00
+RuleKind=Width|RuleName=Width_power|Scope=Board|Minimum=10.00
+RuleKind=Clearance|RuleName=power|Scope=Board|Minimum=10.00
+RuleKind=ShortCircuit|RuleName=ShortCircuit|Scope=Board|Allowed=0

@@ -1,0 +1,15 @@
+Removed Pin From Net: NetName=GND Pin=USB1-5
+Removed Pin From Net: NetName=GND Pin=USB1-5
+Removed Pin From Net: NetName=GND Pin=USB1-5
+Removed Pin From Net: NetName=GND Pin=USB1-5
+Removed Pin From Net: NetName=GND Pin=USB1-5
+Removed Pin From Net: NetName=GND Pin=USB1-5
+Removed Pin From Net: NetName=GND Pin=USB1-5
+Removed Member From Class: ClassName=Sheet4 Member=USB1
+Added Pin To Net: NetName=Net*_1 Pin=D1-1
+Added Net: Name=Net*_1
+Added Pin To Net: NetName=Net*_2 Pin=U3-6
+Added Net: Name=Net*_2
+Added Pin To Net: NetName=Net*_3 Pin=U3-5
+Added Net: Name=Net*_3
+Added Room: Name=Sheet4

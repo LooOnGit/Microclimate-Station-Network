@@ -1,0 +1,4 @@
+Removed Pin From Net: NetName=+5 Pin=USB_WIFI-01
+Removed Pin From Net: NetName=GND Pin=USB_WIFI-04
+Removed Member From Class: ClassName=Sheet2 Member=USB_WIFI
+Added Room: Name=Sheet2

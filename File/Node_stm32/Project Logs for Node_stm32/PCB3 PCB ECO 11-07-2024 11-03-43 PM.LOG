@@ -1,0 +1,57 @@
+Removed Pin From Net: NetName=+24 Pin=K1-2
+Removed Pin From Net: NetName=PA0 Pin=R10-1
+Removed Pin From Net: NetName=PA0 Pin=R11-1
+Change Component Footprint: Designator=C17 Old Footprint=CAP-ALU-SMD-H New Footprint=CAP-ALU-SMD-D
+Change Component Footprint: Designator=R12 Old Footprint=Fuse_1206 New Footprint=tro smd 1206
+Change Component Comment : Designator=R10 Old Comment=330R New Comment=10k
+Change Component Comment : Designator=R12 Old Comment=Fuse_1206 New Comment=330R
+Change component parameters: Designator = "R10" ("R10"); Footprint = "tro smd 1206"; UniqueID = "\RHVJOUCF" ("\RHVJOUCF")
+Change component parameters (AddParameter): Name = "Chung_Loai"; Value = "Dán"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Don_Vi"; Value = "Con"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Kieu_Chan"; Value = ""; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Ma_Hang"; Value = "MH005909"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "So_Chan"; Value = "2"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Ten_Linh_Kien"; Value = "Tr? 1206 5% 10K"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R12" ("R12"); Footprint = "Fuse_1206"; UniqueID = "\PTQKZZTM" ("\PTQKZZTM")
+Change component parameters (AddParameter): Name = "Chung_Loai"; Value = "Dán"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Don_Vi"; Value = "Con"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Kieu_Chan"; Value = ""; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Ma_Hang"; Value = "MH005886"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "So_Chan"; Value = "2"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Ten_Linh_Kien"; Value = "Tr? 1206 1% 10R"; VariantName = "[No Variations]"
+Added Component: Designator=C19(tu 1206)
+Add component (AddParameter): Name = "Chung_Loai"; Value = "Dán"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Don_Vi"; Value = "Con"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Kieu_Chan"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ma_Hang"; Value = "MH004545"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "So_Chan"; Value = "2"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ten_Linh_Kien"; Value = "T? 1206 105-1uF 20% 50V"; VariantName = "[No Variations]"
+Added Component: Designator=D2(INDC1608L)
+Add component (AddParameter): Name = "LatestRevisionDate"; Value = "17-Jul-2002"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "LatestRevisionNote"; Value = "Re-released for DXP Platform."; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PackageReference"; Value = "DIODE-0.7"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Published"; Value = "8-Jun-2000"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Publisher"; Value = "Altium Limited"; VariantName = "[No Variations]"
+Added Component: Designator=O1(MCP601T-I)
+Added Pin To Net: NetName=GND Pin=C19-2
+Added Pin To Net: NetName=+24 Pin=D2-1
+Added Pin To Net: NetName=GND Pin=D2-2
+Added Pin To Net: NetName=+24 Pin=K1-1
+Added Pin To Net: NetName=GND Pin=K1-2
+Added Pin To Net: NetName=PA0 Pin=O1-1
+Added Pin To Net: NetName=GND Pin=O1-2
+Added Pin To Net: NetName=PA0 Pin=O1-4
+Added Pin To Net: NetName=+3.3 Pin=O1-5
+Added Pin To Net: NetName=+24 Pin=R10-1
+Added Pin To Net: NetName=+24 Pin=R11-1
+Added Pin To Net: NetName=GND Pin=R11-2
+Added Pin To Net: NetName=+24 Pin=R12-1
+Added Pin To Net: NetName=GND Pin=R12-2
+Added Pin To Net: NetName=NetC19_1 Pin=C19-1
+Added Pin To Net: NetName=NetC19_1 Pin=O1-3
+Added Pin To Net: NetName=NetC19_1 Pin=R10-2
+Added Net: Name=NetC19_1
+Added Member To Class: ClassName=Sheet3 Member=Component C19 105
+Added Member To Class: ClassName=Sheet3 Member=Component D2 TVS Diode
+Added Member To Class: ClassName=Sheet3 Member=Component O1 MCP601T-I
+Added Room: Name=Sheet3

@@ -1,0 +1,11 @@
+Added Component: Designator=C?(tu nhom 10 (G))
+Add component (AddParameter): Name = "Chung_Loai"; Value = "Dán"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Don_Vi"; Value = "Con"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Kieu_Chan"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ma_Hang"; Value = "MH007513"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "So_Chan"; Value = "2"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ten_Linh_Kien"; Value = "T? Nhôm 680uF 16V 10x10.5MM"; VariantName = "[No Variations]"
+Added Component: Designator=D?(DO-214AC)
+Added Member To Class: ClassName=Sheet2 Member=Component C? 680
+Added Member To Class: ClassName=Sheet2 Member=Component D? SS54
+Added Room: Name=Sheet2

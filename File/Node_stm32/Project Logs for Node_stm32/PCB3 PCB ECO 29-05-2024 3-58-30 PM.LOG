@@ -1,0 +1,16 @@
+Removed Pin From Net: NetName=RX2 Pin=UART2-1
+Removed Pin From Net: NetName=TX2 Pin=UART2-2
+Removed Member From Class: ClassName=Sheet3 Member=UART2
+Added Component: Designator=LCD1(XH2.54M-4)
+Add component (AddParameter): Name = "Chung_Loai"; Value = "C?m"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Don_Vi"; Value = "Con"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ghi_Chu"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Kieu_Chan"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ma_Hang"; Value = "MH001285"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ten_Linh_Kien"; Value = "Header 4P XH2.54-4P Ð?c Th?ng"; VariantName = "[No Variations]"
+Added Pin To Net: NetName=GND Pin=LCD1-1
+Added Pin To Net: NetName=+5 Pin=LCD1-2
+Added Pin To Net: NetName=RX2 Pin=LCD1-3
+Added Pin To Net: NetName=TX2 Pin=LCD1-4
+Added Member To Class: ClassName=Sheet3 Member=Component LCD1 Header 4P
+Added Room: Name=Sheet3

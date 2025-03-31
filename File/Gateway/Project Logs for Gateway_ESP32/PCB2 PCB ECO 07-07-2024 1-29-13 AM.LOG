@@ -1,0 +1,8 @@
+Added Component: Designator=L?(IND_456_640_236X117_SMD)
+Add component (AddParameter): Name = "Alternate Part Number-1"; Value = "NA"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Case/Package"; Value = "SMD"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer"; Value = "Coilcraft"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer Part Number"; Value = "SRP3020TA-R33M"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Supplier Part Number-1"; Value = "SER2918H-333KL"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Supplier-1"; Value = "COILCRAFT SAMPLE"; VariantName = "[No Variations]"
+Added Member To Class: ClassName=Sheet2 Member=Component L? SRP3020TA-R33M

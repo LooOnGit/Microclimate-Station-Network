@@ -1,0 +1,62 @@
+Removed Pin From Net: NetName=+5 Pin=5V-1
+Removed Pin From Net: NetName=GND Pin=5V-2
+Removed Pin From Net: NetName=GND Pin=5V-3
+Removed Pin From Net: NetName=SDA2 Pin=LCD-3
+Removed Pin From Net: NetName=SCL2 Pin=LCD-4
+Removed Pin From Net: NetName=GND Pin=Q1-3
+Removed Pin From Net: NetName=GND Pin=R10-1
+Removed Pin From Net: NetName=GND Pin=R11-1
+Removed Pin From Net: NetName=PA0 Pin=SAL-3
+Removed Pin From Net: NetName=SDA1 Pin=SHT3x-2
+Removed Pin From Net: NetName=SCL1 Pin=SHT3x-3
+Removed Pin From Net: NetName=DIO0 Pin=U2-20
+Removed Pin From Net: NetName=SCL1 Pin=U2-41
+Removed Pin From Net: NetName=SDA1 Pin=U2-42
+Removed Member From Class: ClassName=Sheet3 Member=5V
+Removed Member From Class: ClassName=Sheet3 Member=L7
+Removed Member From Class: ClassName=Sheet3 Member=Q1
+Change Component Comment : Designator=R10 Old Comment=1k New Comment=330R
+Change Component Comment : Designator=R11 Old Comment=1k New Comment=330R
+Change component parameters: Designator = "R10" ("R10"); Footprint = "tro smd 1206"; UniqueID = "\BYBWECZI" ("\BYBWECZI")
+Change component parameters (AddParameter): Name = "Chung_Loai"; Value = "Dán"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Don_Vi"; Value = "Con"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Kieu_Chan"; Value = ""; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Ma_Hang"; Value = "MH005886"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "So_Chan"; Value = "2"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Ten_Linh_Kien"; Value = "Tr? 1206 1% 10R"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R11" ("R11"); Footprint = "tro smd 1206"; UniqueID = "\YBHJYQBE" ("\YBHJYQBE")
+Change component parameters (AddParameter): Name = "Chung_Loai"; Value = "Dán"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Don_Vi"; Value = "Con"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Kieu_Chan"; Value = ""; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Ma_Hang"; Value = "MH005886"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "So_Chan"; Value = "2"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Ten_Linh_Kien"; Value = "Tr? 1206 1% 10R"; VariantName = "[No Variations]"
+Added Component: Designator=K?(KF128_2P)
+Added Pin To Net: NetName=GND Pin=FLOW-1
+Added Pin To Net: NetName=GND Pin=KIT-1
+Added Pin To Net: NetName=GND Pin=LCD-1
+Added Pin To Net: NetName=SDA1 Pin=LCD-3
+Added Pin To Net: NetName=SCL1 Pin=LCD-4
+Added Pin To Net: NetName=PA0 Pin=R10-1
+Added Pin To Net: NetName=PA0 Pin=R11-1
+Added Pin To Net: NetName=GND Pin=SAL-1
+Added Pin To Net: NetName=SDA2 Pin=SHT3x-2
+Added Pin To Net: NetName=SCL2 Pin=SHT3x-3
+Added Pin To Net: NetName=GND Pin=SHT3x-4
+Added Pin To Net: NetName=GND Pin=SIM-6
+Added Pin To Net: NetName=GND Pin=TEMP_W-1
+Added Pin To Net: NetName=DIO0 Pin=U2-41
+Added Pin To Net: NetName=SCL1 Pin=U2-42
+Added Pin To Net: NetName=SDA1 Pin=U2-43
+Change Net Name : Old Net Name=Net1_1 New Net Name=+24
+Added Pin To Net: NetName=NetR10_2 Pin=R10-2
+Added Pin To Net: NetName=NetR10_2 Pin=R11-2
+Added Net: Name=NetR10_2
+Added Pin To Net: NetName=PB1 Pin=SAL-3
+Added Pin To Net: NetName=PB1 Pin=U2-19
+Added Net: Name=PB1
+Added Pin To Net: NetName=PEN Pin=SIM-3
+Added Pin To Net: NetName=PEN Pin=U2-40
+Added Net: Name=PEN
+Added Member To Class: ClassName=Sheet3 Member=Component K? KF128_2P
+Added Room: Name=Sheet3

@@ -1,0 +1,9 @@
+Added Component: Designator=D1(DO-214AC)
+Added Component: Designator=L6(33uH)
+Added Pin To Net: NetName=NetD1_1 Pin=D1-1
+Added Pin To Net: NetName=GND Pin=D1-2
+Added Pin To Net: NetName=+5 Pin=L6-1
+Added Pin To Net: NetName=NetD1_1 Pin=L6-2
+Added Member To Class: ClassName=Sheet3 Member=Component D1 SS54
+Added Member To Class: ClassName=Sheet3 Member=Component L6 CDRH127
+Added Room: Name=Sheet3

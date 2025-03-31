@@ -1,0 +1,13 @@
+Removed Pin From Net: NetName=+3.3 Pin=C13-2
+Removed Pin From Net: NetName=+3.3 Pin=C13-3
+Removed Pin From Net: NetName=ESP_RX0 Pin=C13-4
+Removed Pin From Net: NetName=ESP_TX0 Pin=C13-5
+Removed Pin From Net: NetName=GND Pin=C13-6
+Change Component Footprint: Designator=C12 Old Footprint=CAP-ALU-SMD-H New Footprint=CAP-ALU-SMD-F
+Added Pin To Net: NetName=GND Pin=C13-2
+Added Pin To Net: NetName=EN Pin=C13-3
+Added Pin To Net: NetName=ESP_TX0 Pin=C13-4
+Added Pin To Net: NetName=ESP_RX0 Pin=C13-5
+Added Pin To Net: NetName=ESP_IO0 Pin=C13-6
+Added Member To Class: ClassName=Sheet2 Member=Component LORA Ra-02
+Added Room: Name=Sheet2

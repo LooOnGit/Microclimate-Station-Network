@@ -1,0 +1,11 @@
+Change Component Footprint: Designator=D2 Old Footprint=INDC1608L New Footprint=DO-214AC
+Change Component Comment : Designator=D2 Old Comment=TVS Diode New Comment=Diode TVS
+Change component parameters: Designator = "D2" ("D2"); Footprint = "INDC1608L"; UniqueID = "\FOAAWLXT" ("\FOAAWLXT")
+Change component parameters (AddParameter): Name = "Code_JEDEC"; Value = "DO-214-AB"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "LatestRevisionDate"; Value = "17-Jul-2002"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "LatestRevisionNote"; Value = "Re-released for DXP Platform."; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "PackageReference"; Value = "SMC"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "PackageVersion"; Value = "Sep-1996"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Published"; Value = "8-Jun-2000"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Publisher"; Value = "Altium Limited"; VariantName = "[No Variations]"
+Added Room: Name=Sheet3

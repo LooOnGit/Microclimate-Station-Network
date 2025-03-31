@@ -1,0 +1,39 @@
+Removed Pin From Net: NetName=+5 Pin=C13-1
+Removed Pin From Net: NetName=GND Pin=C13-2
+Removed Pin From Net: NetName=+5 Pin=C14-1
+Removed Pin From Net: NetName=GND Pin=C14-2
+Removed Pin From Net: NetName=ESP_TX0 Pin=R5-1
+Removed Pin From Net: NetName=ESP_RX0 Pin=R7-1
+Removed Pin From Net: NetName=GND Pin=U1-1
+Removed Pin From Net: NetName=+3.3 Pin=U1-2
+Removed Pin From Net: NetName=+5 Pin=U1-3
+Removed Pin From Net: NetName=+5 Pin=U2-16
+Removed Member From Class: ClassName=Sheet2 Member=C13
+Removed Member From Class: ClassName=Sheet2 Member=C14
+Removed Member From Class: ClassName=Sheet2 Member=R5
+Removed Member From Class: ClassName=Sheet2 Member=R7
+Change Component Comment : Designator=C12 Old Comment=104 New Comment=106
+Change component parameters: Designator = "C12" ("C12"); Footprint = "tu 1206"; UniqueID = "\BTBOWEIR" ("\BTBOWEIR")
+Change component parameters (AddParameter): Name = "Chung_Loai"; Value = "Dán"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Don_Vi"; Value = "Con"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Kieu_Chan"; Value = ""; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Ma_Hang"; Value = "MH004541"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "So_Chan"; Value = "2"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Ten_Linh_Kien"; Value = "T? 1206 106-10uF 20% 16V"; VariantName = "[No Variations]"
+Added Component: Designator=AMS1(SOT223)
+Add component (AddParameter): Name = "Chung_Loai"; Value = "Dán"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Don_Vi"; Value = "Con"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ghi_Chu"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Kieu_Chan"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ma_Hang"; Value = "MH000596"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = "AMS1117-3.3V SOT223"; VariantName = "[No Variations]"
+Added Pin To Net: NetName=GND Pin=AMS1-1
+Added Pin To Net: NetName=+3.3 Pin=AMS1-2
+Added Pin To Net: NetName=+5 Pin=AMS1-3
+Added Pin To Net: NetName=+3.3 Pin=C12-1
+Added Pin To Net: NetName=ESP_RX0 Pin=U2-2
+Added Pin To Net: NetName=ESP_TX0 Pin=U2-3
+Added Pin To Net: NetName=+3.3 Pin=U2-4
+Added Pin To Net: NetName=+3.3 Pin=U2-16
+Added Member To Class: ClassName=Sheet2 Member=Component AMS1 AMS1117-3.3V
+Added Room: Name=Sheet2

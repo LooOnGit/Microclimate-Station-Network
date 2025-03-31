@@ -1,0 +1,80 @@
+Removed Pin From Net: NetName=+5 Pin=5V-1
+Removed Pin From Net: NetName=GND Pin=5V-2
+Removed Pin From Net: NetName=GND Pin=5V-3
+Removed Pin From Net: NetName=GND Pin=SIM-6
+Removed Member From Class: ClassName=Sheet2 Member=5V
+Change Component Designator: OldDesignator=C? NewDesignator=C12
+Change Component Designator: OldDesignator=D? NewDesignator=D1
+Change Component Designator: OldDesignator=U? NewDesignator=U1
+Added Component: Designator=24VDC(JACK DC 5.5)
+Add component (AddParameter): Name = "Value"; Value = "Jac DC"; VariantName = "[No Variations]"
+Added Component: Designator=C14(CAP-ALU-SMD-D)
+Add component (AddParameter): Name = "LatestRevisionDate"; Value = "17-Jul-2002"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "LatestRevisionNote"; Value = "Re-released for DXP Platform."; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PackageReference"; Value = "POLAR0.8"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Published"; Value = "8-Jun-2000"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Publisher"; Value = "Altium Limited"; VariantName = "[No Variations]"
+Added Component: Designator=L6(33uH)
+Added Component: Designator=L7(LED-3MM-RED)
+Add component (AddParameter): Name = "Chung_Loai"; Value = "C?m"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Don_Vi"; Value = "Con"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ghi_Chu"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Kieu_Chan"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ma_Hang"; Value = "MH003892"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ten_Linh_Kien"; Value = "Led 3MM Ph? Ð? (10c)"; VariantName = "[No Variations]"
+Added Component: Designator=Q1(TO220)
+Added Component: Designator=R4(tro smd 1206)
+Add component (AddParameter): Name = "Chung_Loai"; Value = "Dán"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Don_Vi"; Value = "Con"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Kieu_Chan"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ma_Hang"; Value = "MH005904"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "So_Chan"; Value = "2"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ten_Linh_Kien"; Value = "Tr? 1206 5% 1k"; VariantName = "[No Variations]"
+Added Component: Designator=R5(tro smd 1206)
+Add component (AddParameter): Name = "Chung_Loai"; Value = "Dán"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Don_Vi"; Value = "Con"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Kieu_Chan"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ma_Hang"; Value = "MH005904"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "So_Chan"; Value = "2"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ten_Linh_Kien"; Value = "Tr? 1206 5% 1k"; VariantName = "[No Variations]"
+Added Pin To Net: NetName=GND Pin=24VDC-2
+Added Pin To Net: NetName=GND Pin=24VDC-3
+Added Pin To Net: NetName=GND Pin=C12-2
+Added Pin To Net: NetName=+5 Pin=C14-1
+Added Pin To Net: NetName=GND Pin=C14-2
+Added Pin To Net: NetName=GND Pin=D1-2
+Added Pin To Net: NetName=+5 Pin=L6-1
+Added Pin To Net: NetName=GND Pin=Q1-3
+Added Pin To Net: NetName=GND Pin=R4-1
+Added Pin To Net: NetName=GND Pin=R5-1
+Added Pin To Net: NetName=GND Pin=U1-3
+Added Pin To Net: NetName=+5 Pin=U1-4
+Added Pin To Net: NetName=GND Pin=U1-5
+Added Pin To Net: NetName=GND Pin=U1-6
+Added Pin To Net: NetName=GND Pin=U1-6
+Added Pin To Net: NetName=GND_CTR Pin=Q1-2
+Added Pin To Net: NetName=GND_CTR Pin=SIM-6
+Added Net: Name=GND_CTR
+Added Pin To Net: NetName=Net24VDC_1 Pin=24VDC-1
+Added Pin To Net: NetName=Net24VDC_1 Pin=C12-1
+Added Pin To Net: NetName=Net24VDC_1 Pin=U1-1
+Added Net: Name=Net24VDC_1
+Added Pin To Net: NetName=NetD1_1 Pin=D1-1
+Added Pin To Net: NetName=NetD1_1 Pin=L6-2
+Added Pin To Net: NetName=NetD1_1 Pin=U1-2
+Added Net: Name=NetD1_1
+Added Pin To Net: NetName=NetL7_2 Pin=L7-2
+Added Pin To Net: NetName=NetL7_2 Pin=R5-2
+Added Net: Name=NetL7_2
+Added Pin To Net: NetName=PW_Sensor Pin=*1-8
+Added Pin To Net: NetName=PW_Sensor Pin=L7-1
+Added Pin To Net: NetName=PW_Sensor Pin=Q1-1
+Added Pin To Net: NetName=PW_Sensor Pin=R4-2
+Added Net: Name=PW_Sensor
+Added Member To Class: ClassName=Sheet2 Member=Component 24VDC JACK DC 5.5
+Added Member To Class: ClassName=Sheet2 Member=Component C14 CN-ALU-SMD
+Added Member To Class: ClassName=Sheet2 Member=Component L6 CDRH127
+Added Member To Class: ClassName=Sheet2 Member=Component L7 LED 3mm
+Added Member To Class: ClassName=Sheet2 Member=Component Q1 IRFZ44
+Added Member To Class: ClassName=Sheet2 Member=Component R4 1k
+Added Member To Class: ClassName=Sheet2 Member=Component R5 1k

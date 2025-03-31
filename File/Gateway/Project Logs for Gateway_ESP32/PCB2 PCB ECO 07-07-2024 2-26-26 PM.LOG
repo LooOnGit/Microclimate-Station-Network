@@ -1,0 +1,4 @@
+Change Component Designator: OldDesignator=C? NewDesignator=C12
+Change Component Designator: OldDesignator=C? NewDesignator=C14
+Added Member To Class: ClassName=Sheet2 Member=Component C12 CN-ALU-SMD
+Added Room: Name=Sheet2

@@ -1,0 +1,41 @@
+Removed Pin From Net: NetName=+3.3 Pin=C12-1
+Removed Pin From Net: NetName=GND Pin=C12-2
+Removed Pin From Net: NetName=+5 Pin=D1-2
+Removed Pin From Net: NetName=EN Pin=Q1-3
+Removed Pin From Net: NetName=ESP_IO0 Pin=Q2-3
+Removed Pin From Net: NetName=GND Pin=U2-1
+Removed Pin From Net: NetName=ESP_RX0 Pin=U2-2
+Removed Pin From Net: NetName=ESP_TX0 Pin=U2-3
+Removed Pin From Net: NetName=+3.3 Pin=U2-4
+Removed Pin From Net: NetName=+3.3 Pin=U2-16
+Removed Pin From Net: NetName=GND Pin=USB1-5
+Removed Pin From Net: NetName=GND Pin=USB1-5
+Removed Pin From Net: NetName=GND Pin=USB1-5
+Removed Pin From Net: NetName=GND Pin=USB1-5
+Removed Pin From Net: NetName=GND Pin=USB1-5
+Removed Pin From Net: NetName=GND Pin=USB1-5
+Removed Pin From Net: NetName=GND Pin=USB1-5
+Removed Member From Class: ClassName=Sheet2 Member=C12
+Removed Member From Class: ClassName=Sheet2 Member=D1
+Removed Member From Class: ClassName=Sheet2 Member=Q1
+Removed Member From Class: ClassName=Sheet2 Member=Q2
+Removed Member From Class: ClassName=Sheet2 Member=R4
+Removed Member From Class: ClassName=Sheet2 Member=R6
+Removed Member From Class: ClassName=Sheet2 Member=U2
+Removed Member From Class: ClassName=Sheet2 Member=USB1
+Added Component: Designator=U?(TO263-5)
+Added Component: Designator=U?(TO263)
+Add component (AddParameter): Name = "Category"; Value = "IC-Power"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Max Input Voltage"; Value = "12 V"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Max Output Current"; Value = "3 (6.0 peak) A"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Max Output Voltage"; Value = "mV"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Min Input Voltage"; Value = "mV"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Min Output Voltage"; Value = "mV"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Mounting Technology"; Value = "Surface Mount"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PowerICTypes"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Status"; Value = "Unreleased"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Supply Voltage"; Value = "mV"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Temperature Range"; Value = "-40 to +125 degC"; VariantName = "[No Variations]"
+Added Member To Class: ClassName=Sheet2 Member=Component U? LM2596
+Added Member To Class: ClassName=Sheet2 Member=Component U? LM2976
+Added Room: Name=Sheet2

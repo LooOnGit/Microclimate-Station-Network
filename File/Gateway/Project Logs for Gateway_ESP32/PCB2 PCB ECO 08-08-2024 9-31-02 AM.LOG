@@ -1,0 +1,32 @@
+Removed Pin From Net: NetName=GND Pin=*1-39
+Removed Pin From Net: NetName=GND Pin=*1-39
+Removed Pin From Net: NetName=GND Pin=*1-39
+Removed Pin From Net: NetName=GND Pin=*1-39
+Removed Pin From Net: NetName=GND Pin=*1-39
+Removed Pin From Net: NetName=GND Pin=*1-39
+Removed Pin From Net: NetName=GND Pin=*1-39
+Removed Pin From Net: NetName=GND Pin=*1-39
+Removed Pin From Net: NetName=GND Pin=*1-39
+Removed Pin From Net: NetName=GND Pin=*1-39
+Removed Pin From Net: NetName=GND Pin=*1-39
+Removed Pin From Net: NetName=GND Pin=*1-39
+Removed Pin From Net: NetName=GND Pin=*1-39
+Removed Pin From Net: NetName=GND Pin=*1-39
+Removed Pin From Net: NetName=GND Pin=*1-39
+Removed Pin From Net: NetName=GND Pin=*1-39
+Removed Pin From Net: NetName=GND Pin=*1-39
+Removed Pin From Net: NetName=GND Pin=*1-39
+Removed Pin From Net: NetName=GND Pin=*1-39
+Removed Pin From Net: NetName=GND Pin=*1-39
+Removed Pin From Net: NetName=GND Pin=*1-39
+Change Component Comment : Designator=D1 Old Comment=SS54 New Comment=SS34
+Added Component: Designator=L?(LED-0805-Red)
+Add component (AddParameter): Name = "Chung_Loai"; Value = "Dán"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Don_Vi"; Value = "Con"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ghi_Chu"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Kieu_Chan"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ma_Hang"; Value = "MH000897"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ten_Linh_Kien"; Value = "LED 0805 Màu Ð? (Red)"; VariantName = "[No Variations]"
+Added Member To Class: ClassName=Sheet2 Member=Component *1 ESP32 WROOM 32
+Added Member To Class: ClassName=Sheet2 Member=Component L? LED 0805
+Added Room: Name=Sheet2

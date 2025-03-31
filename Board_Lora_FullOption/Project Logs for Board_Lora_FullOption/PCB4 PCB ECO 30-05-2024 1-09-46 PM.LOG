@@ -1,0 +1,16 @@
+Removed Pin From Net: NetName=TX2 Pin=H6-1
+Removed Pin From Net: NetName=RX2 Pin=H6-2
+Removed Member From Class: ClassName=Sheet4 Member=H6
+Added Component: Designator=KIT WT(XH2.54M-4)
+Add component (AddParameter): Name = "Chung_Loai"; Value = "C?m"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Don_Vi"; Value = "Con"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ghi_Chu"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Kieu_Chan"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ma_Hang"; Value = "MH001285"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ten_Linh_Kien"; Value = "Header 4P XH2.54-4P Ð?c Th?ng"; VariantName = "[No Variations]"
+Added Pin To Net: NetName=GND Pin=KIT WT-1
+Added Pin To Net: NetName=+5 Pin=KIT WT-2
+Added Pin To Net: NetName=RX2 Pin=KIT WT-3
+Added Pin To Net: NetName=TX2 Pin=KIT WT-4
+Added Member To Class: ClassName=Sheet4 Member=Component KIT WT Header 4P
+Added Room: Name=Sheet4

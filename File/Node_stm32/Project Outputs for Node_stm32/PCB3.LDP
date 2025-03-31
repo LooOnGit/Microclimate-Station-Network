@@ -1,0 +1,3 @@
+Layer Pairs Export File for PCB: D:\Microclimate Station Network\PCB\Microclimate-Station-Network\Node_stm32\PCB3.PcbDoc
+LayersSetName=Top_Bot_Thru_Holes|DrillFile=pcb3-roundholes.txt|DrillLayers=gtl,gbl
+LayersSetName=Top_Bot_Slot_Holes|DrillFile=pcb3-slotholes.txt|DrillLayers=gtl,gbl

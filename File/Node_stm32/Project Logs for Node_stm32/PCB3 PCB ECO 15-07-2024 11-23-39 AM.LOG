@@ -1,0 +1,11 @@
+Removed Pin From Net: NetName=GND Pin=H3-1
+Removed Pin From Net: NetName=NetD2_1 Pin=H3-2
+Removed Pin From Net: NetName=+24 Pin=H3-3
+Removed Member From Class: ClassName=Sheet3 Member=H3
+Added Component: Designator=(KF128_3V)
+Added Pin To Net: NetName=+24 Pin=-1
+Added Pin To Net: NetName=NetD2_1 Pin=-2
+Added Pin To Net: NetName=GND Pin=-3
+Change Net Name : Old Net Name=NetD2_1 New Net Name=Net_2
+Added Member To Class: ClassName=Sheet3 Member=Component  K?
+Added Room: Name=Sheet3

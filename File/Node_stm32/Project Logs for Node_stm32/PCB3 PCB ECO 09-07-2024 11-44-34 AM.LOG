@@ -1,0 +1,8 @@
+Change Component Description : Designator=U2 Old Description=ARM® Cortex®-M3 STM32F1 Microcontroller IC 32-Bit 72MHz 64KB (64K x 8) FLASH 48-LQFP (7x7) New Description=ARM® Cortex®-M3 STM32F1 Microcontroller IC 32-Bit 72MHz 64KB (64K x 8) FLASH 48-LQFP (7x7)
+
+Added Component: Designator=K1(KF128_2P)
+Added Component: Designator=R12(Fuse_1206)
+Added Pin To Net: NetName=+24 Pin=K1-2
+Added Member To Class: ClassName=Sheet3 Member=Component K1 KF128_2P
+Added Member To Class: ClassName=Sheet3 Member=Component R12 Fuse_1206
+Added Room: Name=Sheet3
