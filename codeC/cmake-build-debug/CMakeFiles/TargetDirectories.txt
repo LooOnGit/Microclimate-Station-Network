@@ -1,3 +1,0 @@
-D:/Microclimate Station Network/Code/Microclimate-Station-Network/codeC/cmake-build-debug/CMakeFiles/codeC.dir
-D:/Microclimate Station Network/Code/Microclimate-Station-Network/codeC/cmake-build-debug/CMakeFiles/edit_cache.dir
-D:/Microclimate Station Network/Code/Microclimate-Station-Network/codeC/cmake-build-debug/CMakeFiles/rebuild_cache.dir
